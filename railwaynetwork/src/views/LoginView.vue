@@ -39,7 +39,7 @@
                     <p class="mt-10 text-center text-lightgray text-md">
                         Nincs még fiókja?
                     </p>
-                    <button class="grid w-2/6 p-2 m-auto mt-1 transition duration-300 ease-in-out border-2 border-solid lg:text-xl md-text-md border-lightgray rounded-xl text-lightgray hover:bg-lightgray hover:text-darkgray">
+                    <button class="grid p-2 m-auto mt-1 transition duration-300 ease-in-out border-2 border-solid lg:text-xl md-text-xlw-2/6 border-lightgray rounded-xl text-lightgray hover:bg-lightgray hover:text-darkgray">
                         Hozza létre most!
                     </button>
                 </div>
