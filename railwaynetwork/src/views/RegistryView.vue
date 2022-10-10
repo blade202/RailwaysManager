@@ -11,25 +11,48 @@
                 <!-- registrycontent -->
                 <div
                     class="registry-content # backdrop-blur-sm bg-gray-600 flex flex-col bg-transparent/60 pt-16 pb-16 rounded-3xl">
-                    <form action="" class="text-center registry-form">
-                        <input
+                    <form @submit.prevent="Submit" class="text-center registry-form">
+                        <input v-model="data.name"
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray text-lightgray"
-                            type="text" placeholder="Felhasználónév">
+                            type="text" placeholder="Felhasználónév" required>
 
-                        <input
+                        <input v-model="data.email"
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray"
-                            type="password" placeholder="Jelszó">
+                            type="eamil" placeholder="Email-cím" required>
 
-                        <input
+                        <input v-model="data.password"
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray mb-7"
-                            type="password" placeholder="Jelszó megerősítése">
+                            type="password" placeholder="Jelszó" required>
 
-                        <submit class="w-2/6 p-2 mt-6 text-xl text-center bg-lightgray rounded-xl text-darkgray">
+                        <submit type="submit" class="w-2/6 p-2 mt-6 text-xl text-center bg-lightgray rounded-xl text-darkgray">
                             <RouterLink to="/home">Létrehozás</RouterLink>
                         </submit>
+                        
                     </form>                
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script lang="ts">
+    import {reactive} from 'vue';
+
+    export default{
+        name:"Register",
+        setup(){
+            const data=reactive({
+                name:'',
+                email:'',
+                password:'',
+            });
+            const submit = () => {
+                console.log(data);
+            }
+            return{
+                data,
+                submit
+            }
+        }
+    }
+</script>
