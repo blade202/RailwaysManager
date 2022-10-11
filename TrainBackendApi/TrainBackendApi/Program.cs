@@ -35,7 +35,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddCors(o =>
 o.AddPolicy("vuejs", policy =>
 {
-    policy.WithOrigins("http://192.168.0.17:5173/");
+    policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 })
 );
 
