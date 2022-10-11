@@ -8,6 +8,9 @@
                     class="mb-5 text-4xl font-medium text-center text-lightgray text-shadow-xl font-mainfont inner-shadow">
                     <RouterLink to="/login">RailwaysNetwork</RouterLink>
                 </h1>
+                <h2 v-if="msgvisibility" class="mb-5 text-4xl font-medium text-center text-lightgray text-shadow-xl font-mainfont inner-shadow">
+                   {{msg}}
+                </h2>
                 <!-- registrycontent -->
                 <div
                     class="registry-content # backdrop-blur-sm bg-gray-600 flex flex-col bg-transparent/60 pt-16 pb-16 rounded-3xl">
@@ -43,18 +46,24 @@ export default{
             return{
                 username:'',
                 passwordconfirm:'',
-                password:''
+                password:'',
+                msg:'',
+                msgvisibility:false
             };
         },
         methods:{
            async submithandle(){
-              const response= await axios.post('/SiginUp',{
+            this.msg="A jelszavaknak egyezni kéne!"   
+            if(this.password===this.passwordconfirm)
+            {  
+            const response= await axios.post('/SiginUp',{
                     Username:this.username,
                     PasswordConfrim:this.passwordconfirm,
                     Password:this.password
                 });
-
-                console.log(response);
+                this.msg=response.data;
+            }
+            this.msgvisibility=true;
             }
         }
     }

@@ -32,9 +32,7 @@
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray mb-7"
                             type="password" placeholder="Jelszó">
 
-                        <submit class="w-2/6 p-2 mt-6 text-xl text-center bg-lightgray rounded-xl text-darkgray">
-                            <RouterLink to="/home">Bejelentkezés</RouterLink>
-                        </submit>
+                        <input type="submit" class="w-2/6 p-2 mt-6 text-xl text-center bg-lightgray rounded-xl text-darkgray">
                     </form>
                     <p class="mt-10 text-center text-lightgray text-md">
                         Nincs még fiókja?
