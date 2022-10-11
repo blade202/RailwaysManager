@@ -11,23 +11,22 @@
                 <!-- registrycontent -->
                 <div
                     class="registry-content # backdrop-blur-sm bg-gray-600 flex flex-col bg-transparent/60 pt-16 pb-16 rounded-3xl">
-                    <form @submit.prevent="Submit" class="text-center registry-form">
-                        <input v-model="data.name"
+                    <form @submit.prevent='submithandle' class="text-center registry-form">
+                        <input v-model="username"
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray text-lightgray"
                             type="text" placeholder="Felhasználónév" required>
 
-                        <input v-model="data.email"
+                        <input v-model="password"
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray"
-                            type="eamil" placeholder="Email-cím" required>
+                            type="password" placeholder="Email-cím" required>
 
-                        <input v-model="data.password"
+                        <input v-model="passwordconfirm"
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray mb-7"
                             type="password" placeholder="Jelszó" required>
 
-                        <submit type="submit" class="w-2/6 p-2 mt-6 text-xl text-center bg-lightgray rounded-xl text-darkgray">
-                            <RouterLink to="/home">Létrehozás</RouterLink>
-                        </submit>
-                        
+                        <input type="submit" class="w-2/6 p-2 mt-6 text-xl text-center bg-lightgray rounded-xl text-darkgray ">
+                      
+                   
                     </form>                
                 </div>
             </div>
@@ -35,23 +34,27 @@
     </div>
 </template>
 
-<script lang="ts">
-    import {reactive} from 'vue';
-
-    export default{
-        name:"Register",
-        setup(){
-            const data=reactive({
-                name:'',
-                email:'',
-                password:'',
-            });
-            const submit = () => {
-                console.log(data);
-            }
+<script>
+import router from '../router';
+import axios from 'axios'
+export default{
+        name:"registry",
+        data(){
             return{
-                data,
-                submit
+                username:'',
+                passwordconfirm:'',
+                password:''
+            };
+        },
+        methods:{
+           async submithandle(){
+              const response= await axios.post('/SiginUp',{
+                    Username:this.username,
+                    PasswordConfrim:this.passwordconfirm,
+                    Password:this.password
+                });
+
+                console.log(response);
             }
         }
     }

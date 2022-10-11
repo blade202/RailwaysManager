@@ -2155,11 +2155,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\programozo\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
+      "projectUniqueName": "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
       "projectName": "TrainBackendApi",
-      "projectPath": "E:\\programozo\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
+      "projectPath": "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
       "packagesPath": "C:\\Users\\avp28\\.nuget\\packages\\",
-      "outputPath": "E:\\programozo\\TrainBackendApi\\TrainBackendApi\\obj\\",
+      "outputPath": "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

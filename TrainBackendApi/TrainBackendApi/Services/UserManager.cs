@@ -13,19 +13,23 @@ namespace TrainBackendApi.Services
             this.dbContext = dbContext;
         }
 
-        public User CreateUser(User user)
+        public User CreateUser(RegistryUser user)
         {
-            user.Role = "basic";
-            user.Id = RandomString(12);
-            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, BCrypt.Net.BCrypt.GenerateSalt());
-            dbContext.Users.Add(user);
+            User newuser = new User
+            {
+                Id = RandomString(12),
+                Role = "basic",
+                Password = BCrypt.Net.BCrypt.HashPassword(user.Password, BCrypt.Net.BCrypt.GenerateSalt()),
+                UserName = user.Username
+            };
+            dbContext.Users.Add(newuser);
             dbContext.SaveChanges();
-            return user;
+            return newuser;
         }
 
-        public bool IsUsernameExist(User user)
+        public bool IsUsernameExist(RegistryUser user)
         {
-            if (dbContext.Users.FirstOrDefault(x => x.UserName == user.UserName) != null)
+            if (dbContext.Users.FirstOrDefault(x => x.UserName == user.Username) != null)
             {
                 return true;
             }

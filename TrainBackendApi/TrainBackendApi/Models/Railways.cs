@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ConsoleApp1
 {
     [Table("RALILWAYS")]
-    public class Railways:Base
+    public class Railways
     {
 
      

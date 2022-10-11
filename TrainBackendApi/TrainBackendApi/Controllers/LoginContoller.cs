@@ -30,14 +30,18 @@ namespace TrainBackendApi.Controllers
         }
         [Route("/SiginUp")]
         [HttpPost]
-        public IActionResult SiginUp([FromBody] User user)
+        public IActionResult SiginUp([FromBody] RegistryUser user)
         {
-            if (userManager.IsUsernameExist(user))
+            if (user.Password == user.PasswordConfrim)
             {
-                return Ok("A felhasznalonev mar létezik");
+                if (userManager.IsUsernameExist(user))
+                {
+                    return Ok("A felhasznalonev mar létezik");
+                }
+                userManager.CreateUser(user);
+                return Ok("sikeres regisztracios");
             }
-            userManager.CreateUser(user);
-            return Ok("asd");
+            return BadRequest();
         }
     }
 }
