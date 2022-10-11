@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj": {}
+    "C:\\Users\\dolfi\\OneDrive\\Asztali gép\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj": {}
   },
   "projects": {
-    "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj": {
+    "C:\\Users\\dolfi\\OneDrive\\Asztali gép\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
+        "projectUniqueName": "C:\\Users\\dolfi\\OneDrive\\Asztali gép\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
         "projectName": "TrainBackendApi",
-        "projectPath": "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
-        "packagesPath": "C:\\Users\\avp28\\.nuget\\packages\\",
-        "outputPath": "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\obj\\",
+        "projectPath": "C:\\Users\\dolfi\\OneDrive\\Asztali gép\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
+        "packagesPath": "C:\\Users\\dolfi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dolfi\\OneDrive\\Asztali gép\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\avp28\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dolfi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -62,6 +62,10 @@
               "target": "Package",
               "version": "[6.0.9, )"
             },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.14.0, )"
+            },
             "MySql.Data": {
               "target": "Package",
               "version": "[8.0.30, )"
@@ -93,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
