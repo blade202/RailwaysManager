@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrainBackendApi.Models;
 using TrainBackendApi.Services;
@@ -28,6 +29,7 @@ namespace TrainBackendApi.Controllers
             return BadRequest();
 
         }
+
         [Route("/SiginUp")]
         [HttpPost]
         public IActionResult SiginUp([FromBody] RegistryUser user)
@@ -42,6 +44,12 @@ namespace TrainBackendApi.Controllers
                 return Ok("sikeres regisztracios");
             }
             return BadRequest();
+        }
+        [Route("Test")]
+        [HttpGet]
+        public IActionResult Test()
+        {
+            return Ok("asd");
         }
     }
 }

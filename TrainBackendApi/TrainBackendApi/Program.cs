@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TrainBackendApi.Repository;
@@ -6,6 +7,7 @@ using TrainBackendApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+
 
 // Add services to the container.
 
@@ -30,6 +32,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 }
 );
+builder.Services.AddCors(o =>
+o.AddPolicy("vuejs", policy =>
+{
+    policy.WithOrigins("http://192.168.0.17:5173/");
+})
+);
 
 var app = builder.Build();
 
@@ -43,6 +51,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("vuejs");
 
 app.MapControllers();
 

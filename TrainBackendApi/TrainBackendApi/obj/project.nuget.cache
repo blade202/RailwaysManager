@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zHxLrSDaY3c2MmFR7GifCw5fY94GfXEI5TFxnpeT2Ncc7HbtFFCFp15IqTNMMyYHD5D7ewd3b8CxvxGJvp+7sA==",
+  "dgSpecHash": "GM7AbmcXG1ci0KdLCUPfRk7ZjvoJ5TYtpqQQSWuwJctZNEKKEI4txeIyoa9YNWiBv12JL0GHvmWOGDDUfmQP/A==",
   "success": true,
   "projectFilePath": "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
   "expectedPackageFiles": [
@@ -35,6 +35,7 @@
     "C:\\Users\\avp28\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.10.0\\microsoft.identitymodel.tokens.6.10.0.nupkg.sha512",
     "C:\\Users\\avp28\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\avp28\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\avp28\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.14.0\\microsoft.visualstudio.azure.containers.tools.targets.1.14.0.nupkg.sha512",
     "C:\\Users\\avp28\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\avp28\\.nuget\\packages\\mysql.data\\8.0.30\\mysql.data.8.0.30.nupkg.sha512",
     "C:\\Users\\avp28\\.nuget\\packages\\mysqlconnector\\2.1.2\\mysqlconnector.2.1.2.nupkg.sha512",

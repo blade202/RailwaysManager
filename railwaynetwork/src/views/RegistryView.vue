@@ -48,11 +48,11 @@ export default{
         },
         methods:{
            async submithandle(){
-              const response= await axios.post('/SiginUp',{
+              const response= await axios.post('/SiginUp',JSON.stringify({
                     Username:this.username,
                     PasswordConfrim:this.passwordconfirm,
                     Password:this.password
-                });
+                }));
 
                 console.log(response);
             }
