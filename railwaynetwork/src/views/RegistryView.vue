@@ -64,6 +64,13 @@ export default{
                 this.msg=response.data;
             }
             this.msgvisibility=true;
+            await setTimeout(()=>{this.msgvisibility=false},2500);
+            
+            if(this.msg==="sikeres regisztráció")
+            {
+                router.push("/home");
+                router.go('/home');
+            };
             }
         }
     }
