@@ -41,7 +41,7 @@ namespace TrainBackendApi.Controllers
                     return Ok("A felhasznalonev mar létezik");
                 }
                 userManager.CreateUser(user);
-                return Ok("sikeres regisztracios");
+                return Ok("sikeres regisztráció");
             }
             return BadRequest();
         }

@@ -2236,23 +2236,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dolfi\\.nuget\\packages\\": {},
+    "C:\\Users\\avp28\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dolfi\\OneDrive\\Asztali gép\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
+      "projectUniqueName": "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
       "projectName": "TrainBackendApi",
-      "projectPath": "C:\\Users\\dolfi\\OneDrive\\Asztali gép\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
-      "packagesPath": "C:\\Users\\dolfi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dolfi\\OneDrive\\Asztali gép\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\obj\\",
+      "projectPath": "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\TrainBackendApi.csproj",
+      "packagesPath": "C:\\Users\\avp28\\.nuget\\packages\\",
+      "outputPath": "E:\\programozo\\RailwaysManager\\TrainBackendApi\\TrainBackendApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\dolfi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\avp28\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2332,7 +2332,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
