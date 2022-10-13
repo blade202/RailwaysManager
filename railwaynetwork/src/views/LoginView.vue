@@ -38,7 +38,7 @@
                         Nincs még fiókja?
                     </p>
                     <button class="grid p-2 m-auto mt-1 transition duration-300 ease-in-out border-2 border-solid lg:text-xl md-text-xlw-2/6 border-lightgray rounded-xl text-lightgray hover:bg-lightgray hover:text-darkgray">
-                        Hozza létre most!
+                       <router-link to="/registry">Hozza létre most!</router-link>
                     </button>
                 </div>
             </div>
@@ -48,6 +48,7 @@
 
 <script>
 import axios from 'axios';
+import router from '../router';
 
 export default{
 name:"login",
@@ -65,15 +66,16 @@ methods:{
             password:this.password
             
         })
-        localStorage.setItem('token', response.data)
-        
+        this.token=response.data;
+        console.log(this.token);
+        if(response.data!=="hibás az anyád"){
+            localStorage.setItem('token', response.data)
+            router.push('/home')
+        }
+        console.log(response.data)
     }
-}
-
-
 
 }
-
-
+}
 </script>
 

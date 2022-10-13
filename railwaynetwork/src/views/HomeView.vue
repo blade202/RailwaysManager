@@ -15,7 +15,12 @@ import axios from 'axios';
     export default{
         name:'Home',
         async created(){
-            let response =await axios.get('User');
+            let response =await axios.get('User',{
+                headers: {
+                    Authorization: 'Bearer ' +localStorage.getItem('token')
+                }
+            }
+            );
             console.log(response)
         }
     }
