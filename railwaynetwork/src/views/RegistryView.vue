@@ -6,7 +6,7 @@
                 <!--Title-->
                 <h1
                     class="mb-5 text-4xl font-medium text-center text-lightgray text-shadow-xl font-mainfont inner-shadow">
-                    <RouterLink to="/login">RailwaysNetwork</RouterLink>
+                    <RouterLink to="/">RailwaysNetwork</RouterLink>
                 </h1>
                 <h2 v-if="msgvisibility" class="mb-5 text-4xl font-medium text-center text-lightgray text-shadow-xl font-mainfont inner-shadow">
                    {{msg}}
@@ -21,11 +21,11 @@
 
                         <input v-model="password"
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray"
-                            type="password" placeholder="Email-cím" required>
+                            type="password" placeholder="Jelszó" required>
 
                         <input v-model="passwordconfirm"
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray mb-7"
-                            type="password" placeholder="Jelszó" required>
+                            type="password" placeholder="Jelszó megerősítése" required>
 
                         <input type="submit" class="w-2/6 p-2 mt-6 text-xl text-center bg-lightgray rounded-xl text-darkgray ">
                       
@@ -53,7 +53,7 @@ export default{
         },
         methods:{
            async submithandle(){
-            this.msg="A jelszavaknak egyezni kéne!"   
+            this.msg="A jelszavaknak egyezniük kell!"   
             if(this.password===this.passwordconfirm)
             {  
             const response= await axios.post('/SiginUp',{
@@ -66,7 +66,7 @@ export default{
             this.msgvisibility=true;
             await setTimeout(()=>{this.msgvisibility=false},2500);
             
-            if(this.msg==="sikeres regisztráció")
+            if(this.msg==="Sikeres regisztráció!")
             {
                 router.push('/home');
             };
