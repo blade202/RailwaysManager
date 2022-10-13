@@ -26,7 +26,7 @@ namespace TrainBackendApi.Controllers
             {
                 return Ok(jwtTokenGenerator.Generate(validuser));
             }
-            return BadRequest();
+            return Ok("hibás az anyád");
 
         }
 

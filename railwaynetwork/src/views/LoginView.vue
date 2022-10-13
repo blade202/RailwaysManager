@@ -23,12 +23,12 @@
                 <!-- logincontent -->
                 <div
                     class="login-content # backdrop-blur-sm bg-gray-600 bg-transparent/60 pt-16 pb-16 rounded-3xl grid lg:grid-rows-1 lg:grid-cols-1 lg:w">
-                    <form action="" class="text-center login-form">
-                        <input
+                    <form @submit.prevent="login" class="text-center login-form">
+                        <input v-model="username"
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray text-lightgray"
                             type="text" placeholder="Felhasználónév">
 
-                        <input
+                        <input v-model="password"
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray mb-7"
                             type="password" placeholder="Jelszó">
 
@@ -45,3 +45,35 @@
         </div>
     </div>
 </template>
+
+<script>
+import axios from 'axios';
+
+export default{
+name:"login",
+data(){
+    return{
+        username:'',
+        password:'',
+        token:''
+    };
+},
+methods:{
+    async login(){
+        let response=await axios.post('/Login',{
+            username:this.username,
+            password:this.password
+            
+        })
+        this.token=response.data;
+        console.log(this.token);
+    }
+}
+
+
+
+}
+
+
+</script>
+
