@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TrainBackendApi.Models;
 using TrainBackendApi.Services;
 
@@ -50,6 +52,13 @@ namespace TrainBackendApi.Controllers
         public IActionResult Test()
         {
             return Ok("asd");
+        }
+        [Authorize]
+        [HttpGet]
+        [Route("User")]
+        public IActionResult GetUser()
+        {
+            return Ok(userManager.GetById(User.FindFirstValue(ClaimTypes.NameIdentifier)));
         }
     }
 }
