@@ -45,10 +45,10 @@ namespace TrainBackendApi.Services
             return null;
         }
 
-        public bool ValaidateUser(User user, out User outuser)
+        public bool ValaidateUser(LoginUser user, out User outuser)
         {
 
-            var tempuser = dbContext.Users.FirstOrDefault(x => x.UserName == user.UserName);
+            var tempuser = dbContext.Users.FirstOrDefault(x => x.UserName == user.Username);
             if (tempuser != null)
             {
                 outuser = tempuser;
