@@ -1,6 +1,3 @@
-<script setup>
-</script>
-
 <template>
     <div id="home">
         <div class="main-home-container">
@@ -11,3 +8,15 @@
         </div>
     </div>
 </template>
+
+<script>
+import axios from 'axios';
+
+    export default{
+        name:'Home',
+        async created(){
+            let response =await axios.get('User');
+            console.log(response)
+        }
+    }
+</script>

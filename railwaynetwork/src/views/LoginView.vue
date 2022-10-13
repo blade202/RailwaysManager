@@ -65,8 +65,8 @@ methods:{
             password:this.password
             
         })
-        this.token=response.data;
-        console.log(this.token);
+        localStorage.setItem('token', response.data)
+        
     }
 }
 

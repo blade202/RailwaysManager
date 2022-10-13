@@ -38,10 +38,10 @@ namespace TrainBackendApi.Controllers
             {
                 if (userManager.IsUsernameExist(user))
                 {
-                    return Ok("A felhasznalonev mar létezik");
+                    return Ok("A felhasználónév mar létezik!");
                 }
                 userManager.CreateUser(user);
-                return Ok("sikeres regisztráció");
+                return Ok("Sikeres regisztráció!");
             }
             return BadRequest();
         }

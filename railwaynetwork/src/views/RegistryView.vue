@@ -8,8 +8,9 @@
                     class="mb-5 text-4xl font-medium text-center text-lightgray text-shadow-xl font-mainfont inner-shadow">
                     <RouterLink to="/">RailwaysNetwork</RouterLink>
                 </h1>
-                <h2 v-if="msgvisibility" class="mb-5 text-4xl font-medium text-center text-lightgray text-shadow-xl font-mainfont inner-shadow">
-                   {{msg}}
+                <h2 v-if="msgvisibility"
+                    class="mb-5 text-4xl font-medium text-center text-lightgray text-shadow-xl font-mainfont inner-shadow">
+                    {{msg}}
                 </h2>
                 <!-- registrycontent -->
                 <div
@@ -27,10 +28,11 @@
                             class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray mb-7"
                             type="password" placeholder="Jelszó megerősítése" required>
 
-                        <input type="submit" class="w-2/6 p-2 mt-6 text-xl text-center bg-lightgray rounded-xl text-darkgray ">
-                      
-                   
-                    </form>                
+                        <input type="submit"
+                            class="w-2/6 p-2 mt-6 text-xl text-center bg-lightgray rounded-xl text-darkgray ">
+
+
+                    </form>
                 </div>
             </div>
         </div>
@@ -40,37 +42,36 @@
 <script>
 import router from '../router';
 import axios from 'axios'
-export default{
-        name:"registry",
-        data(){
-            return{
-                username:'',
-                passwordconfirm:'',
-                password:'',
-                msg:'',
-                msgvisibility:false
-            };
-        },
-        methods:{
-           async submithandle(){
-            this.msg="A jelszavaknak egyezniük kell!"   
-            if(this.password===this.passwordconfirm)
-            {  
-            const response= await axios.post('/SiginUp',{
-                    Username:this.username,
-                    PasswordConfrim:this.passwordconfirm,
-                    Password:this.password
+export default {
+    name: "registry",
+    data() {
+        return {
+            username: '',
+            passwordconfirm: '',
+            password: '',
+            msg: '',
+            msgvisibility: false
+        };
+    },
+    methods: {
+        async submithandle() {
+            this.msg = "A jelszavaknak egyezniük kell!"
+            if (this.password === this.passwordconfirm) {
+                const response = await axios.post('/SiginUp', {
+                    Username: this.username,
+                    PasswordConfrim: this.passwordconfirm,
+                    Password: this.password
                 });
-                this.msg=response.data;
+                this.msg = response.data;
             }
-            this.msgvisibility=true;
-            await setTimeout(()=>{this.msgvisibility=false},2500);
-            
-            if(this.msg==="Sikeres regisztráció!")
-            {
-                router.push('/home');
-            };
-            }
+            this.msgvisibility = true;
+            setTimeout(() => {
+                this.msgvisibility = false; 
+                if (this.msg === "Sikeres regisztráció!"){
+                    router.push('/');
+                };
+            }, 2500);
         }
     }
+}
 </script>

@@ -1,3 +1,3 @@
 import axios from 'axios'
 
-axios.defaults.baseURL='https://192.168.0.17:49153/';
+axios.defaults.baseURL='https://localhost:7228/';
