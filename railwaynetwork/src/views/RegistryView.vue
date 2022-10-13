@@ -68,8 +68,7 @@ export default{
             
             if(this.msg==="sikeres regisztráció")
             {
-                router.push("/home");
-                router.go('/home');
+                router.push('/home');
             };
             }
         }
