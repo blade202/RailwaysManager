@@ -19,7 +19,7 @@ namespace TrainBackendApi.Controllers
 
         [Route("/Login")]
         [HttpPost]
-        public IActionResult Login([FromBody] User user)
+        public IActionResult Login([FromBody] LoginUser user)
         {
 
             if (userManager.ValaidateUser(user, out User validuser))
