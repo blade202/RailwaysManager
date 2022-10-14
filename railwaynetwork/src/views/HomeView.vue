@@ -1,14 +1,16 @@
 <template>
     <div id="home">
+        <TheNavbar />
         <div class="main-home-container">
         </div>
+        <TheFooter />
     </div>
-    <TheFooter />
 </template>
 
 <script>
 import axios from 'axios';
 import TheFooter from '../components/TheFooter.vue';
+import TheNavbar from '../components/TheNavbar.vue';
 
     export default{
     name: "Home",
@@ -20,6 +22,6 @@ import TheFooter from '../components/TheFooter.vue';
         });
         console.log(response);
     },
-    components: { TheFooter }
+    components: { TheFooter, TheNavbar }
 }
 </script>
