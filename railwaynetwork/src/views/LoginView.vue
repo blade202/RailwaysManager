@@ -5,7 +5,7 @@
             <div class="registry-login-button-box # absolute p-1 grid grid-rows-1 grid-cols-2 xl:top-5 xl:right-5 xl:translate-x-0 xl:translate-y-0 lg:top-5 lg:right-5 lg:translate-x-0 lg:translate-y-0  md:right-1/2 md:top-2/3 md:translate-x-1/2  sm:right-1/2 sm:top-2/3 sm:translate-x-1/2 sm:translate-y-1/2  xs:right-1/2 xs:top-2/3 xs:translate-x-1/2 xs:translate-y-1/2">
                 <button
                     class="p-2 mr-3 font-medium transition duration-200 ease-in-out border-2 border-solid rounded-md border-lightgray text-lightgray drop-shadow-md font-mainfont hover:shadow-xl shadow-lightgray hover:bg-lightgray hover:text-darkgray">
-                    <router-link to="/registry">Regisztráció</router-link>
+                    <router-link to="/register">Regisztráció</router-link>
                 </button>
                 <button
                     class="p-2 mr-3 font-medium transition duration-200 ease-in-out border-2 rounded-md bg-lightgray text-darkgray drop-shadow-md font-mainfont hover:shadow-xl shadow-lightgray hover:bg-transparent hover:border-solid border-lightgray hover:text-lightgray">
