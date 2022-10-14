@@ -15,7 +15,7 @@
             <div
                 class="main-login-content # p-4 fixed top-1/3 left-1/2 -translate-y-1/2 -translate-x-1/2 font-mainfont grid lg:w-2/5 md:w-2/3 sm:w-full xs:w-full">
                 <!--Title-->
-                <h1
+                <h1 id="title"
                     class="mb-5 text-4xl font-medium text-center text-lightgray text-shadow-xl font-mainfont inner-shadow">
                     <router-link to="/login">RailwaysNetwork</router-link>
 

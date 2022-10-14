@@ -9,13 +9,13 @@
 @keyframes template-loading{
     0%{
         filter: blur(0.5rem);
-        background-color: black;
-    }
+    }   
     100%{
         filter:blur(0);
-        background-color: black;
     }
 }
+
+
 
 
 

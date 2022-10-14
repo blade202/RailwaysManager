@@ -1,27 +1,25 @@
 <template>
     <div id="home">
         <div class="main-home-container">
-            <div class="navbar">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere cumque aspernatur est voluptate debitis veniam perspiciatis repellat molestias temporibus? Ipsum, laborum omnis ratione hic alias perspiciatis provident doloremque fugit excepturi.
-            </div>
-            
         </div>
     </div>
+    <TheFooter />
 </template>
 
 <script>
 import axios from 'axios';
+import TheFooter from '../components/TheFooter.vue';
 
     export default{
-        name:'Home',
-        async created(){
-            let response =await axios.get('User',{
-                headers: {
-                    Authorization: 'Bearer ' +localStorage.getItem('token')
-                }
+    name: "Home",
+    async created() {
+        let response = await axios.get("User", {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
             }
-            );
-            console.log(response)
-        }
-    }
+        });
+        console.log(response);
+    },
+    components: { TheFooter }
+}
 </script>
