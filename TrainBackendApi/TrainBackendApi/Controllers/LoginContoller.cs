@@ -26,7 +26,7 @@ namespace TrainBackendApi.Controllers
 
             if (userManager.ValaidateUser(user, out User validuser))
             {
-                return Ok(jwtTokenGenerator.Generate(validuser));
+                return Ok(new RetunUserWithToken {Username=validuser.UserName,Token= jwtTokenGenerator.Generate(validuser) });
             }
             return Ok("hibás az anyád");
 
