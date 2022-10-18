@@ -2,6 +2,17 @@
     <div id="home">
         <TheNavbar />
         <div class="main-home-container">
+            <div class="upper-content-box">
+                <div class="title">
+
+                </div>
+                <div class="searchbar">
+
+                </div>
+            </div>
+            <div class="table-box">
+                
+            </div>
         </div>
         <TheFooter />
     </div>
