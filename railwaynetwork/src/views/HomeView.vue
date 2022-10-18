@@ -22,6 +22,8 @@
 import axios from 'axios';
 import TheFooter from '../components/TheFooter.vue';
 import TheNavbar from '../components/TheNavbar.vue';
+import {mapGetters} from 'vuex';
+import { computed } from '@vue/reactivity';
 
     export default{
     name: "Home",
@@ -33,6 +35,11 @@ import TheNavbar from '../components/TheNavbar.vue';
         });
         console.log(response);
     },
-    components: { TheFooter, TheNavbar }
+    components: { 
+        TheFooter, TheNavbar 
+    },
+    computed:{
+        ...mapGetters(['user'])
+    }
 }
 </script>

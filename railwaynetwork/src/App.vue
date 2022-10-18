@@ -8,11 +8,6 @@ import Registrtyvue from './views/RegisterView.vue'
 <RouterView />
 </template>
 <script>
-    export default{
-        name:'App',
-        components:{
-            Registrtyvue
-        }
-    }
+    
 </script>
 

@@ -73,6 +73,7 @@ methods:{
             router.push('/home')
         }
         console.log(response.data)
+        this.$store.dispatch('user', response.data)
     }
 
 }
