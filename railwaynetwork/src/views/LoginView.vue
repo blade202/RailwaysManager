@@ -56,7 +56,6 @@ data(){
     return{
         username:'',
         password:'',
-        token:''
     };
 },
 methods:{
@@ -66,15 +65,16 @@ methods:{
             password:this.password
             
         })
-        this.token=response.data;
-        console.log(this.token);
+
         if(response.data!=="hibás az anyád"){
-            localStorage.setItem('token', response.data)
-            router.push('/home')
-        }
-        console.log(response.data)
-        this.$store.dispatch('user', response.data)
+                this.$store.dispatch('user', response.data);
+        console.log(this.$store.user);
+        router.push('/home')
     }
+            
+        }
+
+    
 
 }
 }

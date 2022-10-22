@@ -4,7 +4,7 @@
         <div class="main-home-container">
             <div class="upper-content-box">
                 <div class="title">
-
+                  <h1 v-if="user">{{user.username}}</h1>      
                 </div>
                 <div class="searchbar">
 
@@ -28,11 +28,7 @@ import { computed } from '@vue/reactivity';
     export default{
     name: "Home",
     async created() {
-        let response = await axios.get("User", {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("token")
-            }
-        });
+        let response = await axios.get("User");
         console.log(response);
     },
     components: { 

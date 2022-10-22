@@ -14,7 +14,6 @@ var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build(
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TrainDbConntext>();
 builder.Services.AddTransient<UserManager>();
 builder.Services.AddTransient<JwtTokenGenerator>();
@@ -42,11 +41,7 @@ o.AddPolicy("vuejs", policy =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

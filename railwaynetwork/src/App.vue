@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import Registrtyvue from './views/RegisterView.vue'
 </script>
 
 
@@ -8,6 +7,14 @@ import Registrtyvue from './views/RegisterView.vue'
 <RouterView />
 </template>
 <script>
-    
+export default{
+    name:"home",
+    data() {
+        return{
+            user:null
+        }
+    }
+   
+}
 </script>
 
