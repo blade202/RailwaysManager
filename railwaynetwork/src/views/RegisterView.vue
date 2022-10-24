@@ -30,8 +30,6 @@
 
                         <input type="submit"
                             class="w-2/6 p-2 mt-6 text-xl text-center bg-lightgray rounded-xl text-darkgray ">
-                        class
-
                     </form>
                 </div>
             </div>
