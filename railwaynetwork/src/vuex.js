@@ -5,11 +5,7 @@ import * as Cookies from 'js-cookie';
 
 
 
-<<<<<<< HEAD
-axios.defaults.baseURL='https://localhost:7228/';
-=======
 axios.defaults.baseURL='https://localhost:49153/';
->>>>>>> 93d0b74a6ea77204d453648b7529da3aba1126c8
 const state= {
     user:null
 };
