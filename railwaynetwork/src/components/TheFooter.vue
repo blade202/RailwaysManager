@@ -4,6 +4,6 @@
         <h2>[Soltész Dávid-Plachi Szilárd]</h2>
     </footer>
 </template>
-h
+
 <script>
 </script>

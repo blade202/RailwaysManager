@@ -1,8 +1,8 @@
 <template>
-    <div id="home">
-        <TheNavbar />
+    <div id="home">  
         <div
             class="main-home-container bg-[url('/public/pictures/homebg.jpg')] brightness-90 bg-cover bg-darkgray w-full h-screen bg-fixed bg-no-repeat">
+            <TheNavbar />
             <div class="fixed w-2/3 -translate-x-1/2 translate-y-1/2 main-content-box top-1/6 left-1/2">
                 <div
                     class="mb-5 text-4xl font-medium text-center title text-lightgray text-shadow-xl font-mainfont inner-shadow">

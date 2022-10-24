@@ -11,9 +11,9 @@
 <script>
 import { mapGetters } from 'vuex';
 
-    export default{
-        computed:{
-            ...mapGetters(['user'])
-        }
+export default{
+    computed:{
+        ...mapGetters(['user'])
     }
+}
 </script>

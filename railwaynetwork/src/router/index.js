@@ -24,9 +24,6 @@ const router = createRouter({
    
  
   ]
-
-
- 
 })
 function canAccess(to)
 {
@@ -39,7 +36,6 @@ function canAccess(to)
     return false
   }
   return true;
-  
 }
 router.beforeEach(async(to,from)=>{
  if(!canAccess(to)) return '/'
