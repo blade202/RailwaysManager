@@ -31,7 +31,7 @@ namespace TrainBackendApi.Services
 
             while (!citireader.EndOfStream)
             {
-                dbConntext.Cities.Add(new City { CityName = citireader.ReadLine() });
+                dbConntext.Cities.Add(new City { CityName = citireader.ReadLine()});
 
             }
             dbConntext.SaveChanges();
