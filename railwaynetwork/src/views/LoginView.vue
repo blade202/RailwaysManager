@@ -60,18 +60,19 @@ data(){
 },
 methods:{
     async login(){
+        try{
         let response=await axios.post('/Login',{
             username:this.username,
             password:this.password
             
         })
-
-        if(response.data!=="hibás az anyád"){
-                this.$store.dispatch('user', response.data);
+        this.$store.dispatch('user', response.data);
         console.log(this.$store.user);
         router.push('/home')
+    }catch{
+        console.log("hibaás felhasználonév vagy jelszó")
     }
-            
+         
         }
 
     

@@ -26,9 +26,9 @@ namespace TrainBackendApi.Controllers
 
             if (userManager.ValaidateUser(user, out User validuser))
             {
-                return Ok(new RetunUserWithToken {Username=validuser.UserName,Token= jwtTokenGenerator.Generate(validuser) });
+                return Ok(new UserData {Username=validuser.UserName,Token= jwtTokenGenerator.Generate(validuser),Role=validuser.Role});
             }
-            return Ok("hibás az anyád");
+            return BadRequest();
 
         }
 
@@ -53,12 +53,6 @@ namespace TrainBackendApi.Controllers
         {
             return Ok("asd");
         }
-        [Authorize]
-        [HttpGet]
-        [Route("User")]
-        public IActionResult GetUser()
-        {
-            return Ok(userManager.GetById(User.FindFirstValue(ClaimTypes.NameIdentifier)));
-        }
+
     }
 }

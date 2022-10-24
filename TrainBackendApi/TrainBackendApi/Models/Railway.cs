@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ConsoleApp1
+namespace TrainBackendApi.Models
 {
     [Table("RALILWAYS")]
-    public class Railways
+    public class Railway
     {
-
-     
-
+        [Key]
+        [DatabaseGenerated( DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         [Required]
         [Column("DepatureCyity")]
         public string DepatureCity { get; set; }

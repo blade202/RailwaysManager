@@ -38,10 +38,6 @@ function canAccess(to)
     }
     return false
   }
-  if(to.name==="register"||to.name==="login"&&user)
-  {
-    return false;
-  }
   return true;
   
 }

@@ -5,10 +5,11 @@ namespace TrainBackendApi.Models
 {
     
     [Table("CITIES")]
-    public class Cities
+    public class City
     {
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         [Column("NAME")]
