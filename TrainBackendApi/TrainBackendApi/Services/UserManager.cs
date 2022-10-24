@@ -7,6 +7,7 @@ namespace TrainBackendApi.Services
     {
         private Random random = new Random();
         private TrainDbConntext dbContext;
+        public static bool Updated { get; set; }
 
         public UserManager(TrainDbConntext dbContext)
         {
@@ -25,6 +26,10 @@ namespace TrainBackendApi.Services
             dbContext.Users.Add(newuser);
             dbContext.SaveChanges();
             return newuser;
+        }
+        public bool isUpdated()
+        {
+            return Updated;
         }
 
         public bool IsUsernameExist(RegistryUser user)
