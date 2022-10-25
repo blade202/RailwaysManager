@@ -9,7 +9,9 @@
     </nav>
 </template>
 <script>
+
 import { mapGetters } from 'vuex';
+import router from '../router';
 
     export default{
         computed:{
@@ -18,7 +20,8 @@ import { mapGetters } from 'vuex';
         methods:{
             Logout()
             {
-                user=null;
+                this.$store.dispatch('user', null);
+                router.push('/');
             }
         }
         

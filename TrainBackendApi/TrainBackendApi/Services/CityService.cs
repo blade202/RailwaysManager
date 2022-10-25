@@ -37,6 +37,10 @@ namespace TrainBackendApi.Services
             dbConntext.SaveChanges();
 
         }
+        public List<City>GetAll()
+        {
+            return dbConntext.Cities.ToList();
+        }
 
     }
 }

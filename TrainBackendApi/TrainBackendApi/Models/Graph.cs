@@ -11,8 +11,8 @@ namespace TrainBackendApi.Models
         private int v;
 
         // adjacency list
-        private List<int>[] adjList;
-        public List<List<int>> Resualt;
+        private List<RailwayNode>[] adjList;
+        public List<List<RailwayNode>> Resualt;
         
 
 
@@ -21,7 +21,7 @@ namespace TrainBackendApi.Models
         public Graph(int vertices)
         {
 
-            Resualt = new List<List<int>>();
+            Resualt = new List<List<RailwayNode>>();
             // initialise vertex count
             this.v = vertices;
             // initialise adjacency list
@@ -32,16 +32,16 @@ namespace TrainBackendApi.Models
         // adjacency list
         private void initAdjList()
         {
-            adjList = new List<int>[v];
+            adjList = new List<RailwayNode>[v];
 
             for (int i = 0; i < v; i++)
             {
-                adjList[i] = new List<int>();
+                adjList[i] = new List<RailwayNode>();
             }
         }
 
         // add edge from u to v
-        public void addEdge(int u, int v)
+        public void addEdge(int u, RailwayNode v)
         {
             // Add v to u's list.
             adjList[u].Add(v);
@@ -49,16 +49,16 @@ namespace TrainBackendApi.Models
 
         // Prints all paths from
         // 's' to 'd'
-        public void printAllPaths(int s, int d)
+        public void printAllPaths(RailwayNode s, int d)
         {
             bool[] isVisited = new bool[v];
-            List<int> pathList = new List<int>();
+            List<RailwayNode> pathList = new List<RailwayNode>();
 
             // add source to path[]
             pathList.Add(s);
 
             // Call recursive utility
-            printAllPathsUtil(s, d, isVisited, pathList);
+            printAllPathsUtil(s.NodeId, d, isVisited, pathList);
         }
 
         // A recursive function to print
@@ -69,12 +69,11 @@ namespace TrainBackendApi.Models
         // vertices in the current path
         private void printAllPathsUtil(int u, int d,
                                        bool[] isVisited,
-                                       List<int> localPathList)
+                                       List<RailwayNode> localPathList)
         {
-
             if (u.Equals(d))
             {
-                List<int> templist =new List<int>();
+                List<RailwayNode> templist =new List<RailwayNode>();
                 foreach (var item in localPathList)
                 {
                     templist.Add(item);
@@ -91,14 +90,14 @@ namespace TrainBackendApi.Models
 
             // Recur for all the vertices
             // adjacent to current vertex
-            foreach (int i in adjList[u])
+            foreach (RailwayNode i in adjList[u])
             {
-                if (!isVisited[i])
+                if (!isVisited[i.NodeId])
                 {
                     // store current node
                     // in path[]
                     localPathList.Add(i);
-                    printAllPathsUtil(i, d, isVisited,
+                    printAllPathsUtil(i.NodeId, d, isVisited,
                                       localPathList);
 
                     // remove current node

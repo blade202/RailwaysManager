@@ -1,0 +1,21 @@
+Wonoharjo
+Miaoyu
+Chivhu
+Beni
+Manicaragua
+Bentar
+Golcuv Jeníkov
+Kuantan
+Nova Kakhovka
+Dollard-Des Ormeaux
+Kabardinka
+Caoxi
+San Lorenzo
+Normanton
+Sao Joao del Rei
+Dongshi
+Arruda dos Vinhos
+Elliot
+Upper San Mateo
+Kalilangan
+Wonoharjo->Sao Joao del Rei |Átszálás| Sao Joao del Rei->Kalilangan |Átszálás| Kalilangan->Kabardinka |Átszálás| Kabardinka->Normanton |Átszálás| Normanton->Chivhu |Átszálás| Chivhu->Golcuv Jeníkov |Átszálás| Golcuv Jeníkov->Elliot CélÁlomás

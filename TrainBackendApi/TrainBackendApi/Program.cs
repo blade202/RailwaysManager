@@ -16,6 +16,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<TrainDbConntext>();
 builder.Services.AddTransient<UserManager>();
+builder.Services.AddTransient<RailwaysService>();
+builder.Services.AddTransient<CityService>();
+builder.Services.AddMemoryCache();
 builder.Services.AddTransient<JwtTokenGenerator>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o=>
 {
