@@ -9,15 +9,18 @@ module.exports = {
       current: 'currentColor',
       'lightgray': '#D3D3D3',
       'darkgray': '#2A2A2A',
-      'dark':'#000000',
-      'white':'#FFFFFF'
+      'dark': '#000000',
+      'white': '#FFFFFF'
     },
-    extend:{
-      backgroundImage:{
-        'loginregistrybg':"url(./public/pictures/loginregistrybg.jpg)",
+    extend: {
+      backgroundImage: {
+        'loginregistrybg': "url(./public/pictures/loginregistrybg.jpg)",
       },
-      fontFamily:{
-        'mainfont':['Montserrat, sans-serif']
+      fontFamily: {
+        'mainfont': ['Montserrat, sans-serif']
+      },
+      spacing: {
+        '128': '42rem',
       }
     },
   },

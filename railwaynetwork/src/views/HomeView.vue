@@ -23,18 +23,18 @@
                         keresés
                     </button>
                 </div>
-                <div id="table" class="mt-5 overflow-scroll table-box">
+                <div id="table" class="mt-5 overflow-scroll table-box scrollbar-hide min-h-min max-h-128">
                     <table class="border-separate rounded-lg border-spacing-y-2 bg-transparent/40 backdrop-blur-sm pr-7 pl-7">
-                        <tr class="font-medium rounded-lg bg-lightgray text-darkgray">
+                        <tr class="sticky top-0 font-medium rounded-lg bg-lightgray text-darkgray">
                             <th class="w-4/5 p-3 rounded-bl-xl">Állomások</th>
                             <th class="w-1/12">Távolság</th>
                             <th class="w-1/12">Ár</th>
                             <th class="w-1/6 p-3 rounded-br-xl">Foglalás</th>
                         </tr>
-                        <tbody   class="bg-transparent/40 text-lightgray">
+                        <tbody class=" bg-transparent/40 text-lightgray">
                             <tr v-for="item in Railways">
-                                <td   class="w-4/5 p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray">
-                                       <span v-for="railway in item.railways" >{{railway.depatureCity}}->{{railway.arivalCity}}</span> 
+                                <td  class="w-4/5 p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray">
+                                    <span v-for="railway in item.railways" >{{railway.depatureCity}}->{{railway.arivalCity}}</span> 
                                 </td>
                                 <td class="w-1/12 text-center bg-darkgray">
                                     {{item.km}}
