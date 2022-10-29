@@ -19,7 +19,7 @@
                         <option>Válasszon járataink közül!</option>
                         <option v-for="item in Cities">{{ item.cityName }}</option>
                     </select>
-                    <button>
+                    <button class="cursor-pointer">
                         keresés
                     </button>
                 </div>
@@ -33,7 +33,7 @@
                         </tr>
                         <tbody class=" bg-transparent/40 text-lightgray">
                             <tr>
-                                <td class="w-4/5 p-2 text-center border-r-4 border-opacity-50 rounded-tl-full rounded-bl-full bg-darkgray border-lightgray">
+                                <td class="w-4/5 p-2 text-center border-r-4 border-opacity-50 rounded-tl-full rounded-bl-full bg-darkgray border-lightgray outline-offset-10px">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ipsa veniam vel, ad
                                     fuga
                                     eos blanditiis. Veniam ut consectetur repudiandae aliquam non, saepe quae illo
@@ -46,7 +46,7 @@
                                 <td class="w-1/12 text-center border-r-4 border-opacity-50 bg-darkgray border-lightgray">
                                     5000
                                 </td>
-                                <td class="w-1/6 p-2 font-bold text-white rounded-tr-full rounded-br-full font-sm bg-darkgray">
+                                <td class="w-1/6 p-2 font-bold text-white rounded-tr-full rounded-br-full cursor-pointer font-sm bg-darkgray">
                                     Vásárlás
                                 </td>
                             </tr>
