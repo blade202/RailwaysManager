@@ -23,8 +23,8 @@
                         keresés
                     </button>
                 </div>
-                <div id="table" class="mt-5 overflow-scroll table-box scrollbar-hide min-h-min max-h-128">
-                    <table class="border-separate rounded-lg  border-spacing-y-2 bg-transparent/40 backdrop-blur-sm pr-7 pl-7">
+                <div id="table" class="pb-3 mt-5 overflow-scroll table-box scrollbar-hide min-h-min max-h-128">
+                    <table class="border-separate rounded-lg border-spacing-y-2 bg-transparent/40 backdrop-blur-sm pr-7 pl-7">
                         <tr class="sticky top-0 font-medium rounded-lg bg-lightgray text-darkgray">
                             <th class="w-4/5 p-3 rounded-bl-xl">Állomások</th>
                             <th class="w-1/12">Távolság</th>
