@@ -86,11 +86,11 @@ export default {
             document.getElementById('table').addEventListener("scroll",this.handleScroll);
         },
        async handleScroll () {
-        let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
-        console.log(windowRelativeBottom);
-        console.log()
-        console.log(document.documentElement.clientTop);
-        if (windowRelativeBottom < document.documentElement.clientTop) {
+        let div = document.getElementById('table');
+        console.log(div.offsetHeight);
+        console.log(div.scrollTop);
+        console.log(div.scrollHeight);
+        if (div.offsetHeight+div.scrollTop>=div.scrollHeight) {
             this.range=this.range+50;
             await this.GetRailways();
         }
@@ -104,7 +104,7 @@ export default {
                 range:this.range
             
             })
-          window.addEventListener('scroll', this.handleScroll);
+         document.getElementById('table').addEventListener('scroll', this.handleScroll);
             this.Railways=[...this.Railways,...response.data];
             
             console.log(this.Railways)
