@@ -16,11 +16,14 @@ namespace TrainBackendApi.Models
       
         public List<Railway> Railways { get; set; }
 
-        public ReturnRalway(List<Railway> railways)
+        public int Id { get; set; }
+
+        public ReturnRalway(List<Railway> railways,int id)
         {
             this.Railways = railways;
             Km = railways.Sum(x => x.KM);
             Price = Km * 15;
+            Id = id;
         }
     }
 }

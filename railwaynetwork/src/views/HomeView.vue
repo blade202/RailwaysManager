@@ -9,21 +9,21 @@
                     RailwaysNetwork
                 </div>
                 <div class="grid w-1/2 grid-cols-3 grid-rows-1 m-auto text-center searchbar">
-                    <select name="" id=""
+                    <select v-model="DepatCityId" name="" id=""
                         class="p-2 font-medium text-center rounded-tl-full rounded-bl-full outline-none rounded- text-md bg-darkgray text-lightgray">
                         <option>Válasszon járataink közül!</option>
-                        <option v-for="item in Cities">{{ item.cityName }}</option>
+                        <option v-for="item in Cities"  :value="item.id"   >{{ item.cityName }}</option>
                     </select>
-                    <select name="" id=""
+                    <select v-model="ArrivalCityId" name="" id=""
                         class="p-2 font-medium text-center rounded-tr-full rounded-br-full outline-none text-md bg-darkgray text-lightgray">
                         <option>Válasszon járataink közül!</option>
-                        <option v-for="item in Cities">{{ item.cityName }}</option>
+                        <option v-for="item in Cities" :value="item.id" >{{ item.cityName }}</option>
                     </select>
-                    <button class="cursor-pointer">
+                    <button @click="GetRailways">
                         keresés
                     </button>
                 </div>
-                <div class="mt-5 table-box">
+                <div id="table" class="mt-5 overflow-scroll table-box">
                     <table class="border-separate rounded-lg border-spacing-y-2 bg-transparent/40 backdrop-blur-sm pr-7 pl-7">
                         <tr class="font-medium rounded-lg bg-lightgray text-darkgray">
                             <th class="w-4/5 p-3 rounded-bl-xl">Állomások</th>
@@ -31,56 +31,16 @@
                             <th class="w-1/12">Ár</th>
                             <th class="w-1/6 p-3 rounded-br-xl">Foglalás</th>
                         </tr>
-                        <tbody class=" bg-transparent/40 text-lightgray">
-                            <tr>
-                                <td class="w-4/5 p-2 text-center border-r-4 border-opacity-50 rounded-tl-full rounded-bl-full bg-darkgray border-lightgray outline-offset-10px">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ipsa veniam vel, ad
-                                    fuga
-                                    eos blanditiis. Veniam ut consectetur repudiandae aliquam non, saepe quae illo
-                                    facilis
-                                    nisi est aut neque.
-                                </td>
-                                <td class="w-1/12 text-center border-r-4 border-opacity-50 bg-darkgray border-lightgray">
-                                    120
-                                </td>
-                                <td class="w-1/12 text-center border-r-4 border-opacity-50 bg-darkgray border-lightgray">
-                                    5000
-                                </td>
-                                <td class="w-1/6 p-2 font-bold text-white rounded-tr-full rounded-br-full cursor-pointer font-sm bg-darkgray">
-                                    Vásárlás
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-4/5 p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ipsa veniam vel, ad
-                                    fuga
-                                    eos blanditiis. Veniam ut consectetur repudiandae aliquam non, saepe quae illo
-                                    facilis
-                                    nisi est aut neque.
+                        <tbody   class="bg-transparent/40 text-lightgray">
+                            <tr v-for="item in Railways">
+                                <td   class="w-4/5 p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray">
+                                       <span v-for="railway in item.railways" >{{railway.depatureCity}}->{{railway.arivalCity}}</span> 
                                 </td>
                                 <td class="w-1/12 text-center bg-darkgray">
-                                    120
+                                    {{item.km}}
                                 </td>
                                 <td class="w-1/12 text-center bg-darkgray">
-                                    5000
-                                </td>
-                                <td class="w-1/6 font-bold text-white rounded-tr-full rounded-br-full font-sm bg-darkgray">
-                                    Vásárlás
-                                </td>
-                            </tr>          
-                            <tr>
-                                <td class="w-4/5 p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ipsa veniam vel, ad
-                                    fuga
-                                    eos blanditiis. Veniam ut consectetur repudiandae aliquam non, saepe quae illo
-                                    facilis
-                                    nisi est aut neque.
-                                </td>
-                                <td class="w-1/12 text-center bg-darkgray">
-                                    120
-                                </td>
-                                <td class="w-1/12 text-center bg-darkgray">
-                                    5000
+                                    {{item.price}}
                                 </td>
                                 <td class="w-1/6 font-bold text-white rounded-tr-full rounded-br-full font-sm bg-darkgray">
                                     Vásárlás
@@ -112,14 +72,51 @@ export default {
     },
     data() {
         return {
-            Cities: null
+            Cities: null,
+            Railways:[],
+            DepatCityId:0,
+            ArrivalCityId:0,
+            range:0
         }
     },
     methods: {
         async getcities() {
             let response = await axios.get('/getCities');
             this.Cities = response.data;
-            console.log(response.data)
+            document.getElementById('table').addEventListener("scroll",this.handleScroll);
+        },
+       async handleScroll () {
+        let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
+        console.log(windowRelativeBottom);
+        console.log()
+        console.log(document.documentElement.clientTop);
+        if (windowRelativeBottom < document.documentElement.clientTop) {
+            this.range=this.range+50;
+            await this.GetRailways();
+        }
+        },
+        async GetRailways() 
+        { 
+            console.log(this.ArrivalCityId);
+            let response=await axios.post('/GetRoutes',{
+                DepatureId:this.DepatCityId,
+                ArrivalId:this.ArrivalCityId,
+                range:this.range
+            
+            })
+          window.addEventListener('scroll', this.handleScroll);
+            this.Railways=response.data;
+            
+            console.log(this.Railways)
+        },
+        setDepaturecity(id)
+        {
+            this.DepatCityId=id;
+            console.log(id);
+        },
+        setArrivalCity(id)
+        {
+            this.ArrivalCityId=id;
         }
     },
     beforeMount() {

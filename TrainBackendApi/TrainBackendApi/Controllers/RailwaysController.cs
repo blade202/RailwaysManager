@@ -24,21 +24,36 @@ namespace TrainBackendApi.Controllers
             return Ok();
         }
         [Route("GetRoutes")]
-        public IActionResult GetRoutes(int depatciyiid,int arivelcityid)
+        [HttpPost]
+        public IActionResult GetRoutes([FromBody] GetRoutesRquestMode rquestModel)
         {
-            string Chachekey = $"{depatciyiid} {arivelcityid}";
-            if(!_chache.TryGetValue(Chachekey,out List<ReturnRalway> returnrailways))
+            if (rquestModel != null)
             {
-                returnrailways = railwaysServic1e.Generateroutes(depatciyiid, arivelcityid);
-                var cacheEntryOptions = new MemoryCacheEntryOptions
+                string Chachekey = $"{rquestModel.ArrivalId} {rquestModel.ArrivalId}";
+                if (!_chache.TryGetValue(Chachekey, out List<ReturnRalway> returnrailways))
                 {
-                    AbsoluteExpiration = DateTime.Now.AddMinutes(5),
-                    SlidingExpiration = TimeSpan.FromMinutes(2),
+                    returnrailways = railwaysServic1e.Generateroutes(rquestModel.DepatureId, rquestModel.ArrivalId);
+                    var cacheEntryOptions = new MemoryCacheEntryOptions
+                    {
+                        AbsoluteExpiration = DateTime.Now.AddMinutes(5),
+                        SlidingExpiration = TimeSpan.FromMinutes(2),
 
-                };
-                _chache.Set(Chachekey, returnrailways, cacheEntryOptions);
+                    };
+                    _chache.Set(Chachekey, returnrailways, cacheEntryOptions);
+                }
+                if(rquestModel.Range+50>returnrailways.Count)
+                {
+                    return Ok(returnrailways.Skip(rquestModel.Range).Take(rquestModel.Range-returnrailways.Count));
+                }
+                return Ok(returnrailways.Skip(rquestModel.Range).Take(50));
             }
-            return Ok(returnrailways);
+            return BadRequest();
+        }
+        public IActionResult Tickets()
+        {
+            
+            return Ok();
         }
     }
+    
 }
