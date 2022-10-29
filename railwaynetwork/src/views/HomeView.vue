@@ -12,18 +12,18 @@
                     <select v-model="DepatCityId" name="" id=""
                         class="p-2 font-medium text-center rounded-tl-full rounded-bl-full outline-none rounded- text-md bg-darkgray text-lightgray">
                         <option>Válasszon járataink közül!</option>
-                        <option v-for="item in Cities"   >{{ item.cityName }}</option>
+                        <option v-for="item in Cities"  :value="item.id"   >{{ item.cityName }}</option>
                     </select>
                     <select v-model="ArrivalCityId" name="" id=""
                         class="p-2 font-medium text-center rounded-tr-full rounded-br-full outline-none text-md bg-darkgray text-lightgray">
                         <option>Válasszon járataink közül!</option>
-                        <option v-for="item in Cities"  >{{ item.cityName }}</option>
+                        <option v-for="item in Cities" :value="item.id" >{{ item.cityName }}</option>
                     </select>
                     <button @click="GetRailways">
                         keresés
                     </button>
                 </div>
-                <div class="mt-5 table-box">
+                <div id="table" class="mt-5 table-box overflow-scroll">
                     <table class="border-separate rounded-lg border-spacing-y-2 bg-transparent/40 backdrop-blur-sm pr-7 pl-7">
                         <tr class="font-medium rounded-lg bg-lightgray text-darkgray">
                             <th class="w-4/5 p-3 rounded-bl-xl">Állomások</th>
@@ -31,10 +31,10 @@
                             <th class="w-1/12">Ár</th>
                             <th class="w-1/6 p-3 rounded-br-xl">Foglalás</th>
                         </tr>
-                        <tbody class=" bg-transparent/40 text-lightgray">
+                        <tbody   class="bg-transparent/40 text-lightgray">
                             <tr v-for="item in Railways">
-                                <td  class="w-4/5 p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray">
-                                  asd
+                                <td   class="w-4/5 p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray">
+                                       <span v-for="railway in item.railways" >{{railway.depatureCity}}->{{railway.arivalCity}}</span> 
                                 </td>
                                 <td class="w-1/12 text-center bg-darkgray">
                                     {{item.km}}
@@ -74,23 +74,40 @@ export default {
         return {
             Cities: null,
             Railways:[],
-            DepatCityId:3,
-            ArrivalCityId:5,
+            DepatCityId:0,
+            ArrivalCityId:0,
+            range:0
         }
     },
     methods: {
         async getcities() {
             let response = await axios.get('/getCities');
             this.Cities = response.data;
-            console.log(response.data)
+            document.getElementById('table').addEventListener("scroll",this.handleScroll);
         },
-        async GetRailways()
-        {
+       async handleScroll () {
+        let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
+        console.log(windowRelativeBottom);
+        console.log()
+        console.log(document.documentElement.clientTop);
+        if (windowRelativeBottom < document.documentElement.clientTop) {
+            this.range=this.range+50;
+            await this.GetRailways();
+        }
+        },
+        async GetRailways() 
+        { 
+            console.log(this.ArrivalCityId);
             let response=await axios.post('/GetRoutes',{
-                depatciyiid:this.DepatCityId,
-                arivelcityid:this.arivelcityid
+                DepatureId:this.DepatCityId,
+                ArrivalId:this.ArrivalCityId,
+                range:this.range
+            
             })
+          window.addEventListener('scroll', this.handleScroll);
             this.Railways=response.data;
+            
+            console.log(this.Railways)
         },
         setDepaturecity(id)
         {

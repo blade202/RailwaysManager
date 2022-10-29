@@ -92,7 +92,7 @@ namespace TrainBackendApi.Services
             {
                 return null;
             }
-            Graph g = new Graph(cities.Count);
+            Graph g = new Graph(cities.Count+1);
             foreach (var item in cities)
             {
                 foreach (var railway in railways.Where(x => x.DepatureCity == item.CityName))
@@ -101,16 +101,19 @@ namespace TrainBackendApi.Services
                 }
             }
             g.printAllPaths(new RailwayNode { NodeId = DepatureCityid },Arrivalcityid);
+            int id = 0;
             foreach (var item in g.Resualt)
             {
+             
                 for (int i = 1; i < item.Count; i++)
                 {
                     temprailways.Add(item[i].Railways);
                 }
-                returnRalways.Add(new ReturnRalway(temprailways));
+                id++;
+                returnRalways.Add(new ReturnRalway(temprailways,id));
                 temprailways = new List<Railway>();
             }
-            return returnRalways;
+            return returnRalways.OrderBy(x=>x.Price).ToList();
         }
 
     }
