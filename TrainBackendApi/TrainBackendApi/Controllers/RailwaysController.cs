@@ -24,6 +24,7 @@ namespace TrainBackendApi.Controllers
             return Ok();
         }
         [Route("GetRoutes")]
+        [HttpPost]
         public IActionResult GetRoutes(int depatciyiid,int arivelcityid)
         {
             string Chachekey = $"{depatciyiid} {arivelcityid}";
