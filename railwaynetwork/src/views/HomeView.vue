@@ -19,7 +19,7 @@
                         <option>Válasszon járataink közül!</option>
                         <option v-for="item in Cities" :value="item.id" >{{ item.cityName }}</option>
                     </select>
-                    <button @click="GetRailways">
+                    <button @click="Searchheandel">
                         keresés
                     </button>
                 </div>
@@ -94,6 +94,12 @@ export default {
             this.range=this.range+50;
             await this.GetRailways();
         }
+        },
+        Searchheandel()
+        {
+            this.range=0;
+            this.Railways=[]
+            this.GetRailways()
         },
         async GetRailways() 
         { 
