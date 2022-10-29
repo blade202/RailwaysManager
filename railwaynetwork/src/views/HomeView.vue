@@ -105,7 +105,7 @@ export default {
             
             })
           window.addEventListener('scroll', this.handleScroll);
-            this.Railways=response.data;
+            this.Railways=[...this.Railways,...response.data];
             
             console.log(this.Railways)
         },
