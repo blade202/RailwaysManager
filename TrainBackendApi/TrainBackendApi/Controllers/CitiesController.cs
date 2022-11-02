@@ -26,6 +26,7 @@ namespace TrainBackendApi.Controllers
             return Ok();
         }
         [HttpGet]
+        [Authorize]
         [Route("GetCities")]
         public IActionResult GettAllCity()
         {

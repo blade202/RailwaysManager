@@ -9,6 +9,7 @@ namespace TrainBackendApi.Repository
         public DbSet<User> Users { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Railway> Railways { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         private readonly IConfiguration configuration;
         public TrainDbConntext(IConfiguration configuration)

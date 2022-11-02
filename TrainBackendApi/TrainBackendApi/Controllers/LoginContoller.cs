@@ -11,9 +11,9 @@ namespace TrainBackendApi.Controllers
     public class LoginContoller : ControllerBase
     {
         private UserManager userManager;
-        private JwtTokenGenerator jwtTokenGenerator;
+        private JwtTokenService jwtTokenGenerator;
 
-        public LoginContoller(UserManager userManager, JwtTokenGenerator jwtTokenGenerator)
+        public LoginContoller(UserManager userManager, JwtTokenService jwtTokenGenerator)
         {
             this.userManager = userManager;
             this.jwtTokenGenerator = jwtTokenGenerator;
@@ -21,12 +21,13 @@ namespace TrainBackendApi.Controllers
 
         [Route("/Login")]
         [HttpPost]
-        public IActionResult Login([FromBody] LoginUser user)
+        public IActionResult Login(
+            [FromBody] LoginUser user)
         {
 
             if (userManager.ValaidateUser(user, out User validuser))
             {
-                return Ok(new UserData {Username=validuser.UserName,Token= jwtTokenGenerator.Generate(validuser),Role=validuser.Role});
+                return Ok(new UserData {Username=validuser.UserName,Token= jwtTokenGenerator.Generate(validuser),Role=validuser.Role,Refreshtoken=jwtTokenGenerator.GenerateRefresToken()});
             }
             return BadRequest();
 
@@ -47,11 +48,15 @@ namespace TrainBackendApi.Controllers
             }
             return BadRequest();
         }
-        [Route("Test")]
-        [HttpGet]
-        public IActionResult Test()
+        [Route("RefreshToken")]
+        [HttpPost]
+        public IActionResult RefreshToken([FromBody] RefreshTokenRequest request)
         {
-            return Ok("asd");
+            if (ModelState.IsValid)
+            {
+                return Ok(jwtTokenGenerator.GenerateNewToken(request.RefreshToken, request.oldToken));
+            }
+            return BadRequest();
         }
 
     }

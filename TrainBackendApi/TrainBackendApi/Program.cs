@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using TrainBackendApi.Middelware;
 using TrainBackendApi.Repository;
 using TrainBackendApi.Services;
 
@@ -18,20 +20,32 @@ builder.Services.AddDbContext<TrainDbConntext>();
 builder.Services.AddTransient<UserManager>();
 builder.Services.AddTransient<RailwaysService>();
 builder.Services.AddTransient<CityService>();
+builder.Services.AddTransient<GlobalExeptionMiddelware>();
 builder.Services.AddMemoryCache();
-builder.Services.AddTransient<JwtTokenGenerator>();
+builder.Services.AddTransient<JwtTokenService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o=>
 {
+    o.SaveToken = true;
     o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
     {
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero,
         ValidateIssuerSigningKey = true,
         ValidIssuer = MyConfig.GetValue<string>("Jwt:Issuer"),
         ValidAudience=MyConfig.GetValue<string>("Jwt:Audience"),
         IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(MyConfig.GetValue<string>("Jwt:Key")))
     };
+    o.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = c =>
+          {
+              c.Response.StatusCode = 401;
+              return Task.CompletedTask;
+          }
+    };
+   
 }
 );
 builder.Services.AddCors(o =>
@@ -50,7 +64,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("vuejs");
-
+app.UseMiddleware<GlobalExeptionMiddelware>();
 app.MapControllers();
 
 app.Run();

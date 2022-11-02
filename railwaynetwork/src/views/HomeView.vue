@@ -34,7 +34,13 @@
                         <tbody class=" bg-transparent/40 text-lightgray">
                             <tr v-for="item in Railways">
                                 <td  class="w-4/5 p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray">
-                                    <span v-for="railway in item.railways" >{{railway.depatureCity}}->{{railway.arivalCity}}</span> 
+                                    <span v-for="(key,val,index) of item.railways">
+                                        <span v-if="val == 0">
+                                            {{key.depatureCity}}
+                                        </span>
+                                        ->{{key.arivalCity}}
+                                        {{index}}
+                                    </span> 
                                 </td>
                                 <td class="w-1/12 text-center bg-darkgray">
                                     {{item.km}}
@@ -49,10 +55,13 @@
                         </tbody>
                     </table>
                 </div>
+             
             </div>
         </div>
+
         <TheFooter />
     </div>
+    <h2>feching data from api...</h2>s
 </template>
 
 <script>
@@ -95,25 +104,24 @@ export default {
             await this.GetRailways();
         }
         },
-        Searchheandel()
+       async Searchheandel()
         {
+            
             this.range=0;
             this.Railways=[]
-            this.GetRailways()
+            await this.GetRailways()
         },
         async GetRailways() 
         { 
             console.log(this.ArrivalCityId);
+
             let response=await axios.post('/GetRoutes',{
                 DepatureId:this.DepatCityId,
                 ArrivalId:this.ArrivalCityId,
                 range:this.range
-            
             })
-         document.getElementById('table').addEventListener('scroll', this.handleScroll);
+             document.getElementById('table').addEventListener('scroll', this.handleScroll);
             this.Railways=[...this.Railways,...response.data];
-            
-            console.log(this.Railways)
         },
         setDepaturecity(id)
         {
