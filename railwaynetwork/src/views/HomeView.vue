@@ -33,14 +33,16 @@
                             <th class="w-1/12">Ár</th>
                             <th class="w-1/6 p-3 rounded-br-xl">Foglalás</th>
                         </tr>
-                        <tbody class="w-full bg-transparent/40 text-lightgray">
-                            <tr v-for="item in Railways" class="w-full p-2 overflow-y-scroll bg-darkgray h-14">
-                                <td class="w-4/5 p-2 text-center rounded-tl-full rounded-bl-full ">
-                                    <span class="" v-for="railway in item.railways">
-                                        {{ railway.depatureCity }}
-                                        <i class='items-center m-auto bx bx-right-arrow-alt'></i>
-                                        {{ railway.arivalCity }}
-                                    </span>
+                        <tbody class=" bg-transparent/40 text-lightgray">
+                            <tr v-for="item in Railways">
+                                <td  class="w-4/5 p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray">
+                                    <span v-for="(key,val,index) of item.railways">
+                                        <span v-if="val == 0">
+                                            {{key.depatureCity}}
+                                        </span>
+                                        ->{{key.arivalCity}}
+                                        {{index}}
+                                    </span> 
                                 </td>
                                 <td class="w-1/12 text-center">
                                     {{ item.km }} km.
@@ -82,8 +84,10 @@
                 </div>
             </div>
         </div>
+
         <TheFooter />
     </div>
+    <h2>feching data from api...</h2>s
 </template>
 <script>
 import axios from 'axios';
@@ -125,23 +129,23 @@ export default {
                 await this.GetRailways();
             }
         },
-        Searchheandel() {
-            this.range = 0;
-            this.Railways = []
-            this.GetRailways()
+       async Searchheandel()
+        {
+            
+            this.range=0;
+            this.Railways=[]
+            await this.GetRailways()
         },
         async GetRailways() {
             console.log(this.ArrivalCityId);
-            let response = await axios.post('/GetRoutes', {
-                DepatureId: this.DepatCityId,
-                ArrivalId: this.ArrivalCityId,
-                range: this.range
 
+            let response=await axios.post('/GetRoutes',{
+                DepatureId:this.DepatCityId,
+                ArrivalId:this.ArrivalCityId,
+                range:this.range
             })
-            document.getElementById('table').addEventListener('scroll', this.handleScroll);
-            this.Railways = [...this.Railways, ...response.data];
-
-            console.log(this.Railways)
+             document.getElementById('table').addEventListener('scroll', this.handleScroll);
+            this.Railways=[...this.Railways,...response.data];
         },
         setDepaturecity(id) {
             this.DepatCityId = id;

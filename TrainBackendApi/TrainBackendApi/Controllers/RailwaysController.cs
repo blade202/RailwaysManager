@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using TrainBackendApi.Models;
 using TrainBackendApi.Services;
@@ -25,9 +26,10 @@ namespace TrainBackendApi.Controllers
         }
         [Route("GetRoutes")]
         [HttpPost]
+        [Authorize]
         public IActionResult GetRoutes([FromBody] GetRoutesRquestMode rquestModel)
         {
-            if (rquestModel != null)
+            if (ModelState.IsValid)
             {
                 string Chachekey = $"{rquestModel.ArrivalId} {rquestModel.ArrivalId}";
                 if (!_chache.TryGetValue(Chachekey, out List<ReturnRalway> returnrailways))
@@ -41,13 +43,19 @@ namespace TrainBackendApi.Controllers
                     };
                     _chache.Set(Chachekey, returnrailways, cacheEntryOptions);
                 }
-                if(rquestModel.Range+50>returnrailways.Count)
+
+                if (returnrailways != null) 
                 {
-                    return Ok(returnrailways.Skip(rquestModel.Range).Take(rquestModel.Range-returnrailways.Count));
+                    if (rquestModel.Range + 50 > returnrailways.Count)
+                    {
+                        return Ok(returnrailways.Skip(rquestModel.Range).Take(rquestModel.Range - returnrailways.Count));
+                    }
+                    return Ok(returnrailways.Skip(rquestModel.Range).Take(50));
                 }
-                return Ok(returnrailways.Skip(rquestModel.Range).Take(50));
+                   
+                
             }
-            return BadRequest();
+            return Ok("nulla");
         }
         public IActionResult Tickets()
         {
