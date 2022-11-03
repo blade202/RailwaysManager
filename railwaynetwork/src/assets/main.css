@@ -1,5 +1,7 @@
 @import "./base.css";
-
+*{
+    box-sizing: border-box;
+}
 #login, #registry, #home{
     animation-name: template-loading;
     animation-duration: 1s;
@@ -18,6 +20,16 @@
 .table-box::-webkit-scrollbar {
     display: none;
 }
+
+select::-webkit-scrollbar {
+    display: none;
+}
+
+.main-home-container::-webkit-scrollbar {
+    display: none;
+}
+
+
 
 
 

@@ -4,6 +4,7 @@ import router from './router'
 import './vuex'
 import store from './vuex'
 import Vuex from 'vuex'
+import 'boxicons'
 
 
 import './assets/main.css'
