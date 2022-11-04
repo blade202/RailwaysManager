@@ -57,8 +57,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div
+                    <div
                     class="grid w-full grid-cols-5 grid-rows-1 p-5 text-center text-lightgray infobbox-conatainer mt-9">
                     <div
                         class="col-start-1 col-end-4 p-10 m-2 text-xl font-bold text-center border-4 rounded-lg infobox border-darkgray bg-transparent/40 backdrop-blur-sm">
@@ -82,12 +81,12 @@
                         </div>
                     </div>
                 </div>
+                </div>
+                
             </div>
         </div>
-
         <TheFooter />
     </div>
-    <h2>feching data from api...</h2>s
 </template>
 <script>
 import axios from 'axios';
