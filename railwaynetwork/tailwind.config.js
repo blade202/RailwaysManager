@@ -9,12 +9,14 @@ module.exports = {
       current: 'currentColor',
       'lightgray': '#D3D3D3',
       'darkgray': '#2A2A2A',
+      'moderategray': '#505050',
       'dark': '#000000',
       'white': '#FFFFFF'
     },
     extend: {
       backgroundImage: {
         'loginregistrybg': "url(./public/pictures/loginregistrybg.jpg)",
+        'homebg':"url(/public/pictures/homebg.jpg)"
       },
       fontFamily: {
         'mainfont': ['Montserrat, sans-serif']
