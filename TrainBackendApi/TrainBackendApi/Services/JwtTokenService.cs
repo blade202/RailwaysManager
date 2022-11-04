@@ -75,7 +75,7 @@ namespace TrainBackendApi.Services
                 dbConntext.SaveChanges();
                 return Tokens;
             }
-            throw new SecurityTokenException("Invalid token");
+            throw new SecurityTokenException("Invalid Refresh token");
 
         }
         public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)

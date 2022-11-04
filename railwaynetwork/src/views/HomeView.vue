@@ -96,9 +96,6 @@ export default {
         },
        async handleScroll () {
         let div = document.getElementById('table');
-        console.log(div.offsetHeight);
-        console.log(div.scrollTop);
-        console.log(div.scrollHeight);
         if (div.offsetHeight+div.scrollTop>=div.scrollHeight) {
             this.range=this.range+50;
             await this.GetRailways();
@@ -120,8 +117,10 @@ export default {
                 ArrivalId:this.ArrivalCityId,
                 range:this.range
             })
-             document.getElementById('table').addEventListener('scroll', this.handleScroll);
+            if(response.data.railways!==null)
+            {
             this.Railways=[...this.Railways,...response.data];
+            }
         },
         setDepaturecity(id)
         {
