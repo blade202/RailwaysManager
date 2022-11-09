@@ -34,20 +34,25 @@ namespace TrainBackendApi.Services
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["Jwt:Audience"],
               claims,
-              expires: DateTime.Now.AddSeconds(15),
+              expires: DateTime.Now.AddMinutes(5),
               signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        public string GenerateRefresToken()
+        public string GenerateRefresToken(string Userid)
         {
-
+            var oldtoken = dbConntext.RefreshTokens.FirstOrDefault(x => x.OwnerId == Userid);
+            if (oldtoken!=null)
+            {
+                dbConntext.RefreshTokens.Remove(oldtoken);
+                dbConntext.SaveChanges();
+            }
             var randomNumber = new byte[32];
             using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(randomNumber);
                 var refreshtoken= Convert.ToBase64String(randomNumber);
-                dbConntext.RefreshTokens.Add(new RefreshToken { Token = refreshtoken });
+                dbConntext.RefreshTokens.Add(new RefreshToken { Token = refreshtoken,OwnerId=Userid });
                 dbConntext.SaveChanges();
                 return refreshtoken;
             }
@@ -65,14 +70,11 @@ namespace TrainBackendApi.Services
                 var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Audience"],
                  claims,
-                  expires: DateTime.Now.AddSeconds(15),
+                  expires: DateTime.Now.AddMinutes(5),
                   signingCredentials: credentials);
                  var newtoken =new JwtSecurityTokenHandler().WriteToken(token);
                 Tokens.Add("token",newtoken);
-                Tokens.Add("refreshtoken", GenerateRefresToken());
-                var oldrefrestoken = dbConntext.RefreshTokens.FirstOrDefault(x => x.Token == refreshtoken);
-                dbConntext.RefreshTokens.Remove(oldrefrestoken);
-                dbConntext.SaveChanges();
+                Tokens.Add("refreshtoken", GenerateRefresToken(pricipals.Claims.FirstOrDefault(x=>x.Type==ClaimTypes.NameIdentifier).Value));
                 return Tokens;
             }
             throw new SecurityTokenException("Invalid Refresh token");

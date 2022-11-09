@@ -40,9 +40,43 @@ namespace TrainBackendApi.Controllers
                 };
                 memoryCache.Set("Cities", Cities, ChacherEntryOption);
             }
-            
             return Ok(Cities);
         }
+        [HttpPost]
+        [Authorize(Roles ="admin")]
+        [Route("DeletCity")]
+        public IActionResult DeleteCity([FromBody] int id)
+        {
+            citiservice.Delete(id);
+            return Ok();
+        }
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        [Route("CreatCity")]
+        public IActionResult CreateCity([FromBody] CreatCityReguest newcity)
+        {
+
+            if (ModelState.IsValid)
+            {
+                return Ok(citiservice.Create(newcity));
+            }
+            return BadRequest();
+        }
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        [Route("UpdateCity")]
+        public IActionResult UpdateCity([FromBody] City newcity)
+        {
+
+            if (ModelState.IsValid)
+            {
+                return Ok(citiservice.Update(newcity));
+            }
+            return BadRequest();
+        }
+
+
+
     }
 
 }
