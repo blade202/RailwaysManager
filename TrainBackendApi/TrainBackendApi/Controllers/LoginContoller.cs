@@ -25,9 +25,10 @@ namespace TrainBackendApi.Controllers
             [FromBody] LoginUser user)
         {
 
-            if (userManager.ValaidateUser(user, out User validuser))
+            if (ModelState.IsValid&&userManager.ValaidateUser(user, out User validuser))
             {
-                return Ok(new UserData {Username=validuser.UserName,Token= jwtTokenGenerator.Generate(validuser),Role=validuser.Role,Refreshtoken=jwtTokenGenerator.GenerateRefresToken()});
+                
+                return Ok(new UserData {Username=validuser.UserName,Token= jwtTokenGenerator.Generate(validuser),Role=validuser.Role,Refreshtoken=jwtTokenGenerator.GenerateRefresToken(validuser.Id)});
             }
             return BadRequest();
 

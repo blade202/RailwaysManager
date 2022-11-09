@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { Store } from 'vuex';
 import store from '../vuex';
-let user=store.state.user;
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,24 +21,37 @@ const router = createRouter({
       name:'home',
       component: () => import('@/views/HomeView.vue')
     },
+    {
+      path:'/admin',
+      name : 'admin',
+      component:() => import('@/views/AdminView.vue')
+    }
    
  
   ]
 })
-function canAccess(to)
-{
+router.beforeEach(async(to,from)=>{
   if(to.name==="home")
   {
-    if(user)
+    if(!store.state.user)
     {
-      return true;
+      return '/'
     }
-    return false
   }
-  return true;
-}
-router.beforeEach(async(to,from)=>{
- if(!canAccess(to)) return '/'
+  if(to.name==="login")
+  {
+    if(store.state.user)
+    {
+      return "/home"
+    }
+  }
+  if(to.name==="admin")
+  {
+    if(store.state.user===null||store.state.user.role!=="admin")
+    {
+      return "/";
+    }
+  }
 })
 
 export default router
