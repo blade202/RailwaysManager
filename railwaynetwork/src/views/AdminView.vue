@@ -1,36 +1,52 @@
 <template>
     <TheNavbar />
-    <nav class="bg-white border-gray-200 px-2 mt-20 sm:px-4 py-2.5 rounded dark:bg-gray-900">
-        <div class="container flex flex-wrap justify-between items-center mx-auto">
-          <div class="hidden w-full md:block md:w-auto flex" id="navbar-default">
-                <ul class="flex">
-                    <li>
-                        <a href="#"
-                        class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                        class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-                    </li>
-                </ul>
+    <div class="main-admin-container">
+        <div class="admin-content-container">
+            <div class="absolute w-3/4 m-auto navbar top-20">
+                <div class="cities">
+                    <button @click="showcities">
+                        cities
+                    </button>
+                </div>
+                <div class="railways">
+                    <button @click="showrailways">
+                        railways
+                    </button>
+                </div>
+            </div>
+            <div id="admin-table" class="overflow-scroll scrollbar-hide max-h-128">
+                <table class="border-separate rounded-lg border-spacing-y-4 bg-transparent/40 backdrop-blur-sm">
+                    <tr class="sticky top-0">
+                        <th v-for="header in tableheaders" class="">{{header}}</th>
+                    </tr>
+                    <tbody class="">
+                        <tr class="">
+                            <td class="">
+                                <div class="">
+
+                                </div>
+                            </td>
+                            <td class="">
+                                <div class="">
+
+                                </div>
+                            </td>
+                            <td class="">
+                                <div class="">
+
+                                </div>
+                            </td>
+                            <td class="">
+                                <div class="">
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </nav>
-    <table>
-        <thead>
-            <tr>
-                <td>
-                    asd
-                </td>
-                <td>
-                    asd
-                </td>
-                <td>
-                    asd
-                </td>
-            </tr> 
-        </thead>
-    </table>
+    </div>
     <TheFooter />
 </template>
 
@@ -42,6 +58,21 @@ export default {
     components: {
         TheNavbar, TheFooter,
     },
+    data() {
+        return {
+            tableheaders:[],
+            cities:[],
+            railways:[],
+        }
+    },
+    methods:{
+        showcities(){
+            this.tableheaders=["városok","módosítás","törlés"]
+        },
+        showrailways(){
+            this.tableheaders=["induló állomás", "érkező állomás","km", "módosítás", "törlés"]
+        }
+    }
 
 }
 </script>
