@@ -7,7 +7,6 @@
     animation-duration: 1s;
     animation-iteration-count: 1;
 }
-
 @keyframes template-loading{
     0%{
         filter: blur(0.5rem);
@@ -17,17 +16,51 @@
     }
 }
 
+.main-loading-container{
+    animation-name: loading-container;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes loading-container{
+    0%{
+        opacity: 1;
+    }
+
+    80%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+
+
 .table-box::-webkit-scrollbar {
     display: none;
+    scrollbar-width: none;
 }
 
 select::-webkit-scrollbar {
     display: none;
+    scrollbar-width: none;
 }
 
-.main-home-container::-webkit-scrollbar {
+.main-home-container::-webkit-scrollbar { 
+    width: 0 !important;
+    -ms-overflow-style: none; }
+
+.arrival-depature-container::-webkit-scrollbar {
     display: none;
+    scrollbar-width: none;
 }
+
+template::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+}
+
 
 
 
