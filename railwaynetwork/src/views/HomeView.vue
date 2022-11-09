@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-screen min-h-full overflow-auto bg-fixed bg-no-repeat bg-cover bg-homebg" id="home">
+    <div @click="Showhint" class="w-full h-screen min-h-full overflow-auto bg-fixed bg-no-repeat bg-cover bg-homebg" id="home">
         <div class="w-full main-home-container font-mainfont bg-darkgray ">
             <TheNavbar />
             <div
@@ -9,14 +9,14 @@
                     RailwaysNetwork
                 </div>
                 <div class="grid grid-cols-11 grid-rows-1 m-auto xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar">
-                    <select v-model="DepatCityId" name="" id=""
+                    <select @click="Reomovehint" v-model="DepatCityId" name="" id=""
                         class="col-start-1 col-end-6 p-2 pr-3 font-medium text-center rounded-tl-full rounded-bl-full outline-none text-md bg-darkgray text-lightgray">
-                        <option>Válasszon járataink közül!</option>
-                        <option v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
+                        <option selected>Ki induló város</option>
+                        <option  v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                     </select>
-                    <select v-model="ArrivalCityId" name="" id=""
+                    <select  @click="Reomovehint" v-model="ArrivalCityId" name="" id=""
                         class="col-start-6 col-end-11 p-2 pr-3 font-medium text-center rounded-tr-full rounded-br-full outline-none text-md bg-darkgray text-lightgray">
-                        <option class="rounded-xl">Válasszon járataink közül!</option>
+                        <option  class="rounded-xl" disabled value="" selected>Céllálomás</option>
                         <option v-for="item in Cities" :value="item.id" class="rounded-xl">{{ item.cityName }}</option>
                     </select>
                     <button @click="Searchheandel" class="col-start-11 col-end-12 xl:pl-2 text-lightgray">
@@ -70,7 +70,7 @@
                     </table>
                 </div>
             </div>
-            <div class="w-full main-loading-container">
+            <div id="hint" class="w-full">
                 <div
                     class="absolute p-10 text-xl text-center -translate-x-1/2 border-4 rounded-lg backdrop-blur-sm bg-transparent/50 left-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 loading-conatainer-content xl:top-1/3 lg:top-1/3 md:top-1/3 sm:top-1/3 border-lightgray text-lightgray">
                     Kérjük válasszon induló és érkező állomást!
@@ -216,7 +216,8 @@ export default {
             Railways: [],
             DepatCityId: 0,
             ArrivalCityId: 0,
-            range: 0
+            range: 0,
+            falg:false,
         }
     },
     methods: {
@@ -236,6 +237,8 @@ export default {
 
             this.range = 0;
             this.Railways = []
+            this.falg=false;
+            this.Reomovehint();
             await this.GetRailways()
         },
         async GetRailways() {
@@ -256,7 +259,26 @@ export default {
         },
         setArrivalCity(id) {
             this.ArrivalCityId = id;
+        },
+        Reomovehint()
+        {
+            
+            document.getElementById('hint').classList.add('main-loading-container');
+            setTimeout(()=>{
+                this.falg=true;
+            },1);
+    
+        },
+        Showhint()
+        {
+            if(this.falg&&this.Railways.length===0)
+            {
+            
+                this.falg=false;
+                document.getElementById('hint').classList.remove('main-loading-container');
+            }
         }
+        
     },
     beforeMount() {
         this.getcities();

@@ -18,7 +18,7 @@
 
 .main-loading-container{
     animation-name: loading-container;
-    animation-duration: 4s;
+    animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 
@@ -27,9 +27,6 @@
         opacity: 1;
     }
 
-    80%{
-        opacity: 1;
-    }
     100%{
         opacity: 0;
     }

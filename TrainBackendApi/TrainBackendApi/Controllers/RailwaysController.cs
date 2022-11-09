@@ -57,10 +57,12 @@ namespace TrainBackendApi.Controllers
             }
             return Ok("nulla");
         }
-        public IActionResult Tickets()
+        [HttpGet]
+        [Route("GetRailways")]
+        [Authorize(Roles ="admin")]
+        public IActionResult GettAllRailways()
         {
-            
-            return Ok();
+            return Ok(railwaysServic1e.GettAll());
         }
     }
     

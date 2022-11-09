@@ -53,7 +53,8 @@ o.AddPolicy("vuejs", policy =>
 {
     policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 })
-);
+
+);;
 
 var app = builder.Build();
 
