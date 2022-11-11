@@ -29,10 +29,10 @@
                         <th v-for="header in tableheaders" class="">{{header}}</th>  
                     </tr>
                     <tbody class="bg-transparent/40 text-lightgray">
-                        <tr v-if="tableheaders[0]==='Városok'" class="">
+                        <tr v-if="tableheaders[0]==='Városok'" v-for="city in cities" class="">
                             <td class="p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray h-14">
                                 <div class="">
-                                    Isazeg
+                                    {{city.cityName}}
                                 </div>
                             </td>
                             <td class="text-center bg-darkgray h-14">
@@ -46,15 +46,15 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr v-if="tableheaders[0]==='Induló állomás'">
-                            <td class="p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray h-14">
-                                idnulo
+                        <tr  v-if="tableheaders[0]==='Induló állomás'" v-for="railway in railways">
+                            <td>
+                                {{railway.depatureCity}}
                             </td>
-                            <td class="text-center bg-darkgray h-14">
-                                erkezo
+                            <td>
+                                {{railway.arivalCity}}
                             </td>
-                            <td class="text-center bg-darkgray h-14">
-                                km
+                            <td>
+                                {{railway.km}}
                             </td>
                             <td class="text-center bg-darkgray h-14">
                                 modositas
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import TheFooter from '../components/TheFooter.vue';
 import TheNavbar from '../components/TheNavbar.vue';
 export default {
@@ -87,11 +88,16 @@ export default {
         }
     },
     methods: {
-        showcities() {
-            this.tableheaders = ["Városok", "Módosítás", "Törlés"]
+        async showcities() {
+            this.tableheaders = ["Városok", "Módosítás", "Törlés"];
+            let response=await axios.get('/getCities');
+            this.cities=response.data;
         },
-        showrailways() {
-            this.tableheaders = ["Induló állomás", "Érkező állomás", "Km", "Módosítás", "Törlés"]
+       async showrailways() {
+            this.tableheaders = ["Induló állomás", "Érkező állomás", "Km", "Módosítás", "Törlés"];
+            let response=await axios.get('/GetRailways');
+            this.railways=response.data;
+
         }
     }
 
