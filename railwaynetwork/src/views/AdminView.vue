@@ -23,11 +23,10 @@
                     </button>
                 </div>
             </div>
-            <div id="admin-table" class="scrollbar-hide max-h-128">
-                <table  v-if="tableheaders.length!==0"
-                    class="w-full border-separate rounded-bl-lg rounded-br-lg px-7 border-spacing-y-4 bg-transparent/40 backdrop-blur-sm font-mainfont">
-                    <tr class="sticky top-0 flex w-full p-3 font-medium rounded-lg place-content-around bg-lightgray text-darkgray">
-                        <th v-for="header in tableheaders" class="">{{header}}</th>
+            <div id="admin-table" class="w-full overflow-scroll table-box scrollbar-hide max-h-128">
+                <table  v-if="tableheaders.length!==0" class="w-full border-separate rounded-bl-lg rounded-br-lg px-7 border-spacing-y-4 bg-transparent/40 backdrop-blur-sm font-mainfont">
+                    <tr class="sticky top-0 w-full p-3 font-medium rounded-lg bg-lightgray text-darkgray">
+                        <th v-for="header in tableheaders" class="">{{header}}</th>  
                     </tr>
                     <tbody class="bg-transparent/40 text-lightgray">
                         <tr v-if="tableheaders[0]==='Városok'" class="">
@@ -36,31 +35,31 @@
                                     Isazeg
                                 </div>
                             </td>
-                            <td class="text-center  bg-darkgray h-14">
+                            <td class="text-center bg-darkgray h-14">
                                 <div class="">
                                     itt van a törelés gomb
                                 </div>
                             </td>
-                            <td class="text-center  bg-darkgray h-14">
+                            <td class="text-center rounded-tr-full rounded-br-full bg-darkgray h-14">
                                 <div class="">
                                     itt van a modositas gomb
                                 </div>
                             </td>
                         </tr>
-                        <tr  v-if="tableheaders[0]==='Induló állomás'">
-                            <td>
+                        <tr v-if="tableheaders[0]==='Induló állomás'">
+                            <td class="p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray h-14">
                                 idnulo
                             </td>
-                            <td>
+                            <td class="text-center bg-darkgray h-14">
                                 erkezo
                             </td>
-                            <td>
+                            <td class="text-center bg-darkgray h-14">
                                 km
                             </td>
-                            <td>
+                            <td class="text-center bg-darkgray h-14">
                                 modositas
                             </td>
-                            <td>
+                            <td class="text-center rounded-tr-full rounded-br-full bg-darkgray h-14">
                                 törlés
                             </td>
                         </tr>
