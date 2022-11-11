@@ -26,7 +26,7 @@
                 </div>
                 <div id="table" class="w-full pb-3 mt-5 overflow-scroll table-box scrollbar-hide max-h-128">
                     <table
-                        class="border-separate rounded-lg border-spacing-y-4 bg-transparent/40 backdrop-blur-sm pr-7 pl-7">
+                        class="border-separate rounded-lg border-spacing-y-4 bg-transparent/40 backdrop-blur-sm px-7">
                         <tr class="sticky top-0 font-medium rounded-lg bg-lightgray text-darkgray">
                             <th class="w-4/5 p-3 rounded-bl-xl">Állomások</th>
                             <th class="w-1/12">Távolság</th>
@@ -36,7 +36,7 @@
                         <tbody class=" bg-transparent/40 text-lightgray">
                             <tr class="lg:text-base xl:text-base md:text-sm sm:text-sm" v-for="item in Railways">
                                 <td
-                                    class="w-4/5 p-2 overflow-x-scroll text-center rounded-tl-full rounded-bl-full whitespace-nowrap bg-darkgray h-14 max-h-14">
+                                    class="w-4/5 p-2  text-center rounded-tl-full rounded-bl-full bg-darkgray h-14 max-h-14">
                                     <div
                                         class="border-r-4 arrival-depature-container xl:border-lightgray/70 lg:border-lightgray/70 md:border-lightgray/70 sm:border-none">
                                         <span v-for="(key, val, index) of item.railways">
@@ -72,7 +72,7 @@
             </div>
             <div id="hint" class="w-full">
                 <div
-                    class="absolute p-10 text-xl text-center -translate-x-1/2 border-4 rounded-lg backdrop-blur-sm bg-transparent/50 left-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 loading-conatainer-content xl:top-1/3 lg:top-1/3 md:top-1/3 sm:top-1/3 border-lightgray text-lightgray">
+                    class="absolute p-10 text-xl text-center -translate-x-1/2 border-4 rounded-lg font-mainfont backdrop-blur-sm bg-transparent/50 left-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 loading-conatainer-content xl:top-1/3 lg:top-1/3 md:top-1/3 sm:top-1/3 border-lightgray text-lightgray">
                     Kérjük válasszon induló és érkező állomást!
                 </div>
             </div>
