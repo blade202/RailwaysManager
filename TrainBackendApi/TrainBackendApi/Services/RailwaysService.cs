@@ -84,15 +84,29 @@ namespace TrainBackendApi.Services
         }
         public List<ReturnRalway> Generateroutes(int DepatureCityid, int Arrivalcityid)
         {
-            List<Railway> temprailways = new List<Railway>();
-            List<ReturnRalway> returnRalways = new List<ReturnRalway>();
-            List<City> cities = cityService.GetAll();
-            List<Railway> railways = GettAll();
-            if(cityService.GetById(DepatureCityid)==null||cityService.GetById(Arrivalcityid)==null)
+            if (cityService.GetById(DepatureCityid) == null || cityService.GetById(Arrivalcityid) == null)
             {
                 return null;
             }
-            Graph g = new Graph(cities.Count+1);
+            List<Railway> temprailways = new List<Railway>();
+            List<ReturnRalway> returnRalways = new List<ReturnRalway>();
+            List<City> cities = cityService.GetAll();
+            int ctid = 0;
+            foreach (City city in cities)
+            {
+                if(DepatureCityid==city.Id)
+                {
+                    DepatureCityid = ctid;                    
+                }
+                if(Arrivalcityid==city.Id)
+                {
+                    Arrivalcityid = ctid;
+                }
+                city.Id = ctid;
+                ctid++;
+            }
+            List<Railway> railways = GettAll();
+            Graph g = new Graph(cities.Count);
             foreach (var item in cities)
             {
                 foreach (var railway in railways.Where(x => x.DepatureCity == item.CityName))

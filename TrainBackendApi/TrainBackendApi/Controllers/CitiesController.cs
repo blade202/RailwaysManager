@@ -21,7 +21,7 @@ namespace TrainBackendApi.Controllers
         [Route("ReadCities")]
         public IActionResult Read()
         {
-            
+
             citiservice.readCities();
             return Ok();
         }
@@ -30,13 +30,13 @@ namespace TrainBackendApi.Controllers
         [Route("GetCities")]
         public IActionResult GettAllCity()
         {
-            if(!memoryCache.TryGetValue("Cities",out List<City> Cities))
+            if (!memoryCache.TryGetValue("Cities", out List<City> Cities))
             {
                 Cities = citiservice.GetAll();
-                var ChacherEntryOption = new MemoryCacheEntryOptions{
+                var ChacherEntryOption = new MemoryCacheEntryOptions {
                     AbsoluteExpiration = DateTime.Now.AddMinutes(25),
-                    SlidingExpiration=TimeSpan.FromMinutes(20),
-                    Size =1024                   
+                    SlidingExpiration = TimeSpan.FromMinutes(20),
+                    Size = 1024
                 };
                 memoryCache.Set("Cities", Cities, ChacherEntryOption);
             }
@@ -45,15 +45,15 @@ namespace TrainBackendApi.Controllers
         [HttpPost]
         [Authorize(Roles ="admin")]
         [Route("DeletCity")]
-        public IActionResult DeleteCity([FromBody] int id)
+        public IActionResult DeleteCity([FromBody] DeleteRquest rquest)
         {
-            citiservice.Delete(id);
+            citiservice.Delete(rquest.id);
             return Ok();
         }
-        [HttpPost]
+        [HttpPut]
         [Authorize(Roles = "admin")]
         [Route("CreatCity")]
-        public IActionResult CreateCity([FromBody] CreatCityReguest newcity)
+        public IActionResult CreateCity([FromForm] CreatCityReguest newcity)
         {
 
             if (ModelState.IsValid)

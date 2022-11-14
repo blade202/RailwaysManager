@@ -24,21 +24,24 @@
                 </div>
             </div>
             <div id="admin-table" class="scrollbar-hide max-h-128">
-                <table  v-if="tableheaders.length!==0"
+                <table v-if="tableheaders.length !== 0"
                     class="w-full border-separate rounded-bl-lg rounded-br-lg px-7 border-spacing-y-4 bg-transparent/40 backdrop-blur-sm font-mainfont">
-                    <tr class="sticky top-0 flex w-full p-3 font-medium rounded-lg place-content-around bg-lightgray text-darkgray">
-                        <th v-for="header in tableheaders" class="">{{header}}</th>
+                    <tr
+                        class="sticky top-0 flex w-full p-3 font-medium rounded-lg place-content-around bg-lightgray text-darkgray">
+                        <th v-for="header in tableheaders" class="">{{ header }}</th>
                     </tr>
                     <tbody class="bg-transparent/40 text-lightgray">
-                        <tr v-if="tableheaders[0]==='Városok'" v-for="city in cities" class="">
+                        <tr v-if="tableheaders[0] === 'Városok'" v-for="city in cities" class="">
                             <td class="p-2 text-center rounded-tl-full rounded-bl-full bg-darkgray h-14">
                                 <div class="">
-                                    {{city.cityName}}
+                                    {{ city.cityName }}
                                 </div>
                             </td>
                             <td class="text-center  bg-darkgray h-14">
                                 <div class="">
-                                    itt van a törelés gomb
+                                    <button @click="DeletCities(city.id)">
+                                        Delete
+                                    </button>
                                 </div>
                             </td>
                             <td class="text-center  bg-darkgray h-14">
@@ -47,15 +50,15 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr  v-if="tableheaders[0]==='Induló állomás'" v-for="railway in railways">
+                        <tr v-if="tableheaders[0] === 'Induló állomás'" v-for="railway in railways">
                             <td>
-                                {{railway.depatureCity}}
+                                {{ railway.depatureCity }}
                             </td>
                             <td>
-                                {{railway.arivalCity}}
+                                {{ railway.arivalCity }}
                             </td>
                             <td>
-                                {{railway.km}}
+                                {{ railway.km }}
                             </td>
                             <td>
                                 modositas
@@ -91,14 +94,26 @@ export default {
     methods: {
         async showcities() {
             this.tableheaders = ["Városok", "Módosítás", "Törlés"];
-            let response=await axios.get('/getCities');
-            this.cities=response.data;
+            let response = await axios.get('/getCities');
+            this.cities = response.data;
         },
-       async showrailways() {
+        async showrailways() {
             this.tableheaders = ["Induló állomás", "Érkező állomás", "Km", "Módosítás", "Törlés"];
-            let response=await axios.get('/GetRailways');
-            this.railways=response.data;
+            let response = await axios.get('/GetRailways');
+            this.railways = response.data;
 
+        },
+        async DeletCities(cityid) {
+            try{
+            await axios.post('/DeletCity', {
+                id: cityid,
+            });
+            const objWithIdIndex = this.cities.findIndex((obj) => obj.id === cityid);
+            this.cities.splice(objWithIdIndex, 1);
+
+        }catch{
+
+        }
         }
     }
 
