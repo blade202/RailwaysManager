@@ -3,19 +3,19 @@
         <div class="w-full main-home-container font-mainfont bg-darkgray ">
             <TheNavbar />
             <div
-                class="absolute -translate-x-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 xl:top-10 lg:top-20 md:top-20 sm:top-20 main-content-box left-1/2">
+                class="absolute -translate-x-1/2 xl:text-base lg:text-base md:text-sm sm:text-base xl:w-3/4 xl: lg:w-10/12 md:w-11/12 sm:w-11/12 xl:top-10 lg:top-20 md:top-20 sm:top-20 main-content-box left-1/2">
                 <div
                     class="mb-5 text-4xl font-medium text-center title text-lightgray text-shadow-xl font-mainfont inner-shadow">
                     RailwaysNetwork
                 </div>
-                <div class="grid grid-cols-11 grid-rows-1 m-auto xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar">
+                <div class="static grid grid-cols-11 grid-rows-1 m-auto xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar">
                     <select @click="Reomovehint" v-model="DepatCityId" name="" id=""
-                        class="col-start-1 col-end-6 p-2 pr-3 font-medium text-center rounded-tl-full rounded-bl-full outline-none text-md bg-darkgray text-lightgray">
+                        class="static z-0 col-start-1 col-end-6 p-2 pr-3 font-medium text-center rounded-tl-full rounded-bl-full outline-none text-md bg-darkgray text-lightgray">
                         <option selected>Ki induló város</option>
                         <option  v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                     </select>
                     <select  @click="Reomovehint" v-model="ArrivalCityId" name="" id=""
-                        class="col-start-6 col-end-11 p-2 pr-3 font-medium text-center rounded-tr-full rounded-br-full outline-none text-md bg-darkgray text-lightgray">
+                        class="static z-0 col-start-6 col-end-11 p-2 pr-3 font-medium text-center rounded-tr-full rounded-br-full outline-none text-md bg-darkgray text-lightgray">
                         <option  class="rounded-xl" disabled value="" selected>Céllálomás</option>
                         <option v-for="item in Cities" :value="item.id" class="rounded-xl">{{ item.cityName }}</option>
                     </select>
@@ -26,43 +26,44 @@
                 </div>
                 <div id="table" class="w-full pb-3 mt-5 overflow-scroll table-box scrollbar-hide max-h-128">
                     <table
-                        class="border-separate rounded-lg border-spacing-y-4 bg-transparent/40 backdrop-blur-sm px-7">
+                        class="z-10 border-separate rounded-lg border-spacing-y-4 bg-transparent/40 backdrop-blur-sm px-7">
                         <tr class="sticky top-0 font-medium rounded-lg bg-lightgray text-darkgray">
-                            <th class="w-4/5 p-3 rounded-bl-xl">Állomások</th>
-                            <th class="w-1/12">Távolság</th>
-                            <th class="w-1/12">Ár</th>
-                            <th class="w-1/6 p-3 rounded-br-xl">Foglalás</th>
+                            <th class="p-3 xl:w-4/5 lg:w-4/5 rounded-bl-xl rounded-br-xl">Állomások</th>
+                            <th class="xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 rounded-bl-xl rounded-br-xl">Távolság</th>
+                            <th class="xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 rounded-bl-xl rounded-br-xl">Ár</th>
+                            <th class="p-3 xl:w-1/6 lg:w-1/6 md:w-1/6 sm:w-1/6 rounded-br-xl rounded-bl-xl ">Foglalás</th>
                         </tr>
                         <tbody class=" bg-transparent/40 text-lightgray">
                             <tr class="lg:text-base xl:text-base md:text-sm sm:text-sm" v-for="item in Railways">
                                 <td
-                                    class="w-4/5 p-2  text-center rounded-tl-full rounded-bl-full bg-darkgray h-14 max-h-14">
+                                    class="p-2 text-center rounded-tl-full rounded-bl-full xl:w-4/5 lg:w-4/5 bg-darkgray h-14 max-h-14">
                                     <div
-                                        class="border-r-4 arrival-depature-container xl:border-lightgray/70 lg:border-lightgray/70 md:border-lightgray/70 sm:border-none">
+                                        class="items-center m-auto border-r-4 arrival-depature-container xl:border-lightgray/70 lg:border-lightgray/70 md:border-lightgray/70">
                                         <span v-for="(key, val, index) of item.railways">
                                             <span v-if="val == 0">{{ key.depatureCity }}
+                                                
                                             </span>
-                                            ->
+                                            <i class='pl-1 bx bxs-right-arrow-alt'></i>
                                             {{ key.arivalCity }}{{ index }}
                                         </span>
                                     </div>
                                 </td>
-                                <td class="w-1/12 text-center bg-darkgray h-14">
+                                <td class="text-center xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 bg-darkgray h-14">
                                     <div
                                         class="border-r-4 km-container xl:border-lightgray/70 lg:border-lightgray/70 md:border-lightgray/70 ">
-                                        {{ item.km }} km.
+                                        {{ item.km }} km
                                     </div>
                                 </td>
-                                <td class="w-1/12 text-center bg-darkgray h-14">
+                                <td class="text-center xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 bg-darkgray h-14">
                                     <div
                                         class="border-r-4 price-container xl:border-lightgray/70 lg:border-lightgray/70 md:border-lightgray/70 ">
-                                        {{ item.price }} Ft.
+                                        {{ item.price }} Ft
                                     </div>
                                 </td>
                                 <td
-                                    class="w-1/6 font-bold text-center text-white rounded-tr-full rounded-br-full cursor-pointer font-sm bg-darkgray h-14">
+                                    class="font-bold text-center text-white rounded-tr-full rounded-br-full cursor-pointer xl:w-1/6 lg:w-1/6 md:w-1/6 sm:w-1/6 font-sm bg-darkgray h-14">
                                     <div class="buy-container">
-                                        Vásárlás
+                                        <i class='text-3xl duration-150 ease-in-out bx bxs-cart-add text-yellow hover:text-darkeryellow'></i>
                                     </div>
                                 </td>
                             </tr>
@@ -72,7 +73,7 @@
             </div>
             <div id="hint" class="w-full">
                 <div
-                    class="absolute p-10 text-xl text-center -translate-x-1/2 border-4 rounded-lg font-mainfont backdrop-blur-sm bg-transparent/50 left-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 loading-conatainer-content xl:top-1/3 lg:top-1/3 md:top-1/3 sm:top-1/3 border-lightgray text-lightgray">
+                    class="absolute z-0 p-10 text-xl text-center -translate-x-1/2 border-4 rounded-lg font-mainfont backdrop-blur-sm bg-transparent/50 left-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 loading-conatainer-content xl:top-1/3 lg:top-1/3 md:top-1/3 sm:top-1/3 border-lightgray text-lightgray">
                     Kérjük válasszon induló és érkező állomást!
                 </div>
             </div>
@@ -81,17 +82,17 @@
     <div class="w-full spacing-container bg-darkgray font-mainfont ">
         <div class="grid p-10 gird-cols-2 gird-rows-2 spacing-container-content">
             <span
-                class="pl-2 m-auto text-3xl font-black border-l-8 xl:text-center welcome-title text-dark border-lightgray/80">
+                class="pl-2 m-auto text-3xl font-black border-l-8 xl:text-center welcome-title text-dark border-lightgray/80 z-3">
                 Üdvözöljök a RailwaysNetwork oldalán!<br>
             </span>
         </div>
     </div>
     <div
-        class="w-full lower-conent-main-container bg-[url('/public/pictures/lowercontainerbg.png')] bg-cover bg-no-repeat bg-fixed pb-20 font-mainfont">
+        class=" w-full lower-conent-main-container bg-[url('/public/pictures/lowercontainerbg.png')] bg-cover bg-no-repeat bg-fixed pb-20 font-mainfont">
         <div
             class="grid p-10 m-auto xl:w-full xl:grid-cols-8 xl:grid-rows-1 lg:w-full lg:grid-cols-6 lg:grid-rows-1 lower-conent-container">
             <div
-                class="grid p-3 m-2 text-xl border-4 rounded-lg xl:grid-cols-1 xl:col-start-1 xl:col-end-6 xl:grid-rows-2 lg:col-start-1 lg:col-end-4 toolbox bg-transparent/50 backdrop-blur-sm border-lightgray text-lightgray">
+                class="z-10 grid p-3 m-2 text-xl border-4 rounded-lg xl:grid-cols-1 xl:col-start-1 xl:col-end-6 xl:grid-rows-2 lg:col-start-1 lg:col-end-4 toolbox bg-transparent/50 backdrop-blur-sm border-lightgray text-lightgray">
                 <div
                     class="row-start-1 row-end-2 p-4 text-left border-b-2 xl:text-2xl lg:text-base technology-paragraph border-lightgray">
                     Ez a projekt azért jött létre ,hogy bemutassuk munkaszínvonalunk és tudástárunkat. <br>
@@ -99,46 +100,12 @@
                     részleteikkel együtt.
                     Frontend fejlesztő, Soltész Dávid. Backend fejlesztő, Plachi Szilárd.
                 </div>
-                <div class="grid grid-cols-5 grid-rows-2 row-start-2 row-end-2 p-3 text-center technology-icons">
-                    <div class="py-2 mb-2 rounded-lg vuejscontainer w-18 h-18 bg-lightgray/20 mx-14">
-                        <div
-                            class="icon bg-[url('/public/pictures/vuejspng.png')]  w-16 h-16 bg-contain bg-no-repeat m-auto bg-center p-2">
-                        </div>
-                    </div>
-                    <div class="rounded-lg .netcontainer w-18 h-18 bg-lightgray/20 py-2 mx-14 mb-2">
-                        <div
-                            class="icon bg-[url('/public/pictures/.netpng.png')]  w-16 h-16 bg-contain bg-no-repeat m-auto  bg-center p-2">
-                        </div>
-                    </div>
-                    <div class="py-2 mb-2 rounded-lg tailwindcsscontainer w-18 h-18 bg-lightgray/20 mx-14">
-                        <div
-                            class="icon bg-[url('/public/pictures/tailwindpng.png')]  w-16 h-16 bg-contain bg-no-repeat m-auto bg-center p-2">
-                        </div>
-                    </div>
-                    <div class="py-2 mb-2 rounded-lg cracscontainer w-18 h-18 bg-lightgray/20 mx-14">
-                        <div
-                            class="icon bg-[url('/public/pictures/cracspng.png')]  w-16 h-16 bg-contain bg-no-repeat m-auto  bg-center p-2">
-                        </div>
-                    </div>
-                    <div class="py-2 mb-2 rounded-lg mysqlcontainer w-18 h-18 bg-lightgray/20 mx-14">
-                        <div
-                            class="icon bg-[url('/public/pictures/mysqlpng.png')]  w-16 h-16 bg-contain bg-no-repeat m-auto  bg-center p-2">
-                        </div>
-                    </div>
-                    <div class="py-2 mb-2 rounded-lg javascriptcontainer w-18 h-18 bg-lightgray/20 mx-14">
-                        <div
-                            class="icon bg-[url('/public/pictures/jspng.png')]  w-16 h-16 bg-contain bg-no-repeat m-auto  bg-center p-2">
-                        </div>
-                    </div>
-                    <div class="py-2 mb-2 rounded-lg htmlcontainer w-18 h-18 bg-lightgray/20 mx-14">
-                        <div
-                            class="icon bg-[url('/public/pictures/htmlpng.png')]  w-16 h-16 bg-contain bg-no-repeat m-auto  bg-center p-2">
-                        </div>
-                    </div>
+                <div class="row-start-2 row-end-2 p-3 text-center technology-icons">
+                    
                 </div>
             </div>
             <div
-                class="grid p-5 m-2 border-4 rounded-lg xl:grid-cols-2 xl:col-start-6 xl:col-end-9 xl:grid-rows-1 lg:col-start-4 lg:col-end-7 programers border-lightgray bg-transparent/50 backdrop-blur-sm">
+                class="grid p-5 m-2 border-4 rounded-lg z-3 xl:grid-cols-2 xl:col-start-6 xl:col-end-9 xl:grid-rows-1 lg:col-start-4 lg:col-end-7 programers border-lightgray bg-transparent/50 backdrop-blur-sm">
                 <div class="col-start-1 border-r-2 col-end 2 frontend-developer border-lightgray text-lightgray">
                     <div class="mt-4 contact-name-container">
                         <span class="text-xl font-black contacts-name text-lightgray drop-shadow-sm">Soltész
