@@ -6,7 +6,7 @@
             class="absolute -translate-x-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 left-1/2 admin-content-container xl:top-10 lg:top-20 md:top-20 sm:top-20">
             <div
                 class="m-auto mb-5 text-4xl font-medium text-center title text-lightgray text-shadow-xl font-mainfont inner-shadow">
-                RailwaysNetwork
+                <router-link to="/home">RailwaysNetwork</router-link>
             </div>
             <div
                 class="flex w-full p-3 font-medium border-b-4 rounded-tl-lg rounded-tr-lg bg-darkgray navbar border-lightgray text-lightgray font-mainfont place-content-around">
@@ -47,6 +47,13 @@
                                 </div>
                             </td>
                         </tr>
+                        <div class="main-modal-container" id="modal">
+                            <div class="modal-conent">
+                                <h1>Megerősítés</h1>
+                                <h4>Biztos benne, hogy törölni szeretné a járatot?</h4>
+                                <button>Törlés</button>
+                            </div>
+                        </div>
                         <tr v-if="tableheaders[0] === 'Induló állomás'" v-for="railway in railways">
                             <td class="p-2 text-lg text-center rounded-tl-full rounded-bl-full bg-darkgray h-14">
                                 <div class="border-r-4 border-lightgray/70 xl:text-base lg:text-base md:text-sm sm:text-sm">{{ railway.depatureCity }}</div>
@@ -83,8 +90,17 @@
 
 <script>
 import axios from 'axios';
+import { VueElement } from 'vue';
 import TheFooter from '../components/TheFooter.vue';
 import TheNavbar from '../components/TheNavbar.vue';
+new Vue({
+    el:'#modal',
+    data() {
+        return{
+            showModal: true
+        }
+    }
+})
 export default {
     name: "admin",
     components: {

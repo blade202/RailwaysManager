@@ -67,7 +67,7 @@
                                     class="font-bold text-center text-white rounded-tr-full rounded-br-full cursor-pointer xl:w-1/6 lg:w-1/6 md:w-1/6 sm:w-1/6 font-sm bg-darkgray h-14">
                                     <div class="buy-container">
                                         <i
-                                            class='text-3xl duration-150 ease-in-out bx bxs-cart-add text-yellow hover:text-darkeryellow'></i>
+                                            class='text-3xl duration-150 ease-in-out text-darkeryellow bx bxs-cart-add hover:text-white'></i>
                                     </div>
                                 </td>
                             </tr>
@@ -77,7 +77,7 @@
             </div>
             <div id="hint" class="w-full">
                 <div
-                    class="absolute z-0 p-10 text-xl text-center -translate-x-1/2 border-4 rounded-lg font-mainfont backdrop-blur-sm bg-transparent/50 left-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 loading-conatainer-content xl:top-1/3 lg:top-1/3 md:top-1/3 sm:top-1/3 border-lightgray text-lightgray">
+                    class="absolute z-10 p-10 text-xl text-center -translate-x-1/2 border-4 rounded-lg font-mainfont backdrop-blur-sm bg-transparent/50 left-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 loading-conatainer-content xl:top-1/3 lg:top-1/3 md:top-1/3 sm:top-1/3 border-lightgray text-lightgray">
                     Kérjük válasszon induló és érkező állomást!
                 </div>
             </div>
@@ -104,10 +104,10 @@
                     részleteikkel együtt.
                     Frontend fejlesztő, Soltész Dávid. Backend fejlesztő, Plachi Szilárd.
                 </div>
-                <div class="flex row-start-2 row-end-2 p-3 text-center technology-icons">
-                    <div v-for="img in images" class="py-2 mb-2 rounded-lg w-18 h-18 bg-lightgray/20 mx-14">
+                <div class="flex flex-wrap row-start-2 row-end-2 p-3 m-auto text-center xl:justify-start lg:justify-center md:justify-center sm:justify-around technology-icons">   
+                    <div v-for="img in images" class="w-24 p-2 mx-3 mb-2 rounded-lg h-min bg-lightgray/20">
                         <div 
-                            class="w-16 h-16 p-2 m-auto bg-center bg-no-repeat bg-contain icon`" v-bind:style="{ backgroundImage: 'url(../public/pictures/' + img + ')' }">
+                            class="w-20 h-20 p-2 bg-center bg-no-repeat bg-contain icon " v-bind:style="{ backgroundImage: 'url(../public/pictures/' + img + ')' }">
                         </div>
                     </div>
                 </div>
