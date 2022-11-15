@@ -2,7 +2,7 @@
 
 namespace TrainBackendApi.Models
 {
-    public class GetRoutesRquestMode
+    public class RoutesRequest
     {
         
         [Required]

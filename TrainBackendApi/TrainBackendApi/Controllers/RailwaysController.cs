@@ -10,6 +10,7 @@ namespace TrainBackendApi.Controllers
     {
         private readonly RailwaysService railwaysServic1e;
         private readonly UserManager userManager;
+        private readonly CacheService cacheService;
         private IMemoryCache _chache;
 
         public RailwaysController(RailwaysService railwaysServic1e, UserManager userManager, IMemoryCache chache)
@@ -27,30 +28,22 @@ namespace TrainBackendApi.Controllers
         [Route("GetRoutes")]
         [HttpPost]
         [Authorize]
-        public IActionResult GetRoutes([FromBody] GetRoutesRquestMode rquestModel)
+        public IActionResult GetRoutes([FromBody] RoutesRequest requestModel)
         {
             if (ModelState.IsValid)
             {
-                string Chachekey = $"{rquestModel.ArrivalId} {rquestModel.ArrivalId}";
-                if (!_chache.TryGetValue(Chachekey, out List<ReturnRalway> returnrailways))
+                if (!_chache.TryGetValue($"{requestModel.DepatureId}{requestModel.ArrivalId}", out List<ReturnRalway> returnrailways))
                 {
-                    returnrailways = railwaysServic1e.Generateroutes(rquestModel.DepatureId, rquestModel.ArrivalId);
-                    var cacheEntryOptions = new MemoryCacheEntryOptions
-                    {
-                        AbsoluteExpiration = DateTime.Now.AddMinutes(5),
-                        SlidingExpiration = TimeSpan.FromMinutes(2),
-
-                    };
-                    _chache.Set(Chachekey, returnrailways, cacheEntryOptions);
+                    returnrailways = cacheService.CacheRoutes(requestModel.DepatureId, requestModel.ArrivalId);
                 }
 
                 if (returnrailways != null) 
                 {
-                    if (rquestModel.Range + 50 > returnrailways.Count)
+                    if (requestModel.Range + 50 > returnrailways.Count)
                     {
-                        return Ok(returnrailways.Skip(rquestModel.Range).Take(returnrailways.Count - rquestModel.Range));
+                        return Ok(returnrailways.Skip(requestModel.Range).Take(returnrailways.Count - requestModel.Range));
                     }
-                    return Ok(returnrailways.Skip(rquestModel.Range).Take(50));
+                    return Ok(returnrailways.Skip(requestModel.Range).Take(50));
                 }
                    
                 
@@ -63,6 +56,47 @@ namespace TrainBackendApi.Controllers
         public IActionResult GettAllRailways()
         {
             return Ok(railwaysServic1e.GettAll());
+        }
+        [HttpPost]
+        [Route("DeleteRailway")]
+        [Authorize(Roles ="admin")]
+        public IActionResult DeleteRailway([FromBody] DeleteRquest requeset)
+        {
+            railwaysServic1e.DeleteRailway(requeset.id);
+            cacheService.DeleteAllCacgedRoutes();
+            return Ok();
+        }
+        [HttpPost]
+        [Route("CreateRailwy")]
+        [Authorize(Roles = "admin")]
+        public IActionResult CreateRailway([FromBody] CreateRailwayRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var createdrailway = railwaysServic1e.CreateRailway(request);
+                if(createdrailway!=null)
+                {
+                    cacheService.DeleteAllCacgedRoutes();
+                    return Ok(createdrailway);
+                }
+                return BadRequest();
+              
+            }
+            return BadRequest();
+        }
+        [HttpPost]
+        [Route("UpdateRailway")]
+        [Authorize(Roles = "admin")]
+        public IActionResult UpdateRailway([FromBody] UpdateRailwayRequest requeset)
+        {
+            if(ModelState.IsValid)
+            {
+                var updatedrailway = railwaysServic1e.UpdaeRaiwlay(requeset);
+                cacheService.DeleteAllCacgedRoutes();
+                return Ok();
+            }
+            return BadRequest();
+           
         }
     }
     

@@ -43,7 +43,7 @@
                             </td>
                             <td class="w-1/5 text-center rounded-tr-full rounded-br-full bg-darkgray h-14">
                                 <div class="">
-                                    <i @click="c" class='text-3xl duration-150 ease-in-out cursor-pointer text-red bx bxs-trash hover:text-darkerred'></i>
+                                    <i @click="DeletCities(city.id)" class='text-3xl duration-150 ease-in-out cursor-pointer text-red bx bxs-trash hover:text-darkerred'></i>
                                 </div>
                             </td>
                         </tr>
@@ -108,9 +108,20 @@ export default {
             let response = await axios.get('/GetRailways');
             this.railways = response.data;
 
+        },
+        async DeletCities(cityid) {
+            try{
+            await axios.post('/DeletCity', {
+                id: cityid,
+            });
+            const objWithIdIndex = this.cities.findIndex((obj) => obj.id === cityid);
+            this.cities.splice(objWithIdIndex, 1);
+
+        }catch{
+
         }
         }
-    }
+    }}
 
 
 </script>

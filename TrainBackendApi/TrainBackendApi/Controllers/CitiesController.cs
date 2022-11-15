@@ -9,14 +9,16 @@ namespace TrainBackendApi.Controllers
     public class CitiesController : Controller
     {
         private readonly CityService citiservice;
+        private readonly CacheService cacheService;
         private readonly UserManager userManager;
         private IMemoryCache memoryCache;
 
-        public CitiesController(CityService citiservice, UserManager userManager, IMemoryCache memoryCache)
+        public CitiesController(CityService citiservice, UserManager userManager, IMemoryCache memoryCache, CacheService cacheService)
         {
             this.citiservice = citiservice;
             this.userManager = userManager;
             this.memoryCache = memoryCache;
+            this.cacheService = cacheService;
         }
         [Route("ReadCities")]
         public IActionResult Read()
@@ -32,13 +34,7 @@ namespace TrainBackendApi.Controllers
         {
             if (!memoryCache.TryGetValue("Cities", out List<City> Cities))
             {
-                Cities = citiservice.GetAll();
-                var ChacherEntryOption = new MemoryCacheEntryOptions {
-                    AbsoluteExpiration = DateTime.Now.AddMinutes(25),
-                    SlidingExpiration = TimeSpan.FromMinutes(20),
-                    Size = 1024
-                };
-                memoryCache.Set("Cities", Cities, ChacherEntryOption);
+               Cities=cacheService.CacheCities();
             }
             return Ok(Cities);
         }
@@ -48,6 +44,7 @@ namespace TrainBackendApi.Controllers
         public IActionResult DeleteCity([FromBody] DeleteRquest rquest)
         {
             citiservice.Delete(rquest.id);
+            cacheService.DeletCitesCache();
             return Ok();
         }
         [HttpPut]
@@ -58,7 +55,12 @@ namespace TrainBackendApi.Controllers
 
             if (ModelState.IsValid)
             {
-                return Ok(citiservice.Create(newcity));
+                var createdcity = citiservice.Create(newcity);
+                if(createdcity!=null)
+                {
+                    cacheService.DeletCitesCache();
+                }
+                return Ok(createdcity);
             }
             return BadRequest();
         }
@@ -70,7 +72,12 @@ namespace TrainBackendApi.Controllers
 
             if (ModelState.IsValid)
             {
-                return Ok(citiservice.Update(newcity));
+                var updatedcity = citiservice.Update(newcity);
+                if(updatedcity!=null)
+                {
+                    cacheService.DeletCitesCache();
+                }
+                return Ok(updatedcity);
             }
             return BadRequest();
         }
