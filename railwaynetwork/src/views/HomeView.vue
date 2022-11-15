@@ -107,7 +107,7 @@
                 <div class="flex row-start-2 row-end-2 p-3 text-center technology-icons">
                     <div v-for="img in images" class="py-2 mb-2 rounded-lg w-18 h-18 bg-lightgray/20 mx-14">
                         <div 
-                            :class="`bg-[url('/public/pictures/${img}')] w-16 h-16 p-2 m-auto bg-center bg-no-repeat bg-contain icon`">
+                            class="w-16 h-16 p-2 m-auto bg-center bg-no-repeat bg-contain icon`" v-bind:style="{ backgroundImage: 'url(../public/pictures/' + img + ')' }">
                         </div>
                     </div>
                 </div>
