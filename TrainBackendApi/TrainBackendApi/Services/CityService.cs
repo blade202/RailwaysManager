@@ -6,6 +6,7 @@ namespace TrainBackendApi.Services
     public class CityService
     {
         private readonly TrainDbConntext dbConntext;
+        public static bool IsUpdated=false;
 
         public CityService(TrainDbConntext dbConntext)
         {

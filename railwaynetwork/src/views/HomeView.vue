@@ -224,7 +224,9 @@ export default {
                 DepatureId: this.DepatCityId,
                 ArrivalId: this.ArrivalCityId,
                 range: this.range
+                
             })
+            console.log(response);
             if (response.data.railways !== null) {
                 this.Railways = [...this.Railways, ...response.data];
             }

@@ -48,7 +48,7 @@ namespace TrainBackendApi.Controllers
                 {
                     if (rquestModel.Range + 50 > returnrailways.Count)
                     {
-                        return Ok(returnrailways.Skip(rquestModel.Range).Take(rquestModel.Range - returnrailways.Count));
+                        return Ok(returnrailways.Skip(rquestModel.Range).Take(returnrailways.Count - rquestModel.Range));
                     }
                     return Ok(returnrailways.Skip(rquestModel.Range).Take(50));
                 }
