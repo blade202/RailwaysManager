@@ -43,7 +43,7 @@
                             </td>
                             <td class="w-1/5 text-center rounded-tr-full rounded-br-full bg-darkgray h-14">
                                 <div class="">
-                                    <i @click="DeletCities(city.id)" class='text-3xl duration-150 ease-in-out cursor-pointer text-red bx bxs-trash hover:text-darkerred'></i>
+                                    <i  class='text-3xl duration-150 ease-in-out cursor-pointer text-red bx bxs-trash hover:text-darkerred'></i>
                                 </div>
                             </td>
                         </tr>
@@ -51,7 +51,7 @@
                             <div class="modal-conent">
                                 <h1>Megerősítés</h1>
                                 <h4>Biztos benne, hogy törölni szeretné a járatot?</h4>
-                                <button>Törlés</button>
+                                <button @click="DeletCities(city.id)">Törlés</button>
                             </div>
                         </div>
                         <tr v-if="tableheaders[0] === 'Induló állomás'" v-for="railway in railways">
