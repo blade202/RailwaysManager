@@ -93,7 +93,6 @@ import axios from 'axios';
 import { VueElement } from 'vue';
 import TheFooter from '../components/TheFooter.vue';
 import TheNavbar from '../components/TheNavbar.vue';
-
 export default {
     name: "admin",
     components: {
