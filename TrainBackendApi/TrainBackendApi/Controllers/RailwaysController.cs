@@ -13,11 +13,12 @@ namespace TrainBackendApi.Controllers
         private readonly CacheService cacheService;
         private IMemoryCache _chache;
 
-        public RailwaysController(RailwaysService railwaysServic1e, UserManager userManager, IMemoryCache chache)
+        public RailwaysController(RailwaysService railwaysServic1e, UserManager userManager, IMemoryCache chache, CacheService cacheService)
         {
             this.railwaysServic1e = railwaysServic1e;
             this.userManager = userManager;
             _chache = chache;
+            this.cacheService = cacheService;
         }
         [Route("ReadRalways")]
         public IActionResult Read()
