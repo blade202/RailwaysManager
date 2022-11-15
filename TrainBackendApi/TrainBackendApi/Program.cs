@@ -20,6 +20,7 @@ builder.Services.AddDbContext<TrainDbConntext>();
 builder.Services.AddTransient<UserManager>();
 builder.Services.AddTransient<RailwaysService>();
 builder.Services.AddTransient<CityService>();
+builder.Services.AddTransient<CacheService>();
 builder.Services.AddTransient<GlobalExeptionMiddelware>();
 builder.Services.AddMemoryCache();
 builder.Services.AddTransient<JwtTokenService>();

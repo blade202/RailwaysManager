@@ -1,4 +1,5 @@
-﻿using TrainBackendApi.Models;
+﻿using Microsoft.Extensions.Caching.Memory;
+using TrainBackendApi.Models;
 using TrainBackendApi.Repository;
 
 namespace TrainBackendApi.Services
@@ -23,53 +24,57 @@ namespace TrainBackendApi.Services
         {
             return dbConntex.Railways.FirstOrDefault(x => x.Id == id);
         }
-        public bool  CreatedSeascessfully(RailwayCreator railway)
+        public Railway CreateRailway(CreateRailwayRequest request)
         {
-            var arivalcity = cityService.GetById(railway.AriCityId);
-            var depatcity = cityService.GetById(railway.DepCitiyId);
+            var arivalcity = cityService.GetById(request.ArivalCityId);
+            var depatcity = cityService.GetById(request.DepatureCityId);
             if (arivalcity != null && depatcity != null)
             {
 
-                if (dbConntex.Railways.FirstOrDefault(x => x.ArivalCity == arivalcity.CityName && x.DepatureCity == depatcity.CityName) != null)
+                if (dbConntex.Railways.FirstOrDefault(x => x.ArivalCity == arivalcity.CityName && x.DepatureCity == depatcity.CityName) == null)
                 {
-                    dbConntex.Railways.Add(new Railway { KM = railway.Km, ArivalCity = arivalcity.CityName, DepatureCity = depatcity.CityName });
+                    var newrailway = new Railway
+                    {
+                        KM = request.Km,
+                        ArivalCity = arivalcity.CityName,
+                        DepatureCity = depatcity.CityName
+                    };
+                    dbConntex.Railways.Add(newrailway);
                     dbConntex.SaveChanges();
-                    return true;
+                    return newrailway;
                 }
             }
-            return false;
+            return null;
         }
-        public bool UpdatedSeascessfullySeascessfully(RailwayCreator railway,int id)
+        public Railway UpdaeRaiwlay(UpdateRailwayRequest requset)
         {
-            var arivalcity = cityService.GetById(railway.AriCityId);
-            var depatcity = cityService.GetById(railway.DepCitiyId);
+            var arivalcity = cityService.GetById(requset.AriCityId);
+            var depatcity = cityService.GetById(requset.DepCitiyId);
             if (arivalcity != null && depatcity != null)
             {
-                if (dbConntex.Railways.FirstOrDefault(x => x.ArivalCity == arivalcity.CityName && x.DepatureCity == depatcity.CityName) != null)
+                if (dbConntex.Railways.FirstOrDefault(x => x.ArivalCity == arivalcity.CityName && x.DepatureCity == depatcity.CityName) == null)
                 {
-                    var updaterailway = GetById(id);
+                    var updaterailway = GetById(requset.Id);
                     if(updaterailway!=null)
                     {
                         updaterailway.ArivalCity=arivalcity.CityName;
                         updaterailway.DepatureCity=depatcity.CityName;
-                        updaterailway.KM = railway.Km;
+                        updaterailway.KM = requset.Km;
                         dbConntex.SaveChanges();
                     }
-                    return true;
+                    return updaterailway;
                 }
             }
-            return false;
+            return null;
         }
-        public bool DeletedSeasscessfully(int id)
+        public void DeleteRailway(int id)
         {
             var deleterailway= GetById(id);
             if(deleterailway!=null)
             {
                 dbConntex.Railways.Remove(deleterailway);
-                dbConntex.SaveChanges();
-                return true;
+                dbConntex.SaveChanges();            
             }
-            return false;
 
         }
         public void readrailways()
@@ -129,6 +134,7 @@ namespace TrainBackendApi.Services
             }
             return returnRalways.OrderBy(x=>x.Price).ToList();
         }
+      
        
 
     }

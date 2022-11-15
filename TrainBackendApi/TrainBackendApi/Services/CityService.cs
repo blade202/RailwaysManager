@@ -1,4 +1,5 @@
-﻿using TrainBackendApi.Models;
+﻿using Microsoft.Extensions.Caching.Memory;
+using TrainBackendApi.Models;
 using TrainBackendApi.Repository;
 
 namespace TrainBackendApi.Services
@@ -6,7 +7,6 @@ namespace TrainBackendApi.Services
     public class CityService
     {
         private readonly TrainDbConntext dbConntext;
-        public static bool IsUpdated=false;
 
         public CityService(TrainDbConntext dbConntext)
         {
@@ -50,6 +50,7 @@ namespace TrainBackendApi.Services
                 dbConntext.Cities.Add(city);
                 dbConntext.SaveChanges();
                 return city;
+       
             }
             return null;
         }

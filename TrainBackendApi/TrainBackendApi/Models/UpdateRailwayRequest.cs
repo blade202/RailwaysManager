@@ -2,8 +2,10 @@
 
 namespace TrainBackendApi.Models
 {
-    public class RailwayCreator
+    public class UpdateRailwayRequest
     {
+        [Required]
+        public int Id { get; set; }
         [Required]
         public int DepCitiyId { get; set; }
         [Required]
