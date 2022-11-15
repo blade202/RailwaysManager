@@ -43,7 +43,7 @@
                             </td>
                             <td class="w-1/5 text-center rounded-tr-full rounded-br-full bg-darkgray h-14">
                                 <div class="">
-                                    <i class='text-3xl duration-150 ease-in-out cursor-pointer text-red bx bxs-trash hover:text-darkerred'></i>
+                                    <i @click="c" class='text-3xl duration-150 ease-in-out cursor-pointer text-red bx bxs-trash hover:text-darkerred'></i>
                                 </div>
                             </td>
                         </tr>
@@ -111,5 +111,6 @@ export default {
         }
         }
     }
+
 
 </script>
