@@ -93,14 +93,6 @@ import axios from 'axios';
 import { VueElement } from 'vue';
 import TheFooter from '../components/TheFooter.vue';
 import TheNavbar from '../components/TheNavbar.vue';
-new Vue({
-    el:'#modal',
-    data() {
-        return{
-            showModal: true
-        }
-    }
-})
 export default {
     name: "admin",
     components: {
