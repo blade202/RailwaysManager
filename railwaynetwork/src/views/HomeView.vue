@@ -1,5 +1,6 @@
 <template>
-    <div @click="Showhint" class="w-full h-screen min-h-full overflow-auto bg-fixed bg-no-repeat bg-cover bg-homebg" id="home">
+    <div @click="Showhint" class="w-full h-screen min-h-full overflow-auto bg-fixed bg-no-repeat bg-cover bg-homebg"
+        id="home">
         <div class="w-full main-home-container font-mainfont bg-darkgray ">
             <TheNavbar />
             <div
@@ -8,15 +9,16 @@
                     class="mb-5 text-4xl font-medium text-center title text-lightgray text-shadow-xl font-mainfont inner-shadow">
                     RailwaysNetwork
                 </div>
-                <div class="static grid grid-cols-11 grid-rows-1 m-auto xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar">
+                <div
+                    class="static grid grid-cols-11 grid-rows-1 m-auto xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar">
                     <select @click="Reomovehint" v-model="DepatCityId" name="" id=""
                         class="static z-0 col-start-1 col-end-6 p-2 pr-3 font-medium text-center rounded-tl-full rounded-bl-full outline-none text-md bg-darkgray text-lightgray">
                         <option selected>Ki induló város</option>
-                        <option  v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
+                        <option v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                     </select>
-                    <select  @click="Reomovehint" v-model="ArrivalCityId" name="" id=""
+                    <select @click="Reomovehint" v-model="ArrivalCityId" name="" id=""
                         class="static z-0 col-start-6 col-end-11 p-2 pr-3 font-medium text-center rounded-tr-full rounded-br-full outline-none text-md bg-darkgray text-lightgray">
-                        <option  class="rounded-xl" disabled value="" selected>Céllálomás</option>
+                        <option class="rounded-xl" disabled value="" selected>Céllálomás</option>
                         <option v-for="item in Cities" :value="item.id" class="rounded-xl">{{ item.cityName }}</option>
                     </select>
                     <button @click="Searchheandel" class="col-start-11 col-end-12 xl:pl-2 text-lightgray">
@@ -31,7 +33,8 @@
                             <th class="p-3 xl:w-4/5 lg:w-4/5 rounded-bl-xl rounded-br-xl">Állomások</th>
                             <th class="xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 rounded-bl-xl rounded-br-xl">Távolság</th>
                             <th class="xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 rounded-bl-xl rounded-br-xl">Ár</th>
-                            <th class="p-3 xl:w-1/6 lg:w-1/6 md:w-1/6 sm:w-1/6 rounded-br-xl rounded-bl-xl ">Foglalás</th>
+                            <th class="p-3 xl:w-1/6 lg:w-1/6 md:w-1/6 sm:w-1/6 rounded-br-xl rounded-bl-xl ">Foglalás
+                            </th>
                         </tr>
                         <tbody class=" bg-transparent/40 text-lightgray">
                             <tr class="lg:text-base xl:text-base md:text-sm sm:text-sm" v-for="item in Railways">
@@ -41,7 +44,7 @@
                                         class="items-center m-auto border-r-4 arrival-depature-container xl:border-lightgray/70 lg:border-lightgray/70 md:border-lightgray/70">
                                         <span v-for="(key, val, index) of item.railways">
                                             <span v-if="val == 0">{{ key.depatureCity }}
-                                                
+
                                             </span>
                                             <i class='pl-1 bx bxs-right-arrow-alt'></i>
                                             {{ key.arivalCity }}{{ index }}
@@ -63,7 +66,8 @@
                                 <td
                                     class="font-bold text-center text-white rounded-tr-full rounded-br-full cursor-pointer xl:w-1/6 lg:w-1/6 md:w-1/6 sm:w-1/6 font-sm bg-darkgray h-14">
                                     <div class="buy-container">
-                                        <i class='text-3xl duration-150 ease-in-out bx bxs-cart-add text-yellow hover:text-darkeryellow'></i>
+                                        <i
+                                            class='text-3xl duration-150 ease-in-out bx bxs-cart-add text-yellow hover:text-darkeryellow'></i>
                                     </div>
                                 </td>
                             </tr>
@@ -100,8 +104,12 @@
                     részleteikkel együtt.
                     Frontend fejlesztő, Soltész Dávid. Backend fejlesztő, Plachi Szilárd.
                 </div>
-                <div class="row-start-2 row-end-2 p-3 text-center technology-icons">
-                    
+                <div class="flex row-start-2 row-end-2 p-3 text-center technology-icons">
+                    <div v-for="img in images" class="py-2 mb-2 rounded-lg w-18 h-18 bg-lightgray/20 mx-14">
+                        <div 
+                            :class="`bg-[url('/public/pictures/${img}')] w-16 h-16 p-2 m-auto bg-center bg-no-repeat bg-contain icon`">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div
@@ -184,7 +192,8 @@ export default {
             DepatCityId: 0,
             ArrivalCityId: 0,
             range: 0,
-            falg:false,
+            falg: false,
+            images: ['.net.png', 'cracs.png', 'css.png', 'html.png', 'js.png', 'mysql.png', 'tailwind.png', 'vuejs.png']
         }
     },
     methods: {
@@ -204,7 +213,7 @@ export default {
 
             this.range = 0;
             this.Railways = []
-            this.falg=false;
+            this.falg = false;
             this.Reomovehint();
             await this.GetRailways()
         },
@@ -227,25 +236,22 @@ export default {
         setArrivalCity(id) {
             this.ArrivalCityId = id;
         },
-        Reomovehint()
-        {
-            
+        Reomovehint() {
+
             document.getElementById('hint').classList.add('main-loading-container');
-            setTimeout(()=>{
-                this.falg=true;
-            },1);
-    
+            setTimeout(() => {
+                this.falg = true;
+            }, 1);
+
         },
-        Showhint()
-        {
-            if(this.falg&&this.Railways.length===0)
-            {
-            
-                this.falg=false;
+        Showhint() {
+            if (this.falg && this.Railways.length === 0) {
+
+                this.falg = false;
                 document.getElementById('hint').classList.remove('main-loading-container');
             }
         }
-        
+
     },
     beforeMount() {
         this.getcities();
