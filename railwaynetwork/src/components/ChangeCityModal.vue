@@ -29,32 +29,7 @@
 <script>
     import axios from 'axios';
 
-export default {
-    data() {
-        return {
-            visibility: false,
-        }
-    },
-    props: {
-        visible: Boolean,
-        cityID: Number,
-        delete: Function
-    },
-    methods: {
 
-        closeDeleteModal() {
-            this.visibility = false
-        },
-        DeletCities() {
-            this.delete()
-        }
-    },
-    watch: {
-        visible: function () {
-            this.visibility = true
-        }
-    },
-}
 </script>
 <style lang="scss" scoped>
     .modal-animation-enter-active,

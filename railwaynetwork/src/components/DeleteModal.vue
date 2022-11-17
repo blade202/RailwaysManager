@@ -1,12 +1,12 @@
 <template>
-    <transition v-if="visibility" name="modal-animation">
+    <transition v-if="visible" name="modal-animation">
         <div class="modal">
             <transition name="modal-animation-inner">
                 <div class="modal-inner">
                     <div
                         class="absolute z-50 p-6 -translate-x-1/2 -translate-y-1/2 rounded-lg bakcdrop-filter-none main-modal-container left-1/2 top-2/4 bg-darkgray font-mainfont ">
                         <div class="modal-content">
-                            <i @click="closeDeleteModal()"
+                            <i @click="closemodal()"
                                 class='absolute right-0 px-3 text-3xl font-medium transition duration-200 ease-in-out cursor-pointer top-2 selection:p-1 bx bx-x-circle text-lightgray drop-shadow-md font-mainfont hover:text-red '></i>
                             <h1 class="p-2 text-2xl text-center border-b-4 font-600 border-dark/30 text-lightgray">
                                 Megerősítés</h1>
@@ -20,7 +20,7 @@
                             <div class="flex delete-options place-content-center">
                                 <button
                                     class="p-1 px-5 mt-6 font-medium text-center transition duration-200 ease-in-out border-2 border-solid rounded-md border-lightgray text-lightgray drop-shadow-md font-mainfont hover:shadow-xl shadow-lightgray hover:bg-lightgray hover:text-darkgray hover:font-semibold"
-                                    @click="DeletCities()">Törlés
+                                    @click="deleteCity()">Törlés
                                 </button>
                             </div>
                         </div>
@@ -34,29 +34,10 @@
 import axios from 'axios';
 
 export default {
-    data() {
-        return {
-            visibility: false,
-        }
-    },
     props: {
         visible: Boolean,
-        cityID: Number,
-        delete: Function
-    },
-    methods: {
-
-        closeDeleteModal() {
-            this.visibility = false
-        },
-        DeletCities() {
-            this.delete()
-        }
-    },
-    watch: {
-        visible: function () {
-            this.visibility = true
-        }
+        deleteCity: Function,
+        closemodal:Function
     },
 }
 </script>

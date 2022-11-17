@@ -44,7 +44,7 @@
                             </td>
                             <td class="w-1/5 text-center rounded-tr-full rounded-br-full bg-darkgray h-14">
                                 <div class="">
-                                    <i @click="setDeleteID(city.id)"
+                                    <i @click="setDeleteIDAndOpenDeleteModal(city.id)"
                                         class='text-3xl duration-150 ease-in-out cursor-pointer text-red bx bxs-trash hover:text-darkerred'></i>
                                 </div>
                             </td>
@@ -86,7 +86,7 @@
                 </table>
             </div>
         </div>
-        <DeleteModal :visible=deleteModalVisibility :cityID=deleteID :delete=DeletCities />
+        <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
         <TheFooter />
     </div>
     <div v-if="blurVisibility" id="blur-overlay"
@@ -113,7 +113,7 @@ export default {
             tableheaders: [],
             cities: [],
             railways: [],
-            deleteID: null,
+            CitiId: null,
             blurVisibility: false,
             deleteModalVisibility: false,
 
@@ -132,30 +132,24 @@ export default {
             this.railways = response.data;
 
         },
-        setDeleteID(id) {
-            this.deleteID = id;
+        setDeleteIDAndOpenDeleteModal(id) {
+            this.CitiId = id;
             this.deleteModalVisibility = true;
-            setTimeout(() => {
-                this.deleteModalVisibility = false;
-            }, 0.1);
+            this.blurVisibility=true;
+        },
+        CloseDeleteModal(){
+            this.deleteModalVisibility=false;
+            this.blurVisibility=false;
         },
         async DeletCities() {
-            let cityid = this.deleteID;
-            console.log(cityid);
-            try {
                 await axios.post('/DeletCity', {
-                    id: cityid,
+                    id: this.CitiId,
                 });
                 const objWithIdIndex = this.cities.findIndex((obj) => obj.id === cityid);
                 this.cities.splice(objWithIdIndex, 1);
-
-            } catch {
-
-            }
+                this.deleteModalVisibility=false;
+                this.blurVisibility=false;
         },
-
-
-
     }
 }
 
