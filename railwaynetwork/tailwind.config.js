@@ -17,7 +17,8 @@ module.exports = {
       'silver':'#CED2D7',
       'darkersilver':'#555652',
       'yellow':'#FFFF00',
-      'darkeryellow':'#FFA500'
+      'darkeryellow':'#FFA500',
+      'green':'#00FF00'
     },
     extend: {
       backgroundImage: {
@@ -31,6 +32,14 @@ module.exports = {
         '128': '42rem',
       }
     },
+    screens:{
+      'mobile' :'480px',
+      'sm': '640px',
+      'md':'768px',
+      'lg':'1024px',
+      'xl':'1280px',
+      '2xl':'1536',
+    }
   },
   plugins: [],
 }

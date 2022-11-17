@@ -8,18 +8,27 @@
                 class="m-auto mb-5 text-4xl font-medium text-center title text-lightgray text-shadow-xl font-mainfont inner-shadow">
                 <router-link to="/home">RailwaysNetwork</router-link>
             </div>
-            <div
-                class="flex w-full p-3 font-medium border-b-4 rounded-tl-lg rounded-tr-lg bg-darkgray navbar border-lightgray text-lightgray font-mainfont place-content-around">
-                <div class="cities">
+            <div class="flex w-full p-3 font-medium rounded-tl-lg rounded-tr-lg bg-darkgray navbar text-lightgray font-mainfont place-content-around">
+                <div class="flex cities flex-nowrap">
                     <button @click="showcities"
                         class="border-2 border-lightgray p-0.5 px-5 rounded-lg transition duration-200 ease-in-out hover:bg-lightgray hover:text-darkgray">
                         Városok
                     </button>
+                    <i class='text-3xl bx bx-dots-horizontal-rounded'></i>
+                    <button @click=""
+                        class="border-2 border-lightgray p-0.5 px-5 rounded-lg transition duration-200 ease-in-out hover:bg-lightgray hover:text-darkgray">
+                        Hozzáadás
+                    </button>
                 </div>
-                <div class="railways">
+                <div class="flex railways flex-nowrap">
                     <button @click="showrailways"
                         class="border-2 border-lightgray p-0.5 px-5 rounded-lg transition duration-200 ease-in-out hover:bg-lightgray hover:text-darkgray">
                         Útvonalak
+                    </button>
+                    <i class='text-3xl bx bx-dots-horizontal-rounded'></i>
+                    <button @click=""
+                        class="border-2 border-lightgray p-0.5 px-5 rounded-lg transition duration-200 ease-in-out hover:bg-lightgray hover:text-darkgray">
+                        Hozzáadás
                     </button>
                 </div>
             </div>
