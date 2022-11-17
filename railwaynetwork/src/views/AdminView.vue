@@ -118,8 +118,7 @@ export default {
             blurVisibility: false,
             deleteModalVisibility: false,
             cityModalChangeVisibility:false,
-
-
+            ShowUpdateError:"",
         }
     },
     methods: {
@@ -144,10 +143,11 @@ export default {
             this.blurVisibility=false;
         },
         async DeletCities() {
+                const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
+                let cityname=this.cities[objWithIdIndex];
                 await axios.delete('/DeletCity', {
                     id: this.CitiId,
                 });
-                const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
                 console.log(objWithIdIndex);
                 this.cities.splice(objWithIdIndex, 1);
                 this.deleteModalVisibility=false;

@@ -59,6 +59,7 @@ namespace TrainBackendApi.Services
             var city = dbConntext.Cities.FirstOrDefault(x => x.Id == updatecity.Id);
             if(city != null)
             {
+                UpdateRailwayforCity(city.CityName, updatecity.CityName);
                 city.CityName = updatecity.CityName;
                 dbConntext.SaveChanges();
                 return city;
@@ -70,12 +71,12 @@ namespace TrainBackendApi.Services
             var city = GetById(id);
             if(city!=null)
             {
-                DeleteRailwaytoCity(city);
+                DeleteRailwayforCity(city);
                 dbConntext.Cities.Remove(city);
                 dbConntext.SaveChanges();
             }
         }
-        public void DeleteRailwaytoCity(City city)
+        public void DeleteRailwayforCity(City city)
         {
             var railways = dbConntext.Railways.Where(x => x.ArivalCity == city.CityName || x.DepatureCity == city.CityName);
             foreach (var item in railways)
@@ -83,6 +84,21 @@ namespace TrainBackendApi.Services
                 dbConntext.Railways.Remove(item);
             }
             dbConntext.SaveChanges();
+        }
+        public void UpdateRailwayforCity(string oldcitiname,string newcitiname)
+        {
+            var affectedrailway = dbConntext.Railways.Where(x => x.DepatureCity == oldcitiname || x.ArivalCity == oldcitiname);
+            foreach (var item in affectedrailway)
+            {
+                if(item.DepatureCity==oldcitiname)
+                {
+                    item.DepatureCity=newcitiname;
+                }
+                else
+                {
+                    item.ArivalCity = newcitiname;
+                }
+            }
         }
 
     }

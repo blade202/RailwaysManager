@@ -54,7 +54,7 @@ namespace TrainBackendApi.Services
         }
         public void DeleteAllCacgedRoutes()
         {
-            foreach (var item in CachedRoutes)
+            foreach (var item in CachedRoutes.ToList())
             {
                 memoryCache.Remove(item);
                 CachedRoutes.Remove(item);
