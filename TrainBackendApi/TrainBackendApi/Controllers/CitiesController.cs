@@ -38,10 +38,10 @@ namespace TrainBackendApi.Controllers
             }
             return Ok(Cities);
         }
-        [HttpPost]
+        [HttpDelete]
         [Authorize(Roles ="admin")]
         [Route("DeletCity")]
-        public IActionResult DeleteCity([FromBody] DeleteRquest rquest)
+        public IActionResult DeleteCity([FromHeader] DeleteRquest rquest)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace TrainBackendApi.Controllers
             }
             return BadRequest();
         }
-        [HttpPost]
+        [HttpPatch]
         [Authorize(Roles = "admin")]
         [Route("UpdateCity")]
         public IActionResult UpdateCity([FromBody] City newcity)

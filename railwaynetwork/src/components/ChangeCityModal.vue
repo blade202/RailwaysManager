@@ -13,13 +13,13 @@
                             <h4 class="mt-2 mb-1 text-lg text-center text-lightgray">
                                 Írja be a kívánt módosítást!
                             </h4>
-                            <input class="w-full p-2 font-semibold rounded-lg outline-none bg-dark/60 text-lightgray" type="text">
+                            <input v-model="newcitiname" class="w-full p-2 font-semibold rounded-lg outline-none bg-dark/60 text-lightgray">
                             <h5 class="mt-0.5 mb-1 text-sm text-center text-lightgray">Később is módosíthatja a már
                                 szerkesztett adatokat.</h5>
                             <div class="flex delete place-content-center">
                                 <button
                                     class="p-1 px-5 mt-6 font-medium text-center transition duration-200 ease-in-out border-2 border-solid rounded-md border-lightgray text-lightgray drop-shadow-md font-mainfont hover:shadow-xl shadow-lightgray hover:bg-lightgray hover:text-darkgray hover:font-semibold"
-                                    @click="">Módosítás</button>
+                                    @click="UpdateCiti(this.newcitiname)">Módosítás</button>
                             </div>
                         </div>
                     </div>
@@ -32,13 +32,18 @@
 import axios from 'axios';
 
 export default{
+    data(){
+        return{
+            newcitiname:"isa",
+        }
+    },    
     props: {
         visible:Boolean,
         changeCity:Function,
         closeChangeCityModal:Function,
-
-
+        UpdateCiti:Function
     }
+
 }
 
 </script>
