@@ -43,9 +43,13 @@ namespace TrainBackendApi.Controllers
         [Route("DeletCity")]
         public IActionResult DeleteCity([FromBody] DeleteRquest rquest)
         {
-            citiservice.Delete(rquest.id);
-            cacheService.DeletCitesCache();
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                citiservice.Delete(rquest.id);
+                cacheService.DeletCitesCache();
+                return Ok();
+            }
+            return BadRequest();
         }
         [HttpPut]
         [Authorize(Roles = "admin")]
