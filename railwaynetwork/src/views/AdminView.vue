@@ -38,7 +38,7 @@
                             </td>
                             <td class="w-1/5 text-center bg-darkgray h-14 ">
                                 <div class="border-r-4 xl:border-lightgray/70">
-                                    <i @click="" class='inline-block text-2xl duration-150 ease-in-out cursor-pointer text-silver bx bxs-cog ransition hover:text-darkersilver'></i>
+                                    <i @click="setChangeIDAndOpenChangeModal(city.id)" class='inline-block text-2xl duration-150 ease-in-out cursor-pointer text-silver bx bxs-cog ransition hover:text-darkersilver'></i>
                                 </div>
                             </td>
                             <td class="w-1/5 text-center rounded-tr-full rounded-br-full bg-darkgray h-14">
@@ -85,6 +85,7 @@
                 </table>
             </div>
         </div>
+        <ChangeCityModal :visible=cityModalChangeVisibility :closeChangeCityModal=closeChangeModal />
         <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
         <TheFooter />
     </div>
@@ -116,6 +117,7 @@ export default {
             CitiId: null,
             blurVisibility: false,
             deleteModalVisibility: false,
+            cityModalChangeVisibility:false,
 
 
         }
@@ -145,11 +147,20 @@ export default {
                 await axios.post('/DeletCity', {
                     id: this.CitiId,
                 });
-                const objWithIdIndex = this.cities.findIndex((obj) => obj.id === cityid);
+                const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
                 this.cities.splice(objWithIdIndex, 1);
                 this.deleteModalVisibility=false;
                 this.blurVisibility=false;
         },
+        setChangeIDAndOpenChangeModal(id){
+            this.CitiId=id;
+            this.cityModalChangeVisibility=true;
+            this.blurVisibility=true;
+        },
+        closeChangeModal() {
+            this.cityModalChangeVisibility=false;
+            this.blurVisibility=false;
+        }
     }
 }
 

@@ -1,12 +1,12 @@
 <template>
-    <transition v-if="visibility" name="modal-animation">
+    <transition v-if="visible" name="modal-animation">
         <div class="modal">
             <transition name="modal-animation-inner">
                 <div class="modal-inner">
                     <div
                         class="absolute z-50 p-6 -translate-x-1/2 -translate-y-1/2 rounded-lg bakcdrop-filter-none main-modal-container left-1/2 top-2/4 bg-darkgray font-mainfont ">
                         <div class="modal-content">
-                            <i @click="closeChangeModal()"
+                            <i @click="closeChangeCityModal()"
                                 class='absolute right-0 px-3 text-3xl font-medium transition duration-200 ease-in-out cursor-pointer top-2 selection:p-1 bx bx-x-circle text-lightgray drop-shadow-md font-mainfont hover:text-red '></i>
                             <h1 class="p-2 text-2xl text-center border-b-4 font-600 border-dark/30 text-lightgray">
                                 Módosítás</h1>
@@ -31,6 +31,15 @@
 <script>
 import axios from 'axios';
 
+export default{
+    props: {
+        visible:Boolean,
+        changeCity:Function,
+        closeChangeCityModal:Function,
+
+
+    }
+}
 
 </script>
 <style lang="scss" scoped>
