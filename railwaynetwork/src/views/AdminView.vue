@@ -85,7 +85,7 @@
                 </table>
             </div>
         </div>
-        <ChangeCityModal :visible=cityModalChangeVisibility :closeChangeCityModal=closeChangeModal />
+        <ChangeCityModal :visible=cityModalChangeVisibility :closeChangeCityModal=closeChangeModal :UpdateCiti=UpdateCity />
         <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
         <TheFooter />
     </div>
@@ -144,12 +144,26 @@ export default {
             this.blurVisibility=false;
         },
         async DeletCities() {
-                await axios.post('/DeletCity', {
+                await axios.delete('/DeletCity', {
                     id: this.CitiId,
                 });
                 const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
+                console.log(objWithIdIndex);
                 this.cities.splice(objWithIdIndex, 1);
                 this.deleteModalVisibility=false;
+                this.blurVisibility=false;
+        },
+        async UpdateCity(updatedname)
+        {
+            console.log(updatedname);
+            await axios.patch('/UpdateCity', {
+                    id: this.CitiId,
+                    CityName:updatedname
+                });
+                const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
+                console.log(objWithIdIndex);
+                this.cities[objWithIdIndex].cityName=updatedname;
+                this.cityModalChangeVisibility=false;
                 this.blurVisibility=false;
         },
         setChangeIDAndOpenChangeModal(id){
