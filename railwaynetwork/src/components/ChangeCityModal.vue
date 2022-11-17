@@ -21,6 +21,8 @@
                                     class="p-1 px-5 mt-6 font-medium text-center transition duration-200 ease-in-out border-2 border-solid rounded-md border-lightgray text-lightgray drop-shadow-md font-mainfont hover:shadow-xl shadow-lightgray hover:bg-lightgray hover:text-darkgray hover:font-semibold"
                                     @click="UpdateCiti(this.newcitiname)">Módosítás</button>
                             </div>
+                            <h2 class="text-red" v-if="ShowError">Már van ilyen nevű Város</h2>
+                            <h2 class="text-green" v-if="ShowSussces">Sikese módósitas!!</h2>
                         </div>
                     </div>
                 </div>
@@ -34,15 +36,17 @@ import axios from 'axios';
 export default{
     data(){
         return{
-            newcitiname:"isa",
+            newcitiname:"",
         }
     },    
     props: {
         visible:Boolean,
         changeCity:Function,
         closeChangeCityModal:Function,
-        UpdateCiti:Function
-    }
+        UpdateCiti:Function,
+        ShowError:Boolean,
+        ShowSussces:Boolean,
+    },
 
 }
 

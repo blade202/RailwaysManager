@@ -47,7 +47,8 @@
                             </td>
                             <td class="w-1/5 text-center bg-darkgray h-14 ">
                                 <div class="border-r-4 xl:border-lightgray/70">
-                                    <i @click="setChangeIDAndOpenChangeModal(city.id)" class='inline-block text-2xl duration-150 ease-in-out cursor-pointer text-silver bx bxs-cog ransition hover:text-darkersilver'></i>
+                                    <i @click="setChangeIDAndOpenChangeModal(city.id)"
+                                        class='inline-block text-2xl duration-150 ease-in-out cursor-pointer text-silver bx bxs-cog ransition hover:text-darkersilver'></i>
                                 </div>
                             </td>
                             <td class="w-1/5 text-center rounded-tr-full rounded-br-full bg-darkgray h-14">
@@ -94,7 +95,8 @@
                 </table>
             </div>
         </div>
-        <ChangeCityModal :visible=cityModalChangeVisibility :closeChangeCityModal=closeChangeModal :UpdateCiti=UpdateCity />
+        <ChangeCityModal :visible=cityModalChangeVisibility :closeChangeCityModal=closeChangeModal
+            :UpdateCiti=UpdateCity :ShowError=ShowUpdateError :ShowSussces=showUpdateSussces />
         <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
         <TheFooter />
     </div>
@@ -111,6 +113,7 @@ import TheFooter from '../components/TheFooter.vue';
 import TheNavbar from '../components/TheNavbar.vue';
 import DeleteModal from '../components/DeleteModal.vue';
 import ChangeCityModal from '../components/ChangeCityModal.vue';
+import console from 'console';
 
 
 export default {
@@ -126,8 +129,9 @@ export default {
             CitiId: null,
             blurVisibility: false,
             deleteModalVisibility: false,
-            cityModalChangeVisibility:false,
-            ShowUpdateError:"",
+            cityModalChangeVisibility: false,
+            ShowUpdateError: false,
+            showUpdateSussces: false
         }
     },
     methods: {
@@ -145,44 +149,59 @@ export default {
         setDeleteIDAndOpenDeleteModal(id) {
             this.CitiId = id;
             this.deleteModalVisibility = true;
-            this.blurVisibility=true;
+            this.blurVisibility = true;
         },
-        CloseDeleteModal(){
-            this.deleteModalVisibility=false;
-            this.blurVisibility=false;
+        CloseDeleteModal() {
+            this.deleteModalVisibility = false;
+            this.blurVisibility = false;
         },
         async DeletCities() {
-                const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
-                let cityname=this.cities[objWithIdIndex];
-                await axios.delete('/DeletCity', {
-                    id: this.CitiId,
-                });
-                console.log(objWithIdIndex);
-                this.cities.splice(objWithIdIndex, 1);
-                this.deleteModalVisibility=false;
-                this.blurVisibility=false;
+            axios.delete('/DeletCity', {
+                data: {
+                    id: this.CitiId
+                }
+            });
+            const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
+            this.cities.splice(objWithIdIndex, 1);
+            this.deleteModalVisibility = false;
+            this.blurVisibility = false;
         },
-        async UpdateCity(updatedname)
-        {
-            console.log(updatedname);
-            await axios.patch('/UpdateCity', {
+        async UpdateCity(updatedname) {
+            const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
+            let editcityname = this.cities[objWithIdIndex].cityName;
+            console.log(editcityname);
+            let isexist = this.cities.includes((obj) => obj.cityName === editcityname);
+            if (!isexist) {
+                await axios.patch('/UpdateCity', {
                     id: this.CitiId,
-                    CityName:updatedname
+                    CityName: updatedname
                 });
-                const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
-                console.log(objWithIdIndex);
-                this.cities[objWithIdIndex].cityName=updatedname;
-                this.cityModalChangeVisibility=false;
-                this.blurVisibility=false;
+                this.cities[objWithIdIndex].cityName = updatedname;
+                this.showUpdateSussces = true,
+                    await setTimeout(() => {
+                        this.showUpdateSussces = false;
+                    }, 2500);
+                this.cityModalChangeVisibility = false;
+                this.blurVisibility = false;
+                this.showUpdateSussces
+            }
+            else {
+                this.ShowUpdateError = true;
+                setTimeout(() => {
+                    this.ShowUpdateError = false;
+                }, 2500);
+
+            }
+
         },
-        setChangeIDAndOpenChangeModal(id){
-            this.CitiId=id;
-            this.cityModalChangeVisibility=true;
-            this.blurVisibility=true;
+        setChangeIDAndOpenChangeModal(id) {
+            this.CitiId = id;
+            this.cityModalChangeVisibility = true;
+            this.blurVisibility = true;
         },
         closeChangeModal() {
-            this.cityModalChangeVisibility=false;
-            this.blurVisibility=false;
+            this.cityModalChangeVisibility = false;
+            this.blurVisibility = false;
         }
     }
 }
