@@ -169,10 +169,11 @@ export default {
                 this.showUpdateSussces = true,
                     await setTimeout(() => {
                         this.showUpdateSussces = false;
+                        this.cityModalChangeVisibility = false;
+                        this.blurVisibility = false;
+                        this.showUpdateSussces
                     }, 2500);
-                this.cityModalChangeVisibility = false;
-                this.blurVisibility = false;
-                this.showUpdateSussces
+            
             }
             else {
                 this.ShowUpdateError = true;
