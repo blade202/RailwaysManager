@@ -13,7 +13,7 @@
                             <h4 class="mt-2 mb-1 text-lg text-center text-lightgray">
                                 Írja be a kívánt módosítást!
                             </h4>
-                            <input class="w-10/12 rounded-lg bg-dark/60" type="text">
+                            <input class="w-full p-2 font-semibold rounded-lg outline-none bg-dark/60 text-lightgray" type="text">
                             <h5 class="mt-0.5 mb-1 text-sm text-center text-lightgray">Később is módosíthatja a már
                                 szerkesztett adatokat.</h5>
                             <div class="flex delete place-content-center">
