@@ -38,8 +38,7 @@
                             </td>
                             <td class="w-1/5 text-center bg-darkgray h-14 ">
                                 <div class="border-r-4 xl:border-lightgray/70">
-                                    <i
-                                        class='inline-block text-2xl duration-150 ease-in-out cursor-pointer text-silver bx bxs-cog ransition hover:text-darkersilver'></i>
+                                    <i @click="" class='inline-block text-2xl duration-150 ease-in-out cursor-pointer text-silver bx bxs-cog ransition hover:text-darkersilver'></i>
                                 </div>
                             </td>
                             <td class="w-1/5 text-center rounded-tr-full rounded-br-full bg-darkgray h-14">
@@ -100,13 +99,14 @@ import axios from 'axios';
 import { VueElement } from 'vue';
 import TheFooter from '../components/TheFooter.vue';
 import TheNavbar from '../components/TheNavbar.vue';
-import DeleteModal from '../components/DeleteModal.vue'
+import DeleteModal from '../components/DeleteModal.vue';
+import ChangeCityModal from '../components/ChangeCityModal.vue';
 
 
 export default {
     name: "admin",
     components: {
-        TheNavbar, TheFooter, DeleteModal
+        TheNavbar, TheFooter, DeleteModal, ChangeCityModal
     },
     data() {
         return {
