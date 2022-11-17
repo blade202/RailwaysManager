@@ -59,10 +59,13 @@ namespace TrainBackendApi.Services
             var city = dbConntext.Cities.FirstOrDefault(x => x.Id == updatecity.Id);
             if(city != null)
             {
-                UpdateRailwayforCity(city.CityName, updatecity.CityName);
-                city.CityName = updatecity.CityName;
-                dbConntext.SaveChanges();
-                return city;
+                if (dbConntext.Cities.FirstOrDefault(x => x.CityName == updatecity.CityName) == null)
+                {
+                    UpdateRailwayforCity(city.CityName, updatecity.CityName);
+                    city.CityName = updatecity.CityName;
+                    dbConntext.SaveChanges();
+                    return city;
+                }
             }
             return null;
         }
