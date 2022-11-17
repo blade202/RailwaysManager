@@ -159,9 +159,7 @@ export default {
         },
         async UpdateCity(updatedname) {
             const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
-            let editcityname = this.cities[objWithIdIndex].cityName;
-            console.log(editcityname);
-            let isexist = this.cities.includes((obj) => obj.cityName === editcityname);
+            let isexist = this.cities.some((obj) => obj.cityName === updatedname);
             if (!isexist) {
                 await axios.patch('/UpdateCity', {
                     id: this.CitiId,
