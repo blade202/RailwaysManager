@@ -44,7 +44,7 @@
                             </td>
                             <td class="w-1/5 text-center rounded-tr-full rounded-br-full bg-darkgray h-14">
                                 <div class="">
-                                    <i @click="toggleModal(); setDeleteID(city.id)"
+                                    <i @click="setDeleteID(city.id)"
                                         class='text-3xl duration-150 ease-in-out cursor-pointer text-red bx bxs-trash hover:text-darkerred'></i>
                                 </div>
                             </td>
@@ -86,23 +86,12 @@
                 </table>
             </div>
         </div>
-        <Modal @closeDeleteModal="toggleModal" :modalActive="modalActive"
-            class="absolute z-50 p-6 -translate-x-1/2 -translate-y-1/2 rounded-lg bakcdrop-filter-none main-modal-container left-1/2 top-2/4 bg-darkgray font-mainfont ">
-            <div class="modal-content">
-                <h1 class="p-2 text-2xl text-center border-b-4 font-600 border-dark/30 text-lightgray">Megerősítés</h1>
-                <h4 class="mt-2 mb-2 text-lg text-center text-lightgray">Biztos benne, hogy törölni szeretné a járatot?
-                </h4>
-                <h5 class="mt-1 mb-1 text-sm text-center text-lightgray">Ha törli a járatot többet nem tudja
-                    visszaállítani.</h5>
-                <div class="delete-options">
-                   
-                     
-                </div>
-            </div>
-        </Modal>
+        <DeleteModal :visible=deleteModalVisibility :cityID=deleteID :delete=DeletCities />
         <TheFooter />
     </div>
-    <div v-if="modalActive" id="blur-overlay" class="absolute top-0 z-30 w-full h-screen backdrop-blur-md bg-dark/30">
+    <div v-if="blurVisibility" id="blur-overlay"
+        class="absolute top-0 z-30 w-full h-screen backdrop-blur-md bg-dark/30">
+
     </div>
 </template>
 
@@ -111,28 +100,24 @@ import axios from 'axios';
 import { VueElement } from 'vue';
 import TheFooter from '../components/TheFooter.vue';
 import TheNavbar from '../components/TheNavbar.vue';
-import Modal from '../components/Modal.vue'
-import { ref } from 'vue';
+import DeleteModal from '../components/DeleteModal.vue'
+
 
 export default {
     name: "admin",
     components: {
-        TheNavbar, TheFooter, Modal
-    },
-    setup() {
-        const modalActive = ref(false);
-
-        const toggleModal = () => {
-            modalActive.value = !modalActive.value;
-        };
-        return { toggleModal, modalActive }
+        TheNavbar, TheFooter, DeleteModal
     },
     data() {
         return {
             tableheaders: [],
             cities: [],
             railways: [],
-            deleteID:null
+            deleteID: null,
+            blurVisibility: false,
+            deleteModalVisibility: false,
+
+
         }
     },
     methods: {
@@ -147,8 +132,16 @@ export default {
             this.railways = response.data;
 
         },
+        setDeleteID(id) {
+            this.deleteID = id;
+            this.deleteModalVisibility = true;
+            setTimeout(() => {
+                this.deleteModalVisibility = false;
+            }, 0.1);
+        },
         async DeletCities() {
-            let cityid=this.deleteID;
+            let cityid = this.deleteID;
+            console.log(cityid);
             try {
                 await axios.post('/DeletCity', {
                     id: cityid,
@@ -160,10 +153,8 @@ export default {
 
             }
         },
-        setDeleteID(id) {
-            this.deleteID=id;
-        }
-    
+
+
 
     }
 }
