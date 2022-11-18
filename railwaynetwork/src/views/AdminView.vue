@@ -8,14 +8,15 @@
                 class="m-auto mb-5 text-4xl font-medium text-center title text-lightgray text-shadow-xl font-mainfont inner-shadow">
                 <router-link to="/home">RailwaysNetwork</router-link>
             </div>
-            <div class="flex w-full p-3 font-medium rounded-tl-lg rounded-tr-lg bg-darkgray navbar text-lightgray font-mainfont place-content-around">
+            <div
+                class="flex w-full p-3 font-medium rounded-tl-lg rounded-tr-lg bg-darkgray navbar text-lightgray font-mainfont place-content-around">
                 <div class="flex cities flex-nowrap">
                     <button @click="showcities"
                         class="border-2 border-lightgray p-0.5 px-5 rounded-lg transition duration-200 ease-in-out hover:bg-lightgray hover:text-darkgray">
                         Városok
                     </button>
                     <i class='text-3xl bx bx-dots-horizontal-rounded'></i>
-                    <button @click=""
+                    <button @click="ShowAddCityModal"
                         class="border-2 border-lightgray p-0.5 px-5 rounded-lg transition duration-200 ease-in-out hover:bg-lightgray hover:text-darkgray">
                         Hozzáadás
                     </button>
@@ -78,7 +79,7 @@
                             </td>
                             <td class="text-center xl:w-2/12 lg:w-2/12 md:w-1/12 sm:w-1/12 bg-darkgray h-14">
                                 <div class="border-r-4 border-lightgray/70">
-                                    <i
+                                    <i 
                                         class='text-2xl duration-150 ease-in-out cursor-pointer text-silver bx bxs-cog hover:text-darkersilver'></i>
                                 </div>
                             </td>
@@ -86,7 +87,7 @@
                             <td
                                 class="text-center rounded-tr-full rounded-br-full xl:w-2/12 lg:w-2/12 md:w-2/12 sm:w-1/12 bg-darkgray h-14">
                                 <div class="">
-                                    <i
+                                    <i @click="SetRailwayIdAndOpenRailwayDeleteModal(railway.id)"
                                         class='text-3xl duration-150 ease-in-out cursor-pointer text-red hover:text-darkerred bx bxs-trash '></i>
                                 </div>
                             </td>
@@ -95,9 +96,11 @@
                 </table>
             </div>
         </div>
-        <ChangeCityModal :visible=cityModalChangeVisibility :closeChangeCityModal=closeChangeModal
-            :UpdateCiti=UpdateCity :ShowError=ShowUpdateError :ShowSussces=showUpdateSussces />
+        <ChangeCityModal :visible=cityModalChangeVisibility :close=closeChangeModal :UpdateCiti=UpdateCity
+            :ShowError=ShowError :ShowSussces=ShowSussces />
         <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
+        <AddCityModal :visible=AddCityModalVisibility :close=CloseAddCityModal :AddCity=AddCity :ShowError=ShowError :ShowSussces=ShowSussces />
+        <DeleteRailwayModal :visible=DeleteRailwayModalVisibility :close=CloseDeleRailwayModal :deleteRailway=DeleteRailway />
         <TheFooter />
     </div>
     <div v-if="blurVisibility" id="blur-overlay"
@@ -112,14 +115,16 @@ import { VueElement } from 'vue';
 import TheFooter from '../components/TheFooter.vue';
 import TheNavbar from '../components/TheNavbar.vue';
 import DeleteModal from '../components/DeleteModal.vue';
+import AddCityModal from '../components/AddCityModal.vue';
 import ChangeCityModal from '../components/ChangeCityModal.vue';
+import DeleteRailwayModal from '../components/DeleteRailwayModal.vue';
 import console from 'console';
 
 
 export default {
     name: "admin",
     components: {
-        TheNavbar, TheFooter, DeleteModal, ChangeCityModal
+        TheNavbar, TheFooter, DeleteModal, ChangeCityModal, AddCityModal, DeleteRailwayModal
     },
     data() {
         return {
@@ -127,11 +132,14 @@ export default {
             cities: [],
             railways: [],
             CitiId: null,
+            RailwayId:null,
             blurVisibility: false,
             deleteModalVisibility: false,
             cityModalChangeVisibility: false,
-            ShowUpdateError: false,
-            showUpdateSussces: false
+            AddCityModalVisibility: false,
+            DeleteRailwayModalVisibility:false,
+            ShowError: false,
+            ShowSussces: false,
         }
     },
     methods: {
@@ -175,19 +183,18 @@ export default {
                     CityName: updatedname
                 });
                 this.cities[objWithIdIndex].cityName = updatedname;
-                this.showUpdateSussces = true,
+                this.ShowSussces = true,
                     await setTimeout(() => {
-                        this.showUpdateSussces = false;
+                        this.ShowSussces = false;
                         this.cityModalChangeVisibility = false;
                         this.blurVisibility = false;
-                        this.showUpdateSussces
-                    }, 2500);
-            
+                    }, 1200);
+
             }
             else {
-                this.ShowUpdateError = true;
+                this.ShowError = true;
                 setTimeout(() => {
-                    this.ShowUpdateError = false;
+                    this.ShowError = false;
                 }, 2500);
 
             }
@@ -201,7 +208,65 @@ export default {
         closeChangeModal() {
             this.cityModalChangeVisibility = false;
             this.blurVisibility = false;
+        },
+        async AddCity(citiname) {
+            let isexist = this.cities.some((obj) => obj.cityName === citiname);
+            if (!isexist) {
+                let resposne = await axios.put("/CreatCity",{
+                  
+                        CityName: citiname
+                   
+                })
+                this.cities.push(resposne.data);
+                this.ShowSussces = true;
+                setTimeout(() => {
+                    this.AddCityModalVisibility = false;
+                    this.ShowSussces = false;
+                    this.blurVisibility = false;
+                }, 1200);
+            }
+            else{
+                this.ShowError = true;
+                setTimeout(() => {
+                    this.ShowError = false;
+                }, 2500);
+            }
+        },
+        ShowAddCityModal()
+        {
+            this.blurVisibility=true;
+            this.AddCityModalVisibility=true;
+        },
+        CloseAddCityModal()
+        {
+            this.blurVisibility=false;
+            this.AddCityModalVisibility=false;
+        },
+        DeleteRailway()
+        {
+            axios.delete("/DeleteRailway",{
+                data:{
+                    id:this.RailwayId
+                }
+            });
+            const objWithIdIndex = this.railways.findIndex((obj) => obj.id === this.RailwayId);
+            this.railways.splice(objWithIdIndex, 1);
+            this.DeleteRailwayModalVisibility=false;
+            this.blurVisibility=false;
+        },
+        SetRailwayIdAndOpenRailwayDeleteModal(id)
+        {
+            this.RailwayId=id;
+            this.DeleteRailwayModalVisibility=true;
+            this.blurVisibility=true;
+        },
+        CloseDeleRailwayModal()
+        {
+            this.DeleteRailwayModalVisibility=false;
+            this.blurVisibility=false;
         }
+
+
     }
 }
 

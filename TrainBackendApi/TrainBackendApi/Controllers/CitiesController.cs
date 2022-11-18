@@ -54,7 +54,7 @@ namespace TrainBackendApi.Controllers
         [HttpPut]
         [Authorize(Roles = "admin")]
         [Route("CreatCity")]
-        public IActionResult CreateCity([FromForm] CreatCityReguest newcity)
+        public IActionResult CreateCity([FromBody] CreatCityReguest newcity)
         {
 
             if (ModelState.IsValid)

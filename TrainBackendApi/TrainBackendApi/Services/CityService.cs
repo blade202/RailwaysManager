@@ -40,7 +40,7 @@ namespace TrainBackendApi.Services
         }
         public List<City>GetAll()
         {
-            return dbConntext.Cities.ToList();
+            return dbConntext.Cities.OrderBy(x=>x.CityName).ToList();
         }
         public City Create(CreatCityReguest newcity)
         {
