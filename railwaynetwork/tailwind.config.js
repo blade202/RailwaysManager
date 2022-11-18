@@ -23,7 +23,6 @@ module.exports = {
     extend: {
       backgroundImage: {
         'loginregistrybg': "url(./public/pictures/loginregistrybg.jpg)",
-        'homebg':"url(/public/pictures/homebg.jpg)"
       },
       fontFamily: {
         'mainfont': ['Montserrat, sans-serif']

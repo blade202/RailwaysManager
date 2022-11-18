@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-full main-admin-container h-screen bg-[url('/public/pictures/lowercontainerbg.png')] bg-cover bg-no-repeat  ">
+        id="admin" class="w-full main-admin-container h-screen bg-[url('/public/pictures/lowercontainerbg.png')] bg-cover bg-no-repeat  ">
         <TheNavbar />
         <div
             class="absolute w-full h-screen -translate-x-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 left-1/2 admin-content-container xl:top-10 lg:top-20 md:top-20 sm:top-20 ">

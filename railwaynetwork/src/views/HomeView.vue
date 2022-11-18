@@ -1,29 +1,30 @@
 <template>
-    <div @click="Showhint" class="w-full h-screen min-h-full overflow-auto bg-fixed bg-no-repeat bg-cover bg-homebg"
+    <div @click="Showhint"
+        class="w-full h-screen min-h-full overflow-auto bg-fixed bg-no-repeat bg-[url('/public/pictures/homebg.jpg')] bg-cover "
         id="home">
         <div class="w-full main-home-container font-mainfont bg-darkgray ">
             <TheNavbar />
             <div
-                class="absolute -translate-x-1/2 xl:text-base lg:text-base md:text-sm sm:text-base xl:w-3/4 xl: lg:w-10/12 md:w-11/12 sm:w-11/12 xl:top-10 lg:top-20 md:top-20 sm:top-20 main-content-box left-1/2">
+                class="absolute w-full text-sm -translate-x-1/2 xl:text-base lg:text-base md:text-sm sm:text-base xl:w-3/4 lg:w-10/12 md:w-11/12 sm:w-11/12 xl:top-10 lg:top-20 md:top-20 sm:top-20 top-20 main-content-box left-1/2">
                 <div
                     class="mb-5 text-4xl font-medium text-center title text-lightgray text-shadow-xl font-mainfont inner-shadow">
                     RailwaysNetwork
                 </div>
                 <div
-                    class="static grid grid-cols-11 grid-rows-1 m-auto xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar">
+                    class="static grid grid-cols-11 grid-rows-1 m-auto text-sm xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar xl:text-base lg:text-base md:text-sm sm:text-base">
                     <select @click="Reomovehint" v-model="DepatCityId" name="" id=""
-                        class="static z-0 col-start-1 col-end-6 p-2 pr-3 font-medium text-center rounded-tl-full rounded-bl-full outline-none text-md bg-darkgray text-lightgray">
+                        class="static z-0 col-start-1 col-end-6 p-2 pr-3 font-medium text-center rounded-tl-full rounded-bl-full outline-none bg-darkgray text-lightgray">
                         <option selected>Ki induló város</option>
                         <option v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                     </select>
                     <select @click="Reomovehint" v-model="ArrivalCityId" name="" id=""
-                        class="static z-0 col-start-6 col-end-11 p-2 pr-3 font-medium text-center rounded-tr-full rounded-br-full outline-none text-md bg-darkgray text-lightgray">
+                        class="static z-0 col-start-6 col-end-11 p-2 pr-3 font-medium text-center rounded-tr-full rounded-br-full outline-none bg-darkgray text-lightgray">
                         <option class="rounded-xl" disabled value="" selected>Céllálomás</option>
                         <option v-for="item in Cities" :value="item.id" class="rounded-xl">{{ item.cityName }}</option>
                     </select>
                     <button @click="Searchheandel" class="col-start-11 col-end-12 xl:pl-2 text-lightgray">
                         <i
-                            class='px-3 text-2xl font-medium transition duration-200 ease-in-out border-2 rounded-lg bx bx-search border-darkgray hover:bg-darkgray'></i>
+                            class='px-0 text-2xl font-medium transition duration-200 ease-in-out border-2 rounded-lg xl:px-3 lg:px-3 md:px-3 sm:px-2 bx bx-search border-darkgray hover:bg-darkgray'></i>
                     </button>
                 </div>
                 <div id="table" class="w-full pb-3 mt-5 overflow-scroll table-box scrollbar-hide max-h-128">
@@ -77,7 +78,7 @@
             </div>
             <div id="hint" class="w-full">
                 <div
-                    class="absolute z-10 p-10 text-xl text-center -translate-x-1/2 border-4 rounded-lg font-mainfont backdrop-blur-sm bg-transparent/50 left-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 loading-conatainer-content xl:top-1/3 lg:top-1/3 md:top-1/3 sm:top-1/3 border-lightgray text-lightgray">
+                    class="absolute z-10 w-11/12 p-10 text-center -translate-x-1/2 border-4 rounded-lg font-mainfont backdrop-blur-sm bg-transparent/50 left-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 loading-conatainer-content xl:top-1/3 lg:top-1/3 md:top-1/3 sm:top-1/3 top-1/2 border-lightgray text-lightgray">
                     Kérjük válasszon induló és érkező állomást!
                 </div>
             </div>
@@ -94,29 +95,34 @@
     <div
         class=" w-full lower-conent-main-container bg-[url('/public/pictures/lowercontainerbg.png')] bg-cover bg-no-repeat bg-fixed pb-20 font-mainfont">
         <div
-            class="grid p-10 m-auto xl:w-full xl:grid-cols-8 xl:grid-rows-1 lg:w-full lg:grid-cols-6 lg:grid-rows-1 lower-conent-container">
+            class="grid p-5 m-auto xl:p-5 lg:p-2 md:p-10 sm:p-10 xl:w-full xl:grid-cols-8 xl:grid-rows-1 lg:w-full lg:grid-cols-6 lg:grid-rows-1 lower-conent-container">
             <div
-                class="z-10 grid p-3 m-2 text-xl border-4 rounded-lg xl:grid-cols-1 xl:col-start-1 xl:col-end-6 xl:grid-rows-2 lg:col-start-1 lg:col-end-4 toolbox bg-transparent/50 backdrop-blur-sm border-lightgray text-lightgray">
+                class="z-10 grid p-3 m-2 border-4 rounded-lg xl:grid-cols-1 xl:col-start-1 xl:col-end-6 xl:grid-rows-2 lg:col-start-1 lg:col-end-4 toolbox bg-transparent/50 backdrop-blur-sm border-lightgray text-lightgray">
                 <div
-                    class="row-start-1 row-end-2 p-4 text-left border-b-2 xl:text-2xl lg:text-base technology-paragraph border-lightgray">
-                    Ez a projekt azért jött létre ,hogy bemutassuk munkaszínvonalunk és tudástárunkat. <br>
+                    class="flex items-center row-start-1 row-end-2 p-4 text-sm text-left border-b-2 xl:text-2xl lg:text-xl md:text-lg sm:text-base technology-paragraph border-lightgray">
+                    <span class="border-l-4 h-min w-min border-lightgray">Ez</span> a projekt azért jött létre ,hogy
+                    bemutassuk munkaszínvonalunk és tudástárunkat. <br>
                     Az oldal lényege, hogy két kiválaszott város között az összes lehetséges útvonalat megtekinthessük a
                     részleteikkel együtt.
                     Frontend fejlesztő, Soltész Dávid. Backend fejlesztő, Plachi Szilárd.
                 </div>
-                <div class="flex flex-wrap row-start-2 row-end-2 p-3 m-auto text-center xl:justify-start lg:justify-center md:justify-center sm:justify-around technology-icons">   
-                    <div v-for="img in images" class="w-24 p-2 mx-3 mb-2 rounded-lg h-min bg-lightgray/20">
-                        <div 
-                            class="w-20 h-20 p-2 bg-center bg-no-repeat bg-contain icon " v-bind:style="{ backgroundImage: 'url(../public/pictures/' + img + ')' }">
+                <div
+                    class="flex flex-wrap row-start-2 row-end-2 p-3 place-content-center xl:justify-start lg:justify-center md:justify-center sm:justify-around technology-icons">
+                    <div v-for="img in images"
+                        class="w-16 p-2 mx-3 mb-2 rounded-lg xl:w-24 lg:w-24 md:w-20 sm:w-24 h-min bg-lightgray/20">
+                        <div class="w-12 h-12 p-2 bg-center bg-no-repeat bg-contain xl:w-20 xl:h-20 lg:w-20 lg:h-20 md:w-16 md:h-16 sm:w-20 sm:h-20 icon "
+                            v-bind:style="{ backgroundImage: 'url(../public/pictures/' + img + ')' }">
                         </div>
                     </div>
                 </div>
             </div>
             <div
-                class="grid p-5 m-2 border-4 rounded-lg z-3 xl:grid-cols-2 xl:col-start-6 xl:col-end-9 xl:grid-rows-1 lg:col-start-4 lg:col-end-7 programers border-lightgray bg-transparent/50 backdrop-blur-sm">
-                <div class="col-start-1 border-r-2 col-end 2 frontend-developer border-lightgray text-lightgray">
-                    <div class="mt-4 contact-name-container">
-                        <span class="text-xl font-black contacts-name text-lightgray drop-shadow-sm">Soltész
+                class="grid grid-cols-1 grid-rows-2 p-3 m-2 border-4 rounded-lg lg:grid-rows-2 md:grid-rows-1 sm:grid-rows-1 xl:grid-cols-2 xl:col-start-6 xl:col-end-9 xl:grid-rows-1 lg:col-start-4 lg:col-end-7 lg:grid-cols-1 md:grid-cols-2 sm:grid-cols-2 programers border-lightgray bg-transparent/50 backdrop-blur-sm">
+                <div
+                    class="col-start-1 col-end-1 row-start-2 row-end-2 p-2 text-sm border-t-2 xl:p-0 lg:p-5 md:p-5 sm:p-0 xl:border-r-2 xl:border-b-0 xl:border-t-0 lg:border-t-0 md:border-t-0 sm:border-t-0 lg:border-b-2 lg:border-r-0 md:border-r-2 sm:border-r-2 xl:col-start-1 xl:col-end-2 xl:row-start-1 xl:row-end-1 lg:col-start-1 lg:col-end-1 lg:row-start-1 lg:row-end-2 md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-1 sm:col-start-1 sm:col-end-2 sm:row-start-1 sm:row-end-1 frontend-developer border-lightgray text-lightgray xl:text-base lg:text-base md:text-sm sm:text-base">
+                    <div class="xl:mt-4 lg:mt-0 md:mt-0 contact-name-container">
+                        <span
+                            class="font-black tracking-wider contacts-name text-lightgray drop-shadow-sm xl:text-base lg:text-base md:text-lg sm:text-base tracking">Soltész
                             Dávid</span>
                     </div>
                     <br>
@@ -127,8 +133,7 @@
                     </div>
                     <br>
                     <div class="mb-1 contact-email-container">
-                        <span
-                            class="flex-wrap p-1 font-bold border-l-4 border-white xl:text-sm lg:text-sm md:text-base sm:text-sm contacts-email"><span
+                        <span class="flex-wrap p-1 font-bold border-l-4 border-white contacts-email"><span
                                 class="text-base">Email:</span><br><span>solteszdavid@gmail.com</span>
                         </span>
                     </div>
@@ -139,10 +144,13 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-start-2 col-end-2 pl-5 backend-developer text-lightgray">
-                    <div class="mt-4 contact-name-container">
-                        <span class="text-xl font-black contacts-name text-lightgray drop-shadow-sm">Plachi
-                            Szilárd</span>
+                <div
+                    class="col-start-1 col-end-1 row-start-1 row-end-2 p-2 text-sm xl:p-0 lg:p-5 md:p-5 sm:p-0 xl:pl-5 sm:pl-5 backend-developer text-lightgray xl:text-base lg:text-base md:text-sm sm:text-base xl:col-start-2 xl:col-end-2 xl:row-start-1 xl:row-end-2 lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-2 md:col-start-2 md:col-end-2 md:row-start-1 md:row-end-1 sm:col-start-2 sm:col-end-2 sm:row-start-1 sm:row-end-2">
+                    <div class="xl:mt-4 lg:mt-0 md:mt-0 contact-name-container">
+                        <span
+                            class="font-black tracking-wider contacts-name text-lightgray drop-shadow-sm xl:text-base lg:text-base md:text-lg sm:text-base">Plachi
+                            Szilárd
+                        </span>
                     </div>
                     <br>
                     <div class="mb-1 contact-phone-container">
@@ -152,8 +160,7 @@
                     </div>
                     <br>
                     <div class="mb-1 contact-email-container">
-                        <span
-                            class="flex-wrap p-1 font-bold border-l-4 border-white xl:text-sm lg:text-sm md:text-base sm:text-sm contacts-email"><span
+                        <span class="flex-wrap p-1 font-bold border-l-4 border-white contacts-email"><span
                                 class="text-base">Email:</span><br><span>plachiszilárd@gmail.com</span>
                         </span>
                     </div>
@@ -163,7 +170,6 @@
                             class="p-1 font-bold border-l-4 border-white github-link">GitHub:<br><span>szilardlink</span>
                         </span>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -224,7 +230,7 @@ export default {
                 DepatureId: this.DepatCityId,
                 ArrivalId: this.ArrivalCityId,
                 range: this.range
-                
+
             })
             console.log(response);
             if (response.data.railways !== null) {

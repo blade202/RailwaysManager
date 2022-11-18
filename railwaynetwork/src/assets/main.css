@@ -2,7 +2,7 @@
 *{
     box-sizing: border-box;
 }
-#login, #registry, #home{
+#login, #registry, #home, #admin{
     animation-name: template-loading;
     animation-duration: 1s;
     animation-iteration-count: 1;

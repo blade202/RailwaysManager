@@ -12,22 +12,22 @@
                 </h1>
                 <!-- logincontent -->
                 <div
-                    class="login-content # backdrop-blur-sm bg-gray-600 bg-transparent/60 pt-16 pb-16 rounded-3xl grid lg:grid-rows-1 lg:grid-cols-1">
+                    class="login-content # backdrop-blur-sm bg-gray-600 bg-transparent/60 pt-16 pb-16 rounded-3xl grid lg:grid-rows-1 lg:grid-cols-1 xl:text-xl lg:text-xl md:text-xl sm:text-base">
                     <form @submit.prevent="login" class="text-center login-form">
                         <input v-model="username"
-                            class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray text-lightgray"
+                            class="w-4/5 p-2 m-auto text-center outline-none rounded-3xl bg-darkgray text-lightgray"
                             type="text" placeholder="Felhasználónév">
 
                         <input v-model="password"
-                            class="w-4/5 p-2 m-auto text-xl text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray mb-7"
+                            class="w-4/5 p-2 m-auto text-center outline-none rounded-3xl bg-darkgray mt-7 text-lightgray mb-7"
                             type="password" placeholder="Jelszó">
 
-                        <input type="submit" class="w-2/6 p-2 mt-6 text-xl text-center cursor-pointer bg-lightgray rounded-xl text-darkgray">
+                        <input type="submit" class="w-2/6 p-2 mt-6 text-center cursor-pointer bg-lightgray rounded-xl text-darkgray ">
                     </form>
                     <p class="mt-10 text-center text-lightgray text-md">
                         Nincs még fiókja?
                     </p>
-                    <button @click="GotoRegister" class="grid p-2 m-auto mt-1 transition duration-300 ease-in-out border-2 border-solid lg:text-xl md-text-xlw-2/6 border-lightgray rounded-xl text-lightgray hover:bg-lightgray hover:text-darkgray">
+                    <button @click="GotoRegister" class="grid p-2 m-auto mt-1 transition duration-300 ease-in-out border-2 border-solid xl:w-2/6 lg:w-2-6 md:w-2/6 sm:w-2/4 border-lightgray rounded-xl text-lightgray hover:bg-lightgray hover:text-darkgray">
                     Hozza létre most!
                     </button>
                 </div>
