@@ -101,7 +101,7 @@
         <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
         <AddCityModal :visible=AddCityModalVisibility :close=CloseAddCityModal :AddCity=AddCity :ShowError=ShowError :ShowSussces=ShowSussces />
         <DeleteRailwayModal :visible=DeleteRailwayModalVisibility :close=CloseDeleRailwayModal :deleteRailway=DeleteRailway />
-        <AddRailwayModal :visible=AddCityModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces :close=CloseAddRailwayModal   />
+        <AddRailwayModal :visible=AddRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces :close=CloseAddRailwayModal   />
         <TheFooter />
     </div>
     <div v-if="blurVisibility" id="blur-overlay"
