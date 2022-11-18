@@ -58,7 +58,7 @@ namespace TrainBackendApi.Controllers
         {
             return Ok(railwaysServic1e.GettAll());
         }
-        [HttpPost]
+        [HttpDelete]
         [Route("DeleteRailway")]
         [Authorize(Roles ="admin")]
         public IActionResult DeleteRailway([FromBody] DeleteRquest requeset)

@@ -79,7 +79,7 @@
                             </td>
                             <td class="text-center xl:w-2/12 lg:w-2/12 md:w-1/12 sm:w-1/12 bg-darkgray h-14">
                                 <div class="border-r-4 border-lightgray/70">
-                                    <i
+                                    <i 
                                         class='text-2xl duration-150 ease-in-out cursor-pointer text-silver bx bxs-cog hover:text-darkersilver'></i>
                                 </div>
                             </td>
@@ -87,7 +87,7 @@
                             <td
                                 class="text-center rounded-tr-full rounded-br-full xl:w-2/12 lg:w-2/12 md:w-2/12 sm:w-1/12 bg-darkgray h-14">
                                 <div class="">
-                                    <i
+                                    <i @click="SetRailwayIdAndOpenRailwayDeleteModal(railway.id)"
                                         class='text-3xl duration-150 ease-in-out cursor-pointer text-red hover:text-darkerred bx bxs-trash '></i>
                                 </div>
                             </td>
@@ -100,6 +100,7 @@
             :ShowError=ShowError :ShowSussces=ShowSussces />
         <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
         <AddCityModal :visible=AddCityModalVisibility :close=CloseAddCityModal :AddCity=AddCity :ShowError=ShowError :ShowSussces=ShowSussces />
+        <DeleteRailwayModal :visible=DeleteRailwayModalVisibility :close=CloseDeleRailwayModal :deleteRailway=DeleteRailway />
         <TheFooter />
     </div>
     <div v-if="blurVisibility" id="blur-overlay"
@@ -116,13 +117,14 @@ import TheNavbar from '../components/TheNavbar.vue';
 import DeleteModal from '../components/DeleteModal.vue';
 import AddCityModal from '../components/AddCityModal.vue';
 import ChangeCityModal from '../components/ChangeCityModal.vue';
+import DeleteRailwayModal from '../components/DeleteRailwayModal.vue';
 import console from 'console';
 
 
 export default {
     name: "admin",
     components: {
-        TheNavbar, TheFooter, DeleteModal, ChangeCityModal, AddCityModal
+        TheNavbar, TheFooter, DeleteModal, ChangeCityModal, AddCityModal, DeleteRailwayModal
     },
     data() {
         return {
@@ -130,10 +132,12 @@ export default {
             cities: [],
             railways: [],
             CitiId: null,
+            RailwayId:null,
             blurVisibility: false,
             deleteModalVisibility: false,
             cityModalChangeVisibility: false,
             AddCityModalVisibility: false,
+            DeleteRailwayModalVisibility:false,
             ShowError: false,
             ShowSussces: false,
         }
@@ -184,7 +188,7 @@ export default {
                         this.ShowSussces = false;
                         this.cityModalChangeVisibility = false;
                         this.blurVisibility = false;
-                    }, 2500);
+                    }, 1200);
 
             }
             else {
@@ -219,7 +223,7 @@ export default {
                     this.AddCityModalVisibility = false;
                     this.ShowSussces = false;
                     this.blurVisibility = false;
-                }, 1500);
+                }, 1200);
             }
             else{
                 this.ShowError = true;
@@ -237,6 +241,29 @@ export default {
         {
             this.blurVisibility=false;
             this.AddCityModalVisibility=false;
+        },
+        DeleteRailway()
+        {
+            axios.delete("/DeleteRailway",{
+                data:{
+                    id:this.RailwayId
+                }
+            });
+            const objWithIdIndex = this.railways.findIndex((obj) => obj.id === this.RailwayId);
+            this.railways.splice(objWithIdIndex, 1);
+            this.DeleteRailwayModalVisibility=false;
+            this.blurVisibility=false;
+        },
+        SetRailwayIdAndOpenRailwayDeleteModal(id)
+        {
+            this.RailwayId=id;
+            this.DeleteRailwayModalVisibility=true;
+            this.blurVisibility=true;
+        },
+        CloseDeleRailwayModal()
+        {
+            this.DeleteRailwayModalVisibility=false;
+            this.blurVisibility=false;
         }
 
 
