@@ -27,7 +27,7 @@
                         Útvonalak
                     </button>
                     <i class='text-3xl bx bx-dots-horizontal-rounded'></i>
-                    <button @click=""
+                    <button @click="ShowAddRailwayModal"
                         class="border-2 border-lightgray p-0.5 px-5 rounded-lg transition duration-200 ease-in-out hover:bg-lightgray hover:text-darkgray">
                         Hozzáadás
                     </button>
@@ -101,6 +101,7 @@
         <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
         <AddCityModal :visible=AddCityModalVisibility :close=CloseAddCityModal :AddCity=AddCity :ShowError=ShowError :ShowSussces=ShowSussces />
         <DeleteRailwayModal :visible=DeleteRailwayModalVisibility :close=CloseDeleRailwayModal :deleteRailway=DeleteRailway />
+        <AddRailwayModal :visible=AddCityModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces :close=CloseAddRailwayModal   />
         <TheFooter />
     </div>
     <div v-if="blurVisibility" id="blur-overlay"
@@ -118,13 +119,14 @@ import DeleteModal from '../components/DeleteModal.vue';
 import AddCityModal from '../components/AddCityModal.vue';
 import ChangeCityModal from '../components/ChangeCityModal.vue';
 import DeleteRailwayModal from '../components/DeleteRailwayModal.vue';
+import AddRailwayModal from '../components/AddRailwayModal.vue'
 import console from 'console';
 
 
 export default {
     name: "admin",
     components: {
-        TheNavbar, TheFooter, DeleteModal, ChangeCityModal, AddCityModal, DeleteRailwayModal
+        TheNavbar, TheFooter, DeleteModal, ChangeCityModal, AddCityModal, DeleteRailwayModal,AddRailwayModal
     },
     data() {
         return {
@@ -138,6 +140,7 @@ export default {
             cityModalChangeVisibility: false,
             AddCityModalVisibility: false,
             DeleteRailwayModalVisibility:false,
+            AddRailwayModalVisibility:false,
             ShowError: false,
             ShowSussces: false,
         }
@@ -264,7 +267,24 @@ export default {
         {
             this.DeleteRailwayModalVisibility=false;
             this.blurVisibility=false;
+        },
+        CreateRailway(Railway)
+        {
+            axios.post("/CreateRailway",{
+
+            });           
+        },
+        ShowAddRailwayModal()
+        {
+            this.AddCityModalVisibility=true;
+            this.blurVisibility=true;
+        },
+        CloseAddRailwayModal()
+        {
+            this.AddCityModalVisibility=false;
+            this.blurVisibility=false;
         }
+
 
 
     }
