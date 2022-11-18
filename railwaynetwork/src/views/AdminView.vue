@@ -168,9 +168,7 @@ export default {
         },
         async UpdateCity(updatedname) {
             const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
-            let editcityname = this.cities[objWithIdIndex].cityName;
-            console.log(editcityname);
-            let isexist = this.cities.includes((obj) => obj.cityName === editcityname);
+            let isexist = this.cities.some((obj) => obj.cityName === updatedname);
             if (!isexist) {
                 await axios.patch('/UpdateCity', {
                     id: this.CitiId,
@@ -180,10 +178,11 @@ export default {
                 this.showUpdateSussces = true,
                     await setTimeout(() => {
                         this.showUpdateSussces = false;
+                        this.cityModalChangeVisibility = false;
+                        this.blurVisibility = false;
+                        this.showUpdateSussces
                     }, 2500);
-                this.cityModalChangeVisibility = false;
-                this.blurVisibility = false;
-                this.showUpdateSussces
+            
             }
             else {
                 this.ShowUpdateError = true;
