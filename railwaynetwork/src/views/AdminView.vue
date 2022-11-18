@@ -106,7 +106,7 @@
         <AddRailwayModal :visible=AddRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces
             :close=CloseAddRailwayModal :AddRailway=CreateRailway />
         <UpdateRailwayModal :visible=UpdateRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces
-            :close=CLoseUpdateRailwayModal :UpdateRailwy=UpdateRailway />
+            :close=CLoseUpdateRailwayModal :UpdateRailwy=UpdateRailway :Cities=this.cities />
         <TheFooter />
     </div>
     <div v-if="blurVisibility" id="blur-overlay"

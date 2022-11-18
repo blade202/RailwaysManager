@@ -11,20 +11,19 @@
                     RailwaysNetwork
                 </div>
                 <div
-                    class="static grid grid-cols-11 grid-rows-1 m-auto text-sm xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar xl:text-base lg:text-base md:text-sm sm:text-base">
+                    class="static grid grid-cols-10 grid-rows-2 m-auto text-sm xl:grid-cols-11 xl:grid-rows-1 lg:grid-cols-11 lg:grid-rows-1 md:grid-cols-11 md:grid-rows-1 sm:grid-cols-11 sm:grid-rows-1 xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar xl:text-base lg:text-base md:text-sm sm:text-base">
                     <select @click="Reomovehint" v-model="DepatCityId" name="" id=""
-                        class="static z-0 col-start-1 col-end-6 p-2 pr-3 font-medium text-center rounded-tl-full rounded-bl-full outline-none bg-darkgray text-lightgray">
+                        class="static z-0 col-start-1 col-end-6 p-2 pr-3 font-medium text-center rounded-tl-full rounded-bl-full outline-none xl:row-start-1 xl:row-end-2 lg:row-start-1 lg:row-end-2 md:row-start-1 md:row-end-2 sm:row-start-1 sm:row-end-2 bg-darkgray text-lightgray">
                         <option selected>Ki induló város</option>
                         <option v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                     </select>
                     <select @click="Reomovehint" v-model="ArrivalCityId" name="" id=""
-                        class="static z-0 col-start-6 col-end-11 p-2 pr-3 font-medium text-center rounded-tr-full rounded-br-full outline-none bg-darkgray text-lightgray">
+                        class="static z-0 col-start-6 col-end-11 p-2 pr-3 font-medium text-center rounded-tr-full rounded-br-full outline-none xl:row-start-1 xl:row-end-2 lg:row-start-1 lg:row-end-2 md:row-start-1 md:row-end-2 sm:row-start-1 sm:row-end-2 bg-darkgray text-lightgray">
                         <option class="rounded-xl" disabled value="" selected>Céllálomás</option>
                         <option v-for="item in Cities" :value="item.id" class="rounded-xl">{{ item.cityName }}</option>
                     </select>
-                    <button @click="Searchheandel" class="col-start-11 col-end-12 xl:pl-2 text-lightgray">
-                        <i
-                            class='px-0 text-2xl font-medium transition duration-200 ease-in-out border-2 rounded-lg xl:px-3 lg:px-3 md:px-3 sm:px-2 bx bx-search border-darkgray hover:bg-darkgray'></i>
+                    <button @click="Searchheandel" class="col-start-4 col-end-8 row-start-2 row-end-2 xl:col-start-11 xl:col-end-12 lg:col-start-11 lg:col-end-12 md:col-start-11 md:col-end-12 sm:col-start-11 sm:col-end-12 xl:pl-2 text-lightgray xl:row-start-1 xl:row-end-2 lg:row-start-1 lg:row-end-2 md:row-start-1 md:row-end-2 sm:row-start-1 sm:row-end-2">
+                        <i class='px-0 text-2xl font-medium transition duration-200 ease-in-out border-2 rounded-lg xl:px-3 lg:px-3 md:px-3 sm:px-2 bx bx-search border-darkgray hover:bg-darkgray'></i>
                     </button>
                 </div>
                 <div id="table" class="w-full pb-3 mt-5 overflow-scroll table-box scrollbar-hide max-h-128">
