@@ -101,7 +101,7 @@
         <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
         <AddCityModal :visible=AddCityModalVisibility :close=CloseAddCityModal :AddCity=AddCity :ShowError=ShowError :ShowSussces=ShowSussces />
         <DeleteRailwayModal :visible=DeleteRailwayModalVisibility :close=CloseDeleRailwayModal :deleteRailway=DeleteRailway />
-        <AddRailwayModal :visible=AddCityModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces :close=CloseAddRailwayModal   />
+        <AddRailwayModal :visible=AddRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces :close=CloseAddRailwayModal   />
         <TheFooter />
     </div>
     <div v-if="blurVisibility" id="blur-overlay"
@@ -141,6 +141,7 @@ export default {
             AddCityModalVisibility: false,
             DeleteRailwayModalVisibility:false,
             AddRailwayModalVisibility:false,
+            UpdateRailwayModalVisibility:false,
             ShowError: false,
             ShowSussces: false,
         }
@@ -276,14 +277,30 @@ export default {
         },
         ShowAddRailwayModal()
         {
-            this.AddCityModalVisibility=true;
+            this.AddRailwayModalVisibility=true;
             this.blurVisibility=true;
         },
         CloseAddRailwayModal()
         {
-            this.AddCityModalVisibility=false;
+            this.AddRailwayModalVisibility=false;
             this.blurVisibility=false;
+        },
+        async UpdateRailway(railway)
+        {
+            axios.patch("/UpdateRailway",{
+                Id:this.RailwayId,
+                DepCityId:railway.Depatureid,
+                AriCityId:railway.arrivalid,
+                km:railway.km
+            })
+            this.ShowSussces=true;
+            setTimeout(() => {
+                this.ShowSussces=false;
+                this.blurVisibility=false;
+                this.UpdateRailwayModalVisibility=false;
+            }, 1200);
         }
+       
 
 
 
