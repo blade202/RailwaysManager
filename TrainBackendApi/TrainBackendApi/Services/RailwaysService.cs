@@ -18,7 +18,7 @@ namespace TrainBackendApi.Services
 
         public List<Railway> GettAll()
         {
-            return dbConntex.Railways.ToList();
+            return dbConntex.Railways.OrderBy(x=>x.DepatureCity).ToList();
         }
         public Railway GetById(int id)
         {

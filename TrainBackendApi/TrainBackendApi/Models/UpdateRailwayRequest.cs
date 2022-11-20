@@ -11,7 +11,6 @@ namespace TrainBackendApi.Models
         [Required]
         public int AriCityId { get; set; }
         [Required]
-        [MaxLength(5)]
         public int Km { get; set; }
     }
 }

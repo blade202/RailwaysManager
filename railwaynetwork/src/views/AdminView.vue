@@ -1,6 +1,6 @@
 <template>
-    <div
-        id="admin" class="w-full main-admin-container h-screen bg-[url('/public/pictures/lowercontainerbg.png')] bg-cover bg-no-repeat  ">
+    <div id="admin"
+        class="w-full main-admin-container h-screen bg-[url('/public/pictures/lowercontainerbg.png')] bg-cover bg-no-repeat  ">
         <TheNavbar />
         <div
             class="absolute w-full h-screen -translate-x-1/2 xl:w-3/4 lg:w-5/6 md:w-11/12 sm:w-11/12 left-1/2 admin-content-container xl:top-10 lg:top-20 md:top-20 sm:top-20 ">
@@ -79,7 +79,7 @@
                             </td>
                             <td class="text-center xl:w-2/12 lg:w-2/12 md:w-1/12 sm:w-1/12 bg-darkgray h-14">
                                 <div class="border-r-4 border-lightgray/70">
-                                    <i 
+                                    <i @click="SetRailwayIdAndOpenUpdateRailwayModal(railway.id)"
                                         class='text-2xl duration-150 ease-in-out cursor-pointer text-silver bx bxs-cog hover:text-darkersilver'></i>
                                 </div>
                             </td>
@@ -99,9 +99,14 @@
         <ChangeCityModal :visible=cityModalChangeVisibility :close=closeChangeModal :UpdateCiti=UpdateCity
             :ShowError=ShowError :ShowSussces=ShowSussces />
         <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
-        <AddCityModal :visible=AddCityModalVisibility :close=CloseAddCityModal :AddCity=AddCity :ShowError=ShowError :ShowSussces=ShowSussces />
-        <DeleteRailwayModal :visible=DeleteRailwayModalVisibility :close=CloseDeleRailwayModal :deleteRailway=DeleteRailway />
-        <AddRailwayModal :visible=AddRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces :close=CloseAddRailwayModal :Cities=this.cities  />
+        <AddCityModal :visible=AddCityModalVisibility :close=CloseAddCityModal :AddCity=AddCity :ShowError=ShowError
+            :ShowSussces=ShowSussces />
+        <DeleteRailwayModal :visible=DeleteRailwayModalVisibility :close=CloseDeleRailwayModal
+            :deleteRailway=DeleteRailway />
+        <AddRailwayModal :visible=AddRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces
+            :close=CloseAddRailwayModal :AddRailway=CreateRailway :Cities=this.cities />
+        <UpdateRailwayModal :visible=UpdateRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces
+            :close=CLoseUpdateRailwayModal :Update=UpdateRailway :Cities=this.cities />
         <TheFooter />
     </div>
     <div v-if="blurVisibility" id="blur-overlay"
@@ -120,13 +125,13 @@ import AddCityModal from '../components/AddCityModal.vue';
 import ChangeCityModal from '../components/ChangeCityModal.vue';
 import DeleteRailwayModal from '../components/DeleteRailwayModal.vue';
 import AddRailwayModal from '../components/AddRailwayModal.vue'
-import console from 'console';
+import UpdateRailwayModal from '../components/UpdateRailwayModal.vue'
 
 
 export default {
     name: "admin",
     components: {
-        TheNavbar, TheFooter, DeleteModal, ChangeCityModal, AddCityModal, DeleteRailwayModal,AddRailwayModal
+        TheNavbar, TheFooter, DeleteModal, ChangeCityModal, AddCityModal, DeleteRailwayModal, AddRailwayModal,UpdateRailwayModal
     },
     data() {
         return {
@@ -134,14 +139,14 @@ export default {
             cities: [],
             railways: [],
             CitiId: null,
-            RailwayId:null,
+            RailwayId: null,
             blurVisibility: false,
             deleteModalVisibility: false,
             cityModalChangeVisibility: false,
             AddCityModalVisibility: false,
-            DeleteRailwayModalVisibility:false,
-            AddRailwayModalVisibility:false,
-            UpdateRailwayModalVisibility:false,
+            DeleteRailwayModalVisibility: false,
+            AddRailwayModalVisibility: false,
+            UpdateRailwayModalVisibility: false,
             ShowError: false,
             ShowSussces: false,
         }
@@ -149,14 +154,9 @@ export default {
     methods: {
         async showcities() {
             this.tableheaders = ["Városok", "Módosítás", "Törlés"];
-            let response = await axios.get('/getCities');
-            this.cities = response.data;
         },
         async showrailways() {
             this.tableheaders = ["Induló állomás", "Érkező állomás", "Km", "Módosítás", "Törlés"];
-            let response = await axios.get('/GetRailways');
-            this.railways = response.data;
-
         },
         setDeleteIDAndOpenDeleteModal(id) {
             this.CitiId = id;
@@ -216,10 +216,10 @@ export default {
         async AddCity(citiname) {
             let isexist = this.cities.some((obj) => obj.cityName === citiname);
             if (!isexist) {
-                let resposne = await axios.put("/CreatCity",{
-                  
-                        CityName: citiname
-                   
+                let resposne = await axios.put("/CreatCity", {
+
+                    CityName: citiname
+
                 })
                 this.cities.push(resposne.data);
                 this.ShowSussces = true;
@@ -229,83 +229,110 @@ export default {
                     this.blurVisibility = false;
                 }, 1200);
             }
-            else{
+            else {
                 this.ShowError = true;
                 setTimeout(() => {
                     this.ShowError = false;
                 }, 2500);
             }
         },
-        ShowAddCityModal()
-        {
-            this.blurVisibility=true;
-            this.AddCityModalVisibility=true;
+        ShowAddCityModal() {
+            this.blurVisibility = true;
+            this.AddCityModalVisibility = true;
         },
-        CloseAddCityModal()
-        {
-            this.blurVisibility=false;
-            this.AddCityModalVisibility=false;
+        CloseAddCityModal() {
+            this.blurVisibility = false;
+            this.AddCityModalVisibility = false;
         },
-        DeleteRailway()
-        {
-            axios.delete("/DeleteRailway",{
-                data:{
-                    id:this.RailwayId
+        DeleteRailway() {
+            axios.delete("/DeleteRailway", {
+                data: {
+                    id: this.RailwayId
                 }
             });
             const objWithIdIndex = this.railways.findIndex((obj) => obj.id === this.RailwayId);
             this.railways.splice(objWithIdIndex, 1);
-            this.DeleteRailwayModalVisibility=false;
-            this.blurVisibility=false;
+            this.DeleteRailwayModalVisibility = false;
+            this.blurVisibility = false;
         },
-        SetRailwayIdAndOpenRailwayDeleteModal(id)
-        {
+        SetRailwayIdAndOpenRailwayDeleteModal(id) {
+            this.RailwayId = id;
+            this.DeleteRailwayModalVisibility = true;
+            this.blurVisibility = true;
+        },
+        CloseDeleRailwayModal() {
+            this.DeleteRailwayModalVisibility = false;
+            this.blurVisibility = false;
+        },
+        CreateRailway(Railway) {
+            axios.post("/CreateRailway", {
+
+            });
+        },
+        ShowAddRailwayModal() {
+            this.AddRailwayModalVisibility = true;
+            this.blurVisibility = true;
+        },
+        CloseAddRailwayModal() {
+            this.AddRailwayModalVisibility = false;
+            this.blurVisibility = false;
+        },
+        async UpdateRailway(railway) {
+
+            let DepatureCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.Depatureid)].cityName;
+            let ArrivalCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.arrivalid)].cityName;
+            console.log(DepatureCityname,ArrivalCityname);  
+            let isexist=this.railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname);         
+            if (!isexist) {
+                 let response = await axios.patch("/UpdateRailway", {
+                    Id: this.RailwayId,
+                    DepCitiyId: railway.Depatureid,
+                    AriCityId: railway.arrivalid,
+                    km: railway.km
+                });
+                let inex = this.railways.findIndex((obj) => obj.id === this.RailwayId);
+                this.railways[inex] = response.data;
+                this.ShowSussces = true;
+                setTimeout(() => {
+                    this.ShowSussces = false;
+                    this.blurVisibility = false;
+                    this.UpdateRailwayModalVisibility = false;
+                }, 1200);
+            }
+            else
+            {
+                this.ShowError=true;
+                setTimeout(() => {
+                    this.ShowError=false;
+                }, 1200);
+            }
+     
+        },
+        SetRailwayIdAndOpenUpdateRailwayModal(id){
             this.RailwayId=id;
-            this.DeleteRailwayModalVisibility=true;
             this.blurVisibility=true;
+            this.UpdateRailwayModalVisibility=true;
         },
-        CloseDeleRailwayModal()
+        CLoseUpdateRailwayModal()
         {
-            this.DeleteRailwayModalVisibility=false;
+            this.UpdateRailwayModalVisibility=false;
             this.blurVisibility=false;
         },
-        CreateRailway(Railway)
+        async getcities()
         {
-            axios.post("/CreateRailway",{
-
-            });           
+            let ctresponse = await axios.get('/GetRailways');
+            this.railways = ctresponse.data;
         },
-        ShowAddRailwayModal()
+        async getrailways()
         {
-            this.AddRailwayModalVisibility=true;
-            this.blurVisibility=true;
-        },
-        CloseAddRailwayModal()
-        {
-            this.AddRailwayModalVisibility=false;
-            this.blurVisibility=false;
-        },
-        async UpdateRailway(railway)
-        {
-            axios.patch("/UpdateRailway",{
-                Id:this.RailwayId,
-                DepCityId:railway.Depatureid,
-                AriCityId:railway.arrivalid,
-                km:railway.km
-            })
-            this.ShowSussces=true;
-            setTimeout(() => {
-                this.ShowSussces=false;
-                this.blurVisibility=false;
-                this.UpdateRailwayModalVisibility=false;
-            }, 1200);
+            let railwaysresponse =  await axios.get('/getCities');
+            this.cities = railwaysresponse.data;
         }
-       
-
-
-
+    },
+    async beforeMount(){
+         await this.getcities();
+         await this.getrailways();  
     }
 }
-
 
 </script>

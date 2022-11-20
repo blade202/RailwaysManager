@@ -201,7 +201,8 @@ export default {
             ArrivalCityId: 0,
             range: 0,
             falg: false,
-            images: ['.net.png', 'cracs.png', 'css.png', 'html.png', 'js.png', 'mysql.png', 'tailwind.png', 'vuejs.png']
+            images: ['.net.png', 'cracs.png', 'css.png', 'html.png', 'js.png', 'mysql.png', 'tailwind.png', 'vuejs.png'],
+            theadchildresns:[],
         }
     },
     methods: {
@@ -260,13 +261,38 @@ export default {
                 this.falg = false;
                 document.getElementById('hint').classList.remove('main-loading-container');
             }
+        },
+        SetTeableChildresn()
+        {
+        let thead = document.getElementById("tableheader");
+        let thedchilderns=[];
+        for (const item of thead.children) {
+            thedchilderns.push(item);
         }
+        this.theadchildresns=thedchilderns;
+        }
+        
 
     },
     beforeMount() {
         this.getcities();
-    }
+        onresize = (event) => {
+            let thead = document.getElementById("tableheader");
+            if (window.innerWidth < 1024&&thead.children.length>3) {
+                for (let i = 0; i < 3; i++) {
+                    thead.lastChild.remove();
+                }
+            } else if(window.innerWidth>1024&&thead.children.length<3) {
+                for (let i = 0; i < 4; i++) {
+                    thead.appendChild(this.theadchildresns[i]);
+                }
+            }
+        }
 
+    },
+    mounted: function() {
+      this.SetTeableChildresn() // Calls the method before page loads
+  },
 }
 </script>
 
