@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using TrainBackendApi.Models;
 using TrainBackendApi.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace TrainBackendApi.Services
 {
@@ -39,13 +40,12 @@ namespace TrainBackendApi.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        public string GenerateRefresToken(string Userid)
+        public async Task<string> GenerateRefresToken(string Userid)
         {
-            var oldtoken = dbConntext.RefreshTokens.FirstOrDefault(x => x.OwnerId == Userid);
+            var oldtoken =  dbConntext.RefreshTokens.FirstOrDefault(x => x.OwnerId == Userid);
             if (oldtoken!=null)
             {
-                dbConntext.RefreshTokens.Remove(oldtoken);
-                dbConntext.SaveChanges();
+                dbConntext.Remove(oldtoken);
             }
             var randomNumber = new byte[32];
             using (var rng = RandomNumberGenerator.Create())
@@ -57,13 +57,15 @@ namespace TrainBackendApi.Services
                 return refreshtoken;
             }
         }
-        public Dictionary<string,string> GenerateNewToken(string refreshtoken,string oldtoken)
+        public async Task<Dictionary<string,string>> GenerateNewToken(string refreshtoken,string oldtoken)
         {
             var pricipals = GetPrincipalFromExpiredToken(oldtoken);
-            var validaterefrestoken = dbConntext.RefreshTokens.FirstOrDefault(x => x.Token == refreshtoken) != null;
+            var oldrefreshtoken = dbConntext.RefreshTokens.FirstOrDefault(x => x.Token == refreshtoken);
+
             Dictionary<string, string> Tokens = new Dictionary<string, string>();
-            if (validaterefrestoken)
+            if (oldrefreshtoken != null) 
             {
+                dbConntext.Entry(oldrefreshtoken).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
                 var claims = pricipals.Claims;
@@ -74,7 +76,7 @@ namespace TrainBackendApi.Services
                   signingCredentials: credentials);
                  var newtoken =new JwtSecurityTokenHandler().WriteToken(token);
                 Tokens.Add("token",newtoken);
-                Tokens.Add("refreshtoken", GenerateRefresToken(pricipals.Claims.FirstOrDefault(x=>x.Type==ClaimTypes.NameIdentifier).Value));
+                Tokens.Add("refreshtoken",await GenerateRefresToken(pricipals.Claims.FirstOrDefault(x=>x.Type==ClaimTypes.NameIdentifier).Value));
                 return Tokens;
             }
             throw new SecurityTokenException("Invalid Refresh token");

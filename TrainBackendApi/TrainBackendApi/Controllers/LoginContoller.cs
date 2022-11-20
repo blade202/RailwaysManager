@@ -12,6 +12,7 @@ namespace TrainBackendApi.Controllers
     {
         private UserManager userManager;
         private JwtTokenService jwtTokenGenerator;
+        private static readonly SemaphoreSlim Mutex = new SemaphoreSlim(1);
 
         public LoginContoller(UserManager userManager, JwtTokenService jwtTokenGenerator)
         {
@@ -21,14 +22,14 @@ namespace TrainBackendApi.Controllers
 
         [Route("/Login")]
         [HttpPost]
-        public IActionResult Login(
+        public async Task<IActionResult> Login(
             [FromBody] LoginUser user)
         {
 
             if (ModelState.IsValid&&userManager.ValaidateUser(user, out User validuser))
             {
                 
-                return Ok(new UserData {Username=validuser.UserName,Token= jwtTokenGenerator.Generate(validuser),Role=validuser.Role,Refreshtoken=jwtTokenGenerator.GenerateRefresToken(validuser.Id)});
+                return Ok(new UserData {Username=validuser.UserName,Token= jwtTokenGenerator.Generate(validuser),Role=validuser.Role,Refreshtoken=await jwtTokenGenerator.GenerateRefresToken(validuser.Id)});
             }
             return BadRequest();
 
@@ -51,11 +52,21 @@ namespace TrainBackendApi.Controllers
         }
         [Route("RefreshToken")]
         [HttpPost]
-        public IActionResult RefreshToken([FromBody] RefreshTokenRequest request)
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
         {
             if (ModelState.IsValid)
             {
-                return Ok(jwtTokenGenerator.GenerateNewToken(request.RefreshToken, request.oldToken));
+                await Mutex.WaitAsync();
+                try
+                {
+                    var response = await jwtTokenGenerator.GenerateNewToken(request.RefreshToken, request.oldToken);
+                    return Ok(response);
+                }
+                finally
+                {
+                    Mutex.Release();
+                }
+           
             }
             return BadRequest();
         }

@@ -104,9 +104,9 @@
         <DeleteRailwayModal :visible=DeleteRailwayModalVisibility :close=CloseDeleRailwayModal
             :deleteRailway=DeleteRailway />
         <AddRailwayModal :visible=AddRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces
-            :close=CloseAddRailwayModal :AddRailway=CreateRailway />
+            :close=CloseAddRailwayModal :AddRailway=CreateRailway :Cities=this.cities />
         <UpdateRailwayModal :visible=UpdateRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces
-            :close=CLoseUpdateRailwayModal :UpdateRailwy=UpdateRailway :Cities=this.cities />
+            :close=CLoseUpdateRailwayModal :Update=UpdateRailway :Cities=this.cities />
         <TheFooter />
     </div>
     <div v-if="blurVisibility" id="blur-overlay"
@@ -126,7 +126,6 @@ import ChangeCityModal from '../components/ChangeCityModal.vue';
 import DeleteRailwayModal from '../components/DeleteRailwayModal.vue';
 import AddRailwayModal from '../components/AddRailwayModal.vue'
 import UpdateRailwayModal from '../components/UpdateRailwayModal.vue'
-import console from 'console';
 
 
 export default {
@@ -155,14 +154,9 @@ export default {
     methods: {
         async showcities() {
             this.tableheaders = ["Városok", "Módosítás", "Törlés"];
-            let response = await axios.get('/getCities');
-            this.cities = response.data;
         },
         async showrailways() {
             this.tableheaders = ["Induló állomás", "Érkező állomás", "Km", "Módosítás", "Törlés"];
-            let response = await axios.get('/GetRailways');
-            this.railways = response.data;
-
         },
         setDeleteIDAndOpenDeleteModal(id) {
             this.CitiId = id;
@@ -285,14 +279,14 @@ export default {
         },
         async UpdateRailway(railway) {
 
-            let DepatureCityname = this.cities[railway.Depatureid];
-            let ArrivalCityname = this.cities[railway.arrivalid];
-            let isexist = this.railways.some((obj) => obj.depatureCity === DepatureCityname && obj.arivalCity === ArrivalCityname);
+            let DepatureCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.Depatureid)].cityName;
+            let ArrivalCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.arrivalid)].cityName;
+            console.log(DepatureCityname,ArrivalCityname);  
+            let isexist=this.railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname);         
             if (!isexist) {
-
-                let response = await axios.patch("/UpdateRailway", {
+                 let response = await axios.patch("/UpdateRailway", {
                     Id: this.RailwayId,
-                    DepCityId: railway.Depatureid,
+                    DepCitiyId: railway.Depatureid,
                     AriCityId: railway.arrivalid,
                     km: railway.km
                 });
@@ -312,6 +306,7 @@ export default {
                     this.ShowError=false;
                 }, 1200);
             }
+     
         },
         SetRailwayIdAndOpenUpdateRailwayModal(id){
             this.RailwayId=id;
@@ -322,7 +317,21 @@ export default {
         {
             this.UpdateRailwayModalVisibility=false;
             this.blurVisibility=false;
+        },
+        async getcities()
+        {
+            let ctresponse = await axios.get('/GetRailways');
+            this.railways = ctresponse.data;
+        },
+        async getrailways()
+        {
+            let railwaysresponse =  await axios.get('/getCities');
+            this.cities = railwaysresponse.data;
         }
+    },
+    async beforeMount(){
+         await this.getcities();
+         await this.getrailways();  
     }
 }
 

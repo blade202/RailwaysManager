@@ -67,7 +67,7 @@ namespace TrainBackendApi.Controllers
             cacheService.DeleteAllCacgedRoutes();
             return Ok();
         }
-        [HttpPost]
+        [HttpPut]
         [Route("CreateRailwy")]
         [Authorize(Roles = "admin")]
         public IActionResult CreateRailway([FromBody] CreateRailwayRequest request)
@@ -85,16 +85,19 @@ namespace TrainBackendApi.Controllers
             }
             return BadRequest();
         }
-        [HttpPost]
+        [HttpPatch]
         [Route("UpdateRailway")]
         [Authorize(Roles = "admin")]
         public IActionResult UpdateRailway([FromBody] UpdateRailwayRequest requeset)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var updatedrailway = railwaysServic1e.UpdaeRaiwlay(requeset);
-                cacheService.DeleteAllCacgedRoutes();
-                return Ok();
+                if (updatedrailway != null)
+                {
+                    cacheService.DeleteAllCacgedRoutes();
+                    return Ok(updatedrailway);
+                }
             }
             return BadRequest();
            

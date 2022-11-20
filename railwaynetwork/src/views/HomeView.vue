@@ -22,14 +22,16 @@
                         <option class="rounded-xl" disabled value="" selected>Céllálomás</option>
                         <option v-for="item in Cities" :value="item.id" class="rounded-xl">{{ item.cityName }}</option>
                     </select>
-                    <button @click="Searchheandel" class="col-start-4 col-end-8 row-start-2 row-end-2 xl:col-start-11 xl:col-end-12 lg:col-start-11 lg:col-end-12 md:col-start-11 md:col-end-12 sm:col-start-11 sm:col-end-12 xl:pl-2 text-lightgray xl:row-start-1 xl:row-end-2 lg:row-start-1 lg:row-end-2 md:row-start-1 md:row-end-2 sm:row-start-1 sm:row-end-2">
-                        <i class='px-0 text-2xl font-medium transition duration-200 ease-in-out border-2 rounded-lg xl:px-3 lg:px-3 md:px-3 sm:px-2 bx bx-search border-darkgray hover:bg-darkgray'></i>
+                    <button @click="Searchheandel"
+                        class="col-start-4 col-end-8 row-start-2 row-end-2 xl:col-start-11 xl:col-end-12 lg:col-start-11 lg:col-end-12 md:col-start-11 md:col-end-12 sm:col-start-11 sm:col-end-12 xl:pl-2 text-lightgray xl:row-start-1 xl:row-end-2 lg:row-start-1 lg:row-end-2 md:row-start-1 md:row-end-2 sm:row-start-1 sm:row-end-2">
+                        <i
+                            class='px-0 text-2xl font-medium transition duration-200 ease-in-out border-2 rounded-lg xl:px-3 lg:px-3 md:px-3 sm:px-2 bx bx-search border-darkgray hover:bg-darkgray'></i>
                     </button>
                 </div>
                 <div id="table" class="w-full pb-3 mt-5 overflow-scroll table-box scrollbar-hide max-h-128">
                     <table
                         class="z-10 border-separate rounded-lg border-spacing-y-4 bg-transparent/40 backdrop-blur-sm px-7">
-                        <tr class="sticky top-0 font-medium rounded-lg bg-lightgray text-darkgray">
+                        <tr id="tableheader" class="sticky top-0 font-medium rounded-lg bg-lightgray text-darkgray">
                             <th class="p-3 xl:w-4/5 lg:w-4/5 rounded-bl-xl rounded-br-xl">Állomások</th>
                             <th class="xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 rounded-bl-xl rounded-br-xl">Távolság</th>
                             <th class="xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 rounded-bl-xl rounded-br-xl">Ár</th>
@@ -198,7 +200,8 @@ export default {
             ArrivalCityId: 0,
             range: 0,
             falg: false,
-            images: ['.net.png', 'cracs.png', 'css.png', 'html.png', 'js.png', 'mysql.png', 'tailwind.png', 'vuejs.png']
+            images: ['.net.png', 'cracs.png', 'css.png', 'html.png', 'js.png', 'mysql.png', 'tailwind.png', 'vuejs.png'],
+            theadchildresns:[],
         }
     },
     methods: {
@@ -257,13 +260,38 @@ export default {
                 this.falg = false;
                 document.getElementById('hint').classList.remove('main-loading-container');
             }
+        },
+        SetTeableChildresn()
+        {
+        let thead = document.getElementById("tableheader");
+        let thedchilderns=[];
+        for (const item of thead.children) {
+            thedchilderns.push(item);
         }
+        this.theadchildresns=thedchilderns;
+        }
+        
 
     },
     beforeMount() {
         this.getcities();
-    }
+        onresize = (event) => {
+            let thead = document.getElementById("tableheader");
+            if (window.innerWidth < 1024&&thead.children.length>3) {
+                for (let i = 0; i < 3; i++) {
+                    thead.lastChild.remove();
+                }
+            } else if(window.innerWidth>1024&&thead.children.length<3) {
+                for (let i = 0; i < 4; i++) {
+                    thead.appendChild(this.theadchildresns[i]);
+                }
+            }
+        }
 
+    },
+    mounted: function() {
+      this.SetTeableChildresn() // Calls the method before page loads
+  },
 }
 </script>
 

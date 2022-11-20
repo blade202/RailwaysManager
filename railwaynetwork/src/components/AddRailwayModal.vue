@@ -17,14 +17,14 @@
                             <div class="grid grid-cols-3 grid-rows-1 railway-creation-container">
                                 <div class="col-start-1 col-end-2 depature-container">
                                     <h2 class="text-lg font-medium text-lightgray">Induló állomás</h2>
-                                    <select v-model="DepatCityId" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
+                                    <select v-model="railway.DepatCityId" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
                                         <option  class="cursor-pointer bg-darkgray text-lightgray" value="">Induló állomás</option>
                                         <option class="cursor-pointer bg-darkgray text-lightgray" v-for="item in Cities" :value="item.id">{{ item.cityName }} </option>
                                     </select>
                                 </div>
                                 <div class="col-start-2 col-end-3 arrival-container">
                                     <h2 class="text-lg font-medium text-lightgray">Érkező állomás</h2>
-                                    <select v-model="ArrivalCityId" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
+                                    <select v-model="railway.ArrivalCityId" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
                                         <option class="cursor-pointer bg-darkgray text-lightgray" value="">Érkező állomás</option>
                                         <option class="cursor-pointer bg-darkgray text-lightgray" v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                                     </select>
@@ -32,7 +32,7 @@
                                 <div class="col-start-3 col-end-4 km-container">
                                     <h2 class="text-lg font-medium text-lightgray">Távolság</h2>
                                     <div class="flex items-center km-container-content">
-                                        <input
+                                        <input v-model="railway.km"
                                             class="p-2 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray"
                                             type="text ">
                                         <h2 class="pl-1 first-line:font-semibold text-lightgray"> km.</h2>
@@ -46,7 +46,7 @@
                             <div class="flex place-content-center">
                                 <button
                                     class="p-1 px-5 mt-6 font-medium text-center transition duration-200 ease-in-out border-2 border-solid rounded-md border-lightgray text-lightgray drop-shadow-md font-mainfont hover:shadow-xl shadow-lightgray hover:bg-lightgray hover:text-darkgray hover:font-semibold"
-                                    @click="AddRailway(this.newcitiname)">Módosítás</button>
+                                    @click="AddRailway(this.railway)">Módosítás</button>
                             </div>
                         </div>
                     </div>
@@ -71,8 +71,12 @@ import axios from 'axios';
 export default {
     data() {
         return {
+            railway:{
             DepatCityId: 0,
             ArrivalCityId: 0,
+            km:0   
+            }
+           
         }
     },
     props: {

@@ -66,7 +66,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("vuejs");
-app.UseMiddleware<GlobalExeptionMiddelware>();
+//app.UseMiddleware<GlobalExeptionMiddelware>();
 app.MapControllers();
 
 app.Run();
