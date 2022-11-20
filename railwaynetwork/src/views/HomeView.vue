@@ -5,16 +5,16 @@
         <div class="w-full main-home-container font-mainfont bg-darkgray ">
             <TheNavbar />
             <div
-                class="absolute w-full text-sm -translate-x-1/2 xl:text-base lg:text-base md:text-sm sm:text-base xl:w-3/4 lg:w-10/12 md:w-11/12 sm:w-11/12 xl:top-10 lg:top-20 md:top-20 sm:top-20 top-20 main-content-box left-1/2">
+                class="absolute w-full text-sm -translate-x-1/2 xl:text-base lg:text-sm md:text-sm sm:text-base xl:w-3/4 lg:w-11/12 md:w-11/12 sm:w-11/12 xl:top-10 lg:top-20 md:top-20 sm:top-20 top-20 main-content-box left-1/2">
                 <div
                     class="mb-5 text-4xl font-medium text-center title text-lightgray text-shadow-xl font-mainfont inner-shadow">
                     RailwaysNetwork
                 </div>
                 <div
-                    class="static grid grid-cols-10 grid-rows-2 m-auto text-sm xl:grid-cols-11 xl:grid-rows-1 lg:grid-cols-11 lg:grid-rows-1 md:grid-cols-11 md:grid-rows-1 sm:grid-cols-11 sm:grid-rows-1 xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar xl:text-base lg:text-base md:text-sm sm:text-base">
+                    class="static z-10 grid grid-cols-10 grid-rows-2 p-2 m-auto text-sm xl:p-0 lg:p-0 md:p-0 sm:p-0 left-1/2 xl:grid-cols-11 xl:grid-rows-1 lg:grid-cols-11 lg:grid-rows-1 md:grid-cols-11 md:grid-rows-1 sm:grid-cols-11 sm:grid-rows-1 xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar xl:text-base lg:text-base md:text-sm sm:text-base">
                     <select @click="Reomovehint" v-model="DepatCityId" name="" id=""
                         class="static z-0 col-start-1 col-end-6 p-2 pr-3 font-medium text-center rounded-tl-full rounded-bl-full outline-none xl:row-start-1 xl:row-end-2 lg:row-start-1 lg:row-end-2 md:row-start-1 md:row-end-2 sm:row-start-1 sm:row-end-2 bg-darkgray text-lightgray">
-                        <option selected>Ki induló város</option>
+                        <option selected>Kiinduló város</option>
                         <option v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                     </select>
                     <select @click="Reomovehint" v-model="ArrivalCityId" name="" id=""
@@ -22,56 +22,57 @@
                         <option class="rounded-xl" disabled value="" selected>Céllálomás</option>
                         <option v-for="item in Cities" :value="item.id" class="rounded-xl">{{ item.cityName }}</option>
                     </select>
-                    <button @click="Searchheandel"
-                        class="col-start-4 col-end-8 row-start-2 row-end-2 xl:col-start-11 xl:col-end-12 lg:col-start-11 lg:col-end-12 md:col-start-11 md:col-end-12 sm:col-start-11 sm:col-end-12 xl:pl-2 text-lightgray xl:row-start-1 xl:row-end-2 lg:row-start-1 lg:row-end-2 md:row-start-1 md:row-end-2 sm:row-start-1 sm:row-end-2">
-                        <i
-                            class='px-0 text-2xl font-medium transition duration-200 ease-in-out border-2 rounded-lg xl:px-3 lg:px-3 md:px-3 sm:px-2 bx bx-search border-darkgray hover:bg-darkgray'></i>
+                    <button @click="Searchheandel" class="col-start-4 col-end-8 row-start-2 row-end-2 xl:col-start-11 xl:col-end-12 lg:col-start-11 lg:col-end-12 md:col-start-11 md:col-end-12 sm:col-start-11 sm:col-end-12 xl:pl-2 text-lightgray xl:row-start-1 xl:row-end-2 lg:row-start-1 lg:row-end-2 md:row-start-1 md:row-end-2 sm:row-start-1 sm:row-end-2">
+                        <i class='px-5 mt-1 text-2xl font-medium transition duration-200 ease-in-out border-2 rounded-lg xl:mt-0 lg:mt-0 md:mt-0 sm:mt-0 xl:px-3 lg:px-3 md:px-3 sm:px-2 bx bx-search border-darkgray hover:bg-darkgray'></i>
                     </button>
                 </div>
-                <div id="table" class="w-full pb-3 mt-5 overflow-scroll table-box scrollbar-hide max-h-128">
+                <div id="table" class="z-10 w-full p-2 pb-3 mt-5 overflow-scroll table-box scrollbar-hide max-h-128">
                     <table
-                        class="z-10 border-separate rounded-lg border-spacing-y-4 bg-transparent/40 backdrop-blur-sm px-7">
-                        <tr id="tableheader" class="sticky top-0 font-medium rounded-lg bg-lightgray text-darkgray">
-                            <th class="p-3 xl:w-4/5 lg:w-4/5 rounded-bl-xl rounded-br-xl">Állomások</th>
-                            <th class="xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 rounded-bl-xl rounded-br-xl">Távolság</th>
-                            <th class="xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 rounded-bl-xl rounded-br-xl">Ár</th>
-                            <th class="p-3 xl:w-1/6 lg:w-1/6 md:w-1/6 sm:w-1/6 rounded-br-xl rounded-bl-xl ">Foglalás
+                        class="border-separate xl:rounded-lg lg:rounded-lg md:rounded-none sm:rounded-none xl:border-spacing-y-4 lg:border-spacing-y-4 md:border-spacing-y-0 sm:border-spacing-y-0 bg-transparent/40 backdrop-blur-sm px-7">
+                        <tr class="sticky top-0 font-medium rounded-lg bg-lightgray text-darkgray">
+                            <th class="w-4/5 p-3 rounded-bl-lg rounded-br-none xl:w-4/5 lg:w-4/5 md:w-4/5 sm:w-4/5 xl:rounded-bl-xl xl:rounded-br-xl lg:rounded-bl-xl lg:rounded-br-xl md:rounded-bl-xl md:rounded-br-xl sm:rounded-bl-xl sm:rounded-br-xl">Állomások</th>
+                            <th class="w-1/6 rounded-bl-none rounded-br-none xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 xl:rounded-bl-xl xl:rounded-br-xl lg:rounded-bl-xl lg:rounded-br-xl md:rounded-bl-xl md:rounded-br-xl sm:rounded-bl-xl sm:rounded-br-xl">Távolság</th>
+                            <th class="w-1/6 rounded-bl-none rounded-br-none xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 xl:rounded-bl-xl xl:rounded-br-xl lg:rounded-bl-xl lg:rounded-br-xl md:rounded-bl-xl md:rounded-br-xl sm:rounded-bl-xl sm:rounded-br-xl">Ár</th>
+                            <th class="w-1/6 p-3 rounded-bl-none rounded-br-lg xl:w-1/6 lg:w-1/6 md:w-1/6 sm:w-1/6 xl:rounded-bl-xl xl:rounded-br-xl lg:rounded-bl-xl lg:rounded-br-xl md:rounded-bl-xl md:rounded-br-xl sm:rounded-bl-xl sm:rounded-br-xl ">Foglalás
                             </th>
                         </tr>
                         <tbody class=" bg-transparent/40 text-lightgray">
-                            <tr class="lg:text-base xl:text-base md:text-sm sm:text-sm" v-for="item in Railways">
+                            <tr class="grid grid-cols-1 xl:grid-cols-1 xl:grid-rows-1 lg:grid-cols-1 lg:grid-rows-1 md:grid-cols-1 md:grid-rows-2 sm:grid-cols-1 sm:grid-rows-2 lg:text-base xl:text-base md:text-sm sm:text-sm" v-for="item in Railways">
                                 <td
-                                    class="p-2 text-center rounded-tl-full rounded-bl-full xl:w-4/5 lg:w-4/5 bg-darkgray h-14 max-h-14">
+                                    class="p-2 text-center xl:rounded-tl-full xl:rounded-bl-full lg:rounded-tl-full lg:rounded-bl-full md:rounded-tl-0 md:rounded-bl-0 sm:rounded-tl-0 sm:rounded-bl-0 xl:w-4/5 lg:w-4/5 bg-darkgray h-14 max-h-14 xl:col-start-1 xl:col-end-1 xl:row-start-1 xl:row-end-1 lg:col-start-1 lg:col-end-1 lg:row-start-1 lg:row-end-1 md:col-start-1 md:col-end-1 md:row-start-1 md:row-end-2 sm:col-start-1 sm:col-end-1 sm:row-start-1 sm:row-end-2">
                                     <div
                                         class="items-center m-auto border-r-4 arrival-depature-container xl:border-lightgray/70 lg:border-lightgray/70 md:border-lightgray/70">
                                         <span v-for="(key, val, index) of item.railways">
                                             <span v-if="val == 0">{{ key.depatureCity }}
 
                                             </span>
-                                            <i class='pl-1 bx bxs-right-arrow-alt'></i>
+                                            <i class=' bx bxs-right-arrow-alt'></i>
                                             {{ key.arivalCity }}{{ index }}
                                         </span>
                                     </div>
                                 </td>
-                                <td class="text-center xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 bg-darkgray h-14">
+                                <div class="w-full table-grider">
+                                    <td class="text-center xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 bg-darkgray h-14 xl:col-start-1 xl:col-end-1 xl:row-start-1 xl:row-end-1 lg:col-start-1 lg:col-end-1 lg:row-start-1 lg:row-end-1 md:col-start-1 md:col-end-1 md:row-start-2 md:row-end-2 sm:col-start-1 sm:col-end-1 sm:row-start-1 sm:row-end-2">
                                     <div
-                                        class="border-r-4 km-container xl:border-lightgray/70 lg:border-lightgray/70 md:border-lightgray/70 ">
+                                        class="pr-1 text-center border-r-4 km-container xl:border-lightgray/70 lg:border-lightgray/70 md:border-lightgray/70 ">
                                         {{ item.km }} km
                                     </div>
                                 </td>
-                                <td class="text-center xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 bg-darkgray h-14">
+                                <td class="text-center xl:w-1/12 lg:w-1/12 md:w-1/6 sm:w-1/6 bg-darkgray h-14 xl:col-start-1 xl:col-end-1 xl:row-start-1 xl:row-end-1 lg:col-start-1 lg:col-end-1 lg:row-start-1 lg:row-end-1 md:col-start-1 md:col-end-1 md:row-start-2 md:row-end-2 sm:col-start-1 sm:col-end-1 sm:row-start-1 sm:row-end-2">
                                     <div
                                         class="border-r-4 price-container xl:border-lightgray/70 lg:border-lightgray/70 md:border-lightgray/70 ">
                                         {{ item.price }} Ft
                                     </div>
                                 </td>
                                 <td
-                                    class="font-bold text-center text-white rounded-tr-full rounded-br-full cursor-pointer xl:w-1/6 lg:w-1/6 md:w-1/6 sm:w-1/6 font-sm bg-darkgray h-14">
+                                    class="font-bold text-center text-white cursor-pointer xl:rounded-tr-full xl:rounded-br-full lg:rounded-tr-full lg:rounded-br-full md:rounded-tr-0 md:rounded-br-0 sm:rounded-tr-0 sm:rounded-br-0 xl:w-1/6 lg:w-1/6 md:w-1/6 sm:w-1/6 font-sm bg-darkgray h-14 xl:col-start-1 xl:col-end-1 xl:row-start-1 xl:row-end-1 lg:col-start-1 lg:col-end-1 lg:row-start-1 lg:row-end-1 md:col-start-1 md:col-end-1 md:row-start-2 md:row-end-2 sm:col-start-1 sm:col-end-1 sm:row-start-1 sm:row-end-2">
                                     <div class="buy-container">
                                         <i
                                             class='text-3xl duration-150 ease-in-out text-darkeryellow bx bxs-cart-add hover:text-white'></i>
                                     </div>
                                 </td>
+                                </div>
+                                
                             </tr>
                         </tbody>
                     </table>
@@ -94,14 +95,14 @@
         </div>
     </div>
     <div
-        class=" w-full lower-conent-main-container bg-[url('/public/pictures/lowercontainerbg.png')] bg-cover bg-no-repeat bg-fixed pb-20 font-mainfont">
+        class="z-10 w-full lower-conent-main-container bg-[url('/public/pictures/lowercontainerbg.png')] bg-cover bg-no-repeat bg-fixed pb-20 font-mainfont">
         <div
             class="grid p-5 m-auto xl:p-5 lg:p-2 md:p-10 sm:p-10 xl:w-full xl:grid-cols-8 xl:grid-rows-1 lg:w-full lg:grid-cols-6 lg:grid-rows-1 lower-conent-container">
             <div
-                class="z-10 grid p-3 m-2 border-4 rounded-lg xl:grid-cols-1 xl:col-start-1 xl:col-end-6 xl:grid-rows-2 lg:col-start-1 lg:col-end-4 toolbox bg-transparent/50 backdrop-blur-sm border-lightgray text-lightgray">
+                class="flex grid items-center p-3 m-2 border-4 rounded-lg xl:grid-cols-1 xl:col-start-1 xl:col-end-6 xl:grid-rows-2 lg:col-start-1 lg:col-end-4 toolbox bg-transparent/50 backdrop-blur-sm border-lightgray text-lightgray">
                 <div
-                    class="flex items-center row-start-1 row-end-2 p-4 text-sm text-left border-b-2 xl:text-2xl lg:text-xl md:text-lg sm:text-base technology-paragraph border-lightgray">
-                    <span class="border-l-4 h-min w-min border-lightgray">Ez</span> a projekt azért jött létre ,hogy
+                    class="row-start-1 row-end-2 p-4 text-sm text-left border-b-2 xl:text-2xl lg:text-xl md:text-lg sm:text-base technology-paragraph border-lightgray">
+                    <span class="pl-1 border-l-4 h-min w-min border-lightgray">Ez</span> a projekt azért jött létre ,hogy
                     bemutassuk munkaszínvonalunk és tudástárunkat. <br>
                     Az oldal lényege, hogy két kiválaszott város között az összes lehetséges útvonalat megtekinthessük a
                     részleteikkel együtt.
