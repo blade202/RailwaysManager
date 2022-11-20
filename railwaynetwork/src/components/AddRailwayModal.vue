@@ -11,20 +11,20 @@
                             <h1 class="p-2 text-2xl text-center border-b-4 font-600 border-dark/30 text-lightgray">
                                 Hozzáadás</h1>
                             <h4 class="mt-2 mb-5 text-lg text-center text-lightgray">
-                                Írja be a kívánt módosításokat!
+                                Írja be az Új útvonal adatait!
                             </h4>
                             
                             <div class="grid grid-cols-3 grid-rows-1 railway-creation-container">
                                 <div class="col-start-1 col-end-2 depature-container">
                                     <h2 class="text-lg font-medium text-lightgray">Induló állomás</h2>
-                                    <select v-model="railway.DepatCityId" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
+                                    <select v-model="railway.Depatureid" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
                                         <option  class="cursor-pointer bg-darkgray text-lightgray" value="">Induló állomás</option>
                                         <option class="cursor-pointer bg-darkgray text-lightgray" v-for="item in Cities" :value="item.id">{{ item.cityName }} </option>
                                     </select>
                                 </div>
                                 <div class="col-start-2 col-end-3 arrival-container">
                                     <h2 class="text-lg font-medium text-lightgray">Érkező állomás</h2>
-                                    <select v-model="railway.ArrivalCityId" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
+                                    <select v-model="railway.arrivalid" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
                                         <option class="cursor-pointer bg-darkgray text-lightgray" value="">Érkező állomás</option>
                                         <option class="cursor-pointer bg-darkgray text-lightgray" v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                                     </select>
@@ -41,24 +41,24 @@
                                 
                             </div>
                             <h2 class="mt-3 text-sm text-center text-lightgray">
-                                Később megváltoztathatja a korábban hozzáadott járatokat és részleteit is.
+                               csak már meglévő városokat tudd beálítani!
                             </h2>
                             <div class="flex place-content-center">
                                 <button
                                     class="p-1 px-5 mt-6 font-medium text-center transition duration-200 ease-in-out border-2 border-solid rounded-md border-lightgray text-lightgray drop-shadow-md font-mainfont hover:shadow-xl shadow-lightgray hover:bg-lightgray hover:text-darkgray hover:font-semibold"
-                                    @click="AddRailway(this.railway)">Módosítás</button>
+                                    @click="AddRailway(this.railway)">Hozzáadás</button>
                             </div>
                         </div>
                     </div>
                     <div v-if="ShowError"
                         class="z-50 p-6 mt-3 font-semibold text-center rounded-lg response-container bg-darkgray font-mainfont">
                         <h2 class="text-red">
-                            Sikertelen módosítás! <br>
-                            Már létezik ilyen nevű város!</h2>
+                            Sikertelen Hozzáadás! <br>
+                            Már létezik ilyen útvonal!</h2>
                     </div>
                     <div v-if="ShowSussces"
                         class="z-50 p-6 mt-3 font-semibold text-center rounded-lg response-container bg-darkgray font-mainfont">
-                        <h2 class="text-green">Sikeres módosítás!</h2>
+                        <h2 class="text-green">Sikeres Hozzáadás</h2>
                     </div>
                 </div>
             </transition>
@@ -72,8 +72,8 @@ export default {
     data() {
         return {
             railway:{
-            DepatCityId: 0,
-            ArrivalCityId: 0,
+            Depatureid: 0,
+            arrivalid: 0,
             km:0   
             }
            

@@ -9,7 +9,7 @@
                             <i @click="close()"
                                 class='absolute right-0 px-3 text-3xl font-medium transition duration-200 ease-in-out cursor-pointer top-2 selection:p-1 bx bx-x-circle text-lightgray drop-shadow-md font-mainfont hover:text-red '></i>
                             <h1 class="p-2 text-2xl text-center border-b-4 font-600 border-dark/30 text-lightgray">
-                                Hozzáadás</h1>
+                                Módósítás</h1>
                             <h4 class="mt-2 mb-5 text-lg text-center text-lightgray">
                                 Írja be a kívánt módosításokat!
                             </h4>
@@ -41,7 +41,7 @@
                                 
                             </div>
                             <h2 class="mt-3 text-sm text-center text-lightgray">
-                                Később megváltoztathatja a korábban hozzáadott járatokat és részleteit is.
+                                Később megváltoztathatja a korábban Módósított járatokat és részleteit is.
                             </h2>
                             <div class="flex place-content-center">
                                 <button
