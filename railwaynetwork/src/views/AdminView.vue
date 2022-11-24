@@ -10,8 +10,8 @@
             </div>
             <div
                 class="grid w-11/12 grid-cols-2 p-3 m-auto mb-5 text-sm font-medium rounded-tl-lg rounded-tr-lg rounded-bl-lg rounded-br-lg xl:gap-0 lg:gap-0 md:gap-0 sm:gap-x-5 gap-x-5 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xl:flex lg:flex md:flex sm:grid xl:text-base lg:text-base md:text-sm sm:text-sm bg-transparent/40 backdrop-blur-sm navbar text-lightgray font-mainfont place-content-around">
-                <div class="grid xl:flex lg:flex md:flex sm:grid cities flex-nowrap ">
-                    <button @click="showcities"
+                <div class="grid xl:flex lg:flex md:flex sm:grid Cities flex-nowrap ">
+                    <button @click="ShowCities"
                         class="xl:py-0 lg:py-0 md:py-0 sm:py-1.5 py-1.5 border-2 border-lightgray p-0.5 px-5 rounded-lg transition duration-200 ease-in-out hover:bg-lightgray hover:text-darkgray">
                         Városok
                     </button>
@@ -24,8 +24,8 @@
                         Hozzáadás
                     </button>
                 </div>
-                <div class="grid xl:flex railways lg:flex md:flex sm:grid flex-nowrap">
-                    <button @click="showrailways"
+                <div class="grid xl:flex Railways lg:flex md:flex sm:grid flex-nowrap">
+                    <button @click="ShowRailways"
                         class="xl:py-0 lg:py-0 md:py-0 sm:py-1.5 py-1.5 border-2 border-lightgray p-0.5 px-5 rounded-lg transition duration-200 ease-in-out hover:bg-lightgray hover:text-darkgray">
                         Útvonalak
                     </button>
@@ -41,13 +41,13 @@
             </div>
             <div id="admin-table"
                 class="w-11/12 m-auto overflow-scroll text-sm xl:max-h-desktop lg:max-h-desktop md:max-h-desktop sm:max-h-desktop max-h-mobile xl:text-base lg:text-base md:text-sm sm:text-sm table-box scrollbar-hide font-mainfont">
-                <table v-if="tableheaders.length !== 0"
+                <table v-if="TableHeaders.length !== 0"
                     class="w-full px-1 border-separate rounded-tl-lg rounded-tr-lg rounded-bl-lg rounded-br-lg main-admin-table xl:px-7 lg:px-7 md:px-7 sm:px-7 border-spacing-y-4 bg-transparent/40 backdrop-blur-sm font-mainfont">
                     <tr id="admintableheader" class="sticky top-0 w-full font-medium bg-lightgray text-darkgray">
-                        <th v-for="header in tableheaders" class="p-3 rounded-bl-lg rounded-br-lg">{{ header }}</th>
+                        <th v-for="header in TableHeaders" class="p-3 rounded-bl-lg rounded-br-lg">{{ header }}</th>
                     </tr>
                     <tbody class=" text-lightgray">
-                        <tr v-if="tableheaders[0] === 'Városok'" v-for="city in cities" class="">
+                        <tr v-if="TableHeaders[0] === 'Városok'" v-for="city in Cities" class="">
                             <td class="w-3/5 p-2 text-center rounded-tl-lg rounded-bl-lg bg-darkgray h-14 ">
                                 <div class="border-r-4 xl:border-lightgray/70">
                                     {{ city.cityName }}
@@ -55,18 +55,18 @@
                             </td>
                             <td class="w-1/5 text-center bg-darkgray h-14 ">
                                 <div class="border-r-4 xl:border-lightgray/70">
-                                    <i @click="setChangeIDAndOpenChangeModal(city.id)"
+                                    <i @click="SetChangeIDAndOpenChangeModal(city.id)"
                                         class='inline-block text-2xl duration-150 ease-in-out cursor-pointer text-silver bx bxs-cog ransition hover:text-darkersilver'></i>
                                 </div>
                             </td>
                             <td class="w-1/5 text-center rounded-tr-lg rounded-br-lg bg-darkgray h-14">
                                 <div class="">
-                                    <i @click="setDeleteIDAndOpenDeleteModal(city.id)"
+                                    <i @click="SetDeleteIDAndOpenDeleteModal(city.id)"
                                         class='text-3xl duration-150 ease-in-out cursor-pointer text-red bx bxs-trash hover:text-darkerred'></i>
                                 </div>
                             </td>
                         </tr>
-                        <tr v-if="showrailwayalone" v-for="railway in railways"
+                        <tr v-if="ShowRailwayMobileScreen" v-for="railway in Railways"
                             class="grid w-full grid-cols-4 grid-rows-2 mb-5 xl:table-row lg:table-row md:grid sm:grid xl:grid-cols-5 xl:grid-rows-1 lg:grid-cols-5 lg:grid-rows-1 md:grid-cols-4 md:grid-rows-2 sm:grid-cols-4 sm:grid-rows-2 ">
                             <td
                                 class="grid items-center col-start-1 col-end-3 row-start-1 row-end-2 p-0 pl-3 text-center rounded-tl-lg rounded-tr-none h-11 scrollbar-hide xl:table-cell lg:table-cell md:grid sm:gird xl:p-2 lg:p-2 md:p-0 sm:p-0 xl:rounded-tr-none lg:rounded-tr-none md:rounded-tr-none sm:rounded-tr-none xl:rounded-tl-lg xl:rounded-bl-lg lg:rounded-tl-lg lg:rounded-bl-lg md:rounded-tl-lg sm:rounded-tl-lg bg-darkgray xl:col-start-1 xl:col-end-2 xl:row-start-1 xl:row-end-1 lg:col-start-1 lg:col-end-2 md:col-start-1 md:col-end-3 md:row-start-1 md:row-end-2 sm:col-start-1 sm:col-end-3 sm:row-start-1 sm:row-end-2 xl:pl-0 lg:pl-0 md:pl-3 sm:pl-3">
@@ -90,7 +90,7 @@
                             <td
                                 class="grid items-center w-full col-start-3 col-end-4 row-start-2 row-end-2 text-center xl:w-1/12 lg:w-1/12 md:w-full sm:w-full h-9 xl:h-14 lg:h-14 md:h-9 sm:h-9 xl:table-cell lg:table-cell md:grid sm:gird bg-darkgray xl:col-start-4 xl:col-end-5 xl:row-start-1 xl:row-end-2 lg:col-start-4 lg:col-end-5 lg:row-start-1 lg:row-end-2 md:col-start-3 md:col-end-4 md:row-start-2 md:row-end-2 sm:col-start-3 sm:col-end-4 sm:row-start-2 sm:row-end-2">
                                 <div class="border-r-4 border-lightgray/70 ">
-                                    <i @click="SetRailwayIdAndOpenUpdateRailwayModal(railway.id)"
+                                    <i @click="SetRailwayIDAndOpenUpdateRailwayModal(railway.id)"
                                         class='text-xl duration-150 ease-in-out cursor-pointer xl:text-2xl lg:text-2xl md:text-xl sm:text-xl text-silver bx bxs-cog hover:text-darkersilver'></i>
                                 </div>
                             </td>
@@ -98,7 +98,7 @@
                             <td
                                 class="grid items-center w-full col-start-4 col-end-5 row-start-2 row-end-2 font-bold text-center text-white rounded-br-lg cursor-pointer xl:w-1/12 lg:w-1/12 md:w-full sm:w-full h-9 xl:h-14 lg:h-14 md:h-9 sm:h-9 xl:table-cell lg:table-cell md:grid sm:gird xl:rounded-tr-lg xl:rounded-br-lg lg:rounded-tr-lg lg:rounded-br-lg md:rounded-br-lg sm:rounded-br-lg font-sm bg-darkgray xl:col-start-5 xl:col-end-6 xl:row-start-1 xl:row-end-2 lg:col-start-5 lg:col-end-6 lg:row-start-1 lg:row-end-2 md:col-start-4 md:col-end-5 md:row-start-2 md:row-end-2 sm:col-start-4 sm:col-end-5 sm:row-start-2 sm:row-end-2">
                                 <div class="">
-                                    <i @click="SetRailwayIdAndOpenRailwayDeleteModal(railway.id)"
+                                    <i @click="SetRailwayIDAndOpenRailwayDeleteModal(railway.id)"
                                         class='text-xl duration-150 ease-in-out cursor-pointer xl:text-3xl lg:text-3xl md:text-xl sm:text-xl text-red hover:text-darkerred bx bxs-trash '></i>
                                 </div>
                             </td>
@@ -107,20 +107,20 @@
                 </table>
             </div>
         </div>
-        <ChangeCityModal :visible=cityModalChangeVisibility :close=closeChangeModal :UpdateCiti=UpdateCity
-            :ShowError=ShowError :ShowSussces=ShowSussces />
-        <DeleteModal :visible=deleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
+        <ChangeCityModal :visible=CityModalChangeVisibility :close=CloseChangeModal :UpdateCiti=UpdateCity
+            :ShowError=ShowError :ShowSuccess=ShowSuccess />
+        <DeleteModal :visible=DeleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
         <AddCityModal :visible=AddCityModalVisibility :close=CloseAddCityModal :AddCity=AddCity :ShowError=ShowError
-            :ShowSussces=ShowSussces />
+            :ShowSuccess=ShowSuccess />
         <DeleteRailwayModal :visible=DeleteRailwayModalVisibility :close=CloseDeleRailwayModal
             :deleteRailway=DeleteRailway />
-        <AddRailwayModal :visible=AddRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces
-            :close=CloseAddRailwayModal :AddRailway=CreateRailway :Cities=this.cities />
-        <UpdateRailwayModal :visible=UpdateRailwayModalVisibility :ShowError=ShowError :ShowSussces=ShowSussces
-            :close=CLoseUpdateRailwayModal :Update=UpdateRailway :Cities=this.cities />
+        <AddRailwayModal :visible=AddRailwayModalVisibility :ShowError=ShowError :ShowSuccess=ShowSuccess
+            :close=CloseAddRailwayModal :AddRailway=CreateRailway :Cities=this.Cities />
+        <UpdateRailwayModal :visible=UpdateRailwayModalVisibility :ShowError=ShowError :ShowSuccess=ShowSuccess
+            :close=CloseUpdateRailwayModal :Update=UpdateRailway :Cities=this.Cities />
         <TheFooter />
     </div>
-    <div v-if="blurVisibility" id="blur-overlay"
+    <div v-if="BlurVisibility" id="blur-overlay"
         class="absolute top-0 z-30 w-full h-screen backdrop-blur-md bg-dark/30">
 
     </div>
@@ -146,72 +146,73 @@ export default {
     },
     data() {
         return {
-            tableheaders: [],
-            cities: [],
-            railways: [],
-            CitiId: null,
-            RailwayId: null,
-            blurVisibility: false,
-            deleteModalVisibility: false,
-            cityModalChangeVisibility: false,
+            TableHeaders: [],
+            Cities: [],
+            Railways: [],
+            CityID: null,
+            RailwayID: null,
+            BlurVisibility: false,
+            DeleteModalVisibility: false,
+            CityModalChangeVisibility: false,
             AddCityModalVisibility: false,
             DeleteRailwayModalVisibility: false,
             AddRailwayModalVisibility: false,
             UpdateRailwayModalVisibility: false,
             ShowError: false,
-            ShowSussces: false,
-            showrailwayalone:false
+            ShowSuccess: false,
+            ShowRailwayMobileScreen:false
         }
     },
     methods: {
-        async showcities() {
-            this.tableheaders = ["Városok", "Módosítás", "Törlés"];
-            this.showrailwayalone=false;
+        async ShowCities() {
+            this.TableHeaders = ["Városok", "Módosítás", "Törlés"];
+            this.ShowRailwayMobileScreen=false;
+
         },
         
-        async showrailways() {
+        async ShowRailways() {
             if (window.innerWidth < 1024) {
-                this.tableheaders = ["Járataink"];
+                this.TableHeaders = ["Járataink"];
             }else
             {
-                this.tableheaders = ["Induló állomás", "Érkező állomás", "Km", "Módosítás", "Törlés"];
+                this.TableHeaders = ["Induló állomás", "Érkező állomás", "Km", "Módosítás", "Törlés"];
             }
-            this.showrailwayalone=true;
+            this.ShowRailwayMobileScreen=true;
         },
-        setDeleteIDAndOpenDeleteModal(id) {
-            this.CitiId = id;
-            this.deleteModalVisibility = true;
-            this.blurVisibility = true;
+        SetDeleteIDAndOpenDeleteModal(id) {
+            this.CityID = id;
+            this.DeleteModalVisibility = true;
+            this.BlurVisibility = true;
         },
         CloseDeleteModal() {
-            this.deleteModalVisibility = false;
-            this.blurVisibility = false;
+            this.DeleteModalVisibility = false;
+            this.BlurVisibility = false;
         },
         async DeletCities() {
             axios.delete('/DeletCity', {
                 data: {
-                    id: this.CitiId
+                    id: this.CityID
                 }
             });
-            const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
-            this.cities.splice(objWithIdIndex, 1);
-            this.deleteModalVisibility = false;
-            this.blurVisibility = false;
+            const ObjWithIDIndex = this.Cities.findIndex((obj) => obj.id === this.CityID);
+            this.Cities.splice(ObjWithIDIndex, 1);
+            this.DeleteModalVisibility = false;
+            this.BlurVisibility = false;
         },
         async UpdateCity(updatedname) {
-            const objWithIdIndex = this.cities.findIndex((obj) => obj.id === this.CitiId);
-            let isexist = this.cities.some((obj) => obj.cityName === updatedname);
+            const ObjWithIDIndex = this.Cities.findIndex((obj) => obj.id === this.CityID);
+            let isexist = this.Cities.some((obj) => obj.cityName === updatedname);
             if (!isexist) {
                 await axios.patch('/UpdateCity', {
-                    id: this.CitiId,
+                    id: this.CityID,
                     CityName: updatedname
                 });
-                this.cities[objWithIdIndex].cityName = updatedname;
-                this.ShowSussces = true,
+                this.Cities[ObjWithIDIndex].cityName = updatedname;
+                this.ShowSuccess = true,
                     await setTimeout(() => {
-                        this.ShowSussces = false;
-                        this.cityModalChangeVisibility = false;
-                        this.blurVisibility = false;
+                        this.ShowSuccess = false;
+                        this.CityModalChangeVisibility = false;
+                        this.BlurVisibility = false;
                     }, 1200);
 
             }
@@ -224,29 +225,29 @@ export default {
             }
 
         },
-        setChangeIDAndOpenChangeModal(id) {
-            this.CitiId = id;
-            this.cityModalChangeVisibility = true;
-            this.blurVisibility = true;
+        SetChangeIDAndOpenChangeModal(id) {
+            this.CityID = id;
+            this.CityModalChangeVisibility = true;
+            this.BlurVisibility = true;
         },
-        closeChangeModal() {
-            this.cityModalChangeVisibility = false;
-            this.blurVisibility = false;
+        CloseChangeModal() {
+            this.CityModalChangeVisibility = false;
+            this.BlurVisibility = false;
         },
         async AddCity(citiname) {
-            let isexist = this.cities.some((obj) => obj.cityName === citiname);
+            let isexist = this.Cities.some((obj) => obj.cityName === citiname);
             if (!isexist) {
                 let resposne = await axios.put("/CreatCity", {
 
                     CityName: citiname
 
                 })
-                this.cities.push(resposne.data);
-                this.ShowSussces = true;
+                this.Cities.push(resposne.data);
+                this.ShowSuccess = true;
                 setTimeout(() => {
                     this.AddCityModalVisibility = false;
-                    this.ShowSussces = false;
-                    this.blurVisibility = false;
+                    this.ShowSuccess = false;
+                    this.BlurVisibility = false;
                 }, 1200);
             }
             else {
@@ -257,48 +258,48 @@ export default {
             }
         },
         ShowAddCityModal() {
-            this.blurVisibility = true;
+            this.BlurVisibility = true;
             this.AddCityModalVisibility = true;
         },
         CloseAddCityModal() {
-            this.blurVisibility = false;
+            this.BlurVisibility = false;
             this.AddCityModalVisibility = false;
         },
         DeleteRailway() {
             axios.delete("/DeleteRailway", {
                 data: {
-                    id: this.RailwayId
+                    id: this.RailwayID
                 }
             });
-            const objWithIdIndex = this.railways.findIndex((obj) => obj.id === this.RailwayId);
-            this.railways.splice(objWithIdIndex, 1);
+            const ObjWithIDIndex = this.Railways.findIndex((obj) => obj.id === this.RailwayID);
+            this.Railways.splice(ObjWithIDIndex, 1);
             this.DeleteRailwayModalVisibility = false;
-            this.blurVisibility = false;
+            this.BlurVisibility = false;
         },
-        SetRailwayIdAndOpenRailwayDeleteModal(id) {
-            this.RailwayId = id;
+        SetRailwayIDAndOpenRailwayDeleteModal(id) {
+            this.RailwayID = id;
             this.DeleteRailwayModalVisibility = true;
-            this.blurVisibility = true;
+            this.BlurVisibility = true;
         },
         CloseDeleRailwayModal() {
             this.DeleteRailwayModalVisibility = false;
-            this.blurVisibility = false;
+            this.BlurVisibility = false;
         },
         async CreateRailway(railway) {
-            let DepatureCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.Depatureid)].cityName;
-            let ArrivalCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.arrivalid)].cityName;
-            let isexist=this.railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname);         
+            let DepatureCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.Depatureid)].cityName;
+            let ArrivalCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.arrivalid)].cityName;
+            let isexist=this.Railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname);         
             if (!isexist) {
                  let response = await axios.put("/CreateRailwy", {
-                    DepatureCityId: railway.Depatureid,
-                    ArivalCityId: railway.arrivalid,
+                    DepatureCityID: railway.Depatureid,
+                    ArivalCityID: railway.arrivalid,
                     km: railway.km
                 });
-                this.railways.push(response.data)
-                this.ShowSussces = true;
+                this.Railways.push(response.data)
+                this.ShowSuccess = true;
                 setTimeout(() => {
-                    this.ShowSussces = false;
-                    this.blurVisibility = false;
+                    this.ShowSuccess = false;
+                    this.BlurVisibility = false;
                     this.AddRailwayModalVisibility = false;
                 }, 1200);
             }
@@ -312,30 +313,30 @@ export default {
         },
         ShowAddRailwayModal() {
             this.AddRailwayModalVisibility = true;
-            this.blurVisibility = true;
+            this.BlurVisibility = true;
         },
         CloseAddRailwayModal() {
             this.AddRailwayModalVisibility = false;
-            this.blurVisibility = false;
+            this.BlurVisibility = false;
         },
         async UpdateRailway(railway) {
 
-            let DepatureCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.Depatureid)].cityName;
-            let ArrivalCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.arrivalid)].cityName;
-            let isexist=this.railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname);         
+            let DepatureCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.Depatureid)].cityName;
+            let ArrivalCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.arrivalid)].cityName;
+            let isexist=this.Railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname);         
             if (!isexist) {
                 let response = await axios.patch("/UpdateRailway", {
-                    Id: this.RailwayId,
+                    Id: this.RailwayID,
                     DepCitiyId: railway.Depatureid,
-                    AriCityId: railway.arrivalid,
+                    AriCityID: railway.arrivalid,
                     km: railway.km
                 });
-                let inex = this.railways.findIndex((obj) => obj.id === this.RailwayId);
-                this.railways[inex] = response.data;
-                this.ShowSussces = true;
+                let inex = this.Railways.findIndex((obj) => obj.id === this.RailwayID);
+                this.Railways[inex] = response.data;
+                this.ShowSuccess = true;
                 setTimeout(() => {
-                    this.ShowSussces = false;
-                    this.blurVisibility = false;
+                    this.ShowSuccess = false;
+                    this.BlurVisibility = false;
                     this.UpdateRailwayModalVisibility = false;
                 }, 1200);
             }
@@ -347,38 +348,38 @@ export default {
             }
 
         },
-        SetRailwayIdAndOpenUpdateRailwayModal(id) {
-            this.RailwayId = id;
-            this.blurVisibility = true;
+        SetRailwayIDAndOpenUpdateRailwayModal(id) {
+            this.RailwayID = id;
+            this.BlurVisibility = true;
             this.UpdateRailwayModalVisibility = true;
         },
-        CLoseUpdateRailwayModal() {
+        CloseUpdateRailwayModal() {
             this.UpdateRailwayModalVisibility = false;
-            this.blurVisibility = false;
+            this.BlurVisibility = false;
         },
-        async getcities() {
+        async getCities() {
             let ctresponse = await axios.get('/GetRailways');
-            this.railways = ctresponse.data;
+            this.Railways = ctresponse.data;
         },
-        async getrailways() {
-            let railwaysresponse = await axios.get('/getCities');
-            this.cities = railwaysresponse.data;
+        async getRailways() {
+            let Railwaysresponse = await axios.get('/getCities');
+            this.Cities = Railwaysresponse.data;
         }
     },
     async beforeMount() {
-        await this.getcities();
-        await this.getrailways();
+        await this.getCities();
+        await this.getRailways();
         onresize = (event) => {
-            if (window.innerWidth < 1024 && this.tableheaders.length>3) {
-                this.tableheaders = ["Járatok"]
+            if (window.innerWidth < 1024 && this.TableHeaders.length>3) {
+                this.TableHeaders = ["Járatok"]
                 
 
-            } else if (window.innerWidth > 1024 && this.tableheaders.length<3) {
+            } else if (window.innerWidth > 1024 && this.TableHeaders.length<3) {
 
-                this.tableheaders = ["Induló állomás", "Érkező állomás", "Km", "Módosítás", "Törlés"];
+                this.TableHeaders = ["Induló állomás", "Érkező állomás", "Km", "Módosítás", "Törlés"];
 
             }
-            console.log(window.innerWidth,this.tableheaders.length)
+            console.log(window.innerWidth,this.TableHeaders.length)
         }
     }
 

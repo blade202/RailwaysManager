@@ -12,12 +12,12 @@
                 </div>
                 <div
                     class="static z-10 grid grid-cols-10 grid-rows-2 p-2 m-auto text-sm xl:p-0 lg:p-0 md:p-0 sm:p-0 left-1/2 xl:grid-cols-11 xl:grid-rows-1 lg:grid-cols-11 lg:grid-rows-1 md:grid-cols-11 md:grid-rows-1 sm:grid-cols-11 sm:grid-rows-1 xl:w-1/2 lg:w-10/12 md:w-10/12 sm:w-full searchbar xl:text-base lg:text-base md:text-sm sm:text-base">
-                    <select @click="Reomovehint" v-model="DepatCityId" name="" id=""
+                    <select @click="Reomovehint" v-model="DepatureCityID" name="" id=""
                         class="static z-0 col-start-1 col-end-6 p-2 pr-3 font-medium text-center rounded-tl-lg rounded-bl-lg outline-none xl:row-start-1 xl:row-end-2 lg:row-start-1 lg:row-end-2 md:row-start-1 md:row-end-2 sm:row-start-1 sm:row-end-2 bg-darkgray text-lightgray">
                         <option selected>Kiinduló város</option>
                         <option v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                     </select>
-                    <select @click="Reomovehint" v-model="ArrivalCityId" name="" id=""
+                    <select @click="Reomovehint" v-model="ArrivalCityID" name="" id=""
                         class="static z-0 col-start-6 col-end-11 p-2 pr-3 font-medium text-center rounded-tr-lg rounded-br-lg outline-none xl:row-start-1 xl:row-end-2 lg:row-start-1 lg:row-end-2 md:row-start-1 md:row-end-2 sm:row-start-1 sm:row-end-2 bg-darkgray text-lightgray">
                         <option class="rounded-lg" disabled value="" selected>Céllálomás</option>
                         <option v-for="item in Cities" :value="item.id" class="rounded-lg">{{ item.cityName }}</option>
@@ -132,7 +132,7 @@
                 </div>
                 <div
                     class="flex flex-wrap row-start-2 row-end-2 p-3 place-content-center xl:justify-center lg:justify-center md:justify-center sm:justify-around technology-icons">
-                    <div v-for="img in images"
+                    <div v-for="img in Iamges"
                         class="w-16 p-2 mx-3 mb-2 rounded-lg xl:w-24 lg:w-24 md:w-20 sm:w-24 h-min bg-lightgray/20">
                         <div class="w-12 h-12 p-2 bg-center bg-no-repeat bg-contain xl:w-20 xl:h-20 lg:w-20 lg:h-20 md:w-16 md:h-16 sm:w-20 sm:h-20 icon "
                             v-bind:style="{ backgroundImage: 'url(../public/pictures/' + img + ')' }">
@@ -219,12 +219,12 @@ export default {
         return {
             Cities: null,
             Railways: [],
-            DepatCityId: 0,
-            ArrivalCityId: 0,
-            range: 0,
-            falg: false,
-            images: ['.net.png', 'cracs.png', 'css.png', 'html.png', 'js.png', 'mysql.png', 'tailwind.png', 'vuejs.png'],
-            theadchildresns: [],
+            DepatureCityID: 0,
+            ArrivalCityID: 0,
+            Range: 0,
+            Flag: false,
+            Iamges: ['.net.png', 'cracs.png', 'css.png', 'html.png', 'js.png', 'mysql.png', 'tailwind.png', 'vuejs.png'],
+            TheadCildren: [],
         }
     },
     methods: {
@@ -236,25 +236,25 @@ export default {
         async handleScroll() {
             let div = document.getElementById('table');
             if (div.offsetHeight + div.scrollTop >= div.scrollHeight) {
-                this.range = this.range + 50;
+                this.Range = this.Range + 50;
                 await this.GetRailways();
             }
         },
         async Searchheandel() {
 
-            this.range = 0;
+            this.Range = 0;
             this.Railways = []
-            this.falg = false;
+            this.Flag = false;
             this.Reomovehint();
             await this.GetRailways()
         },
         async GetRailways() {
-            console.log(this.ArrivalCityId);
+            console.log(this.ArrivalCityID);
 
             let response = await axios.post('/GetRoutes', {
-                DepatureId: this.DepatCityId,
-                ArrivalId: this.ArrivalCityId,
-                range: this.range
+                DepatureId: this.DepatureCityID,
+                ArrivalId: this.ArrivalCityID,
+                Range: this.Range
 
             })
             console.log(response);
@@ -263,24 +263,24 @@ export default {
             }
         },
         setDepaturecity(id) {
-            this.DepatCityId = id;
+            this.DepatureCityID = id;
             console.log(id);
         },
         setArrivalCity(id) {
-            this.ArrivalCityId = id;
+            this.ArrivalCityID = id;
         },
         Reomovehint() {
 
             document.getElementById('hint').classList.add('main-loading-container');
             setTimeout(() => {
-                this.falg = true;
+                this.Flag = true;
             }, 1);
 
         },
         Showhint() {
-            if (this.falg && this.Railways.length === 0) {
+            if (this.Flag && this.Railways.length === 0) {
 
-                this.falg = false;
+                this.Flag = false;
                 document.getElementById('hint').classList.remove('main-loading-container');
             }
         },
@@ -290,7 +290,7 @@ export default {
             for (const item of thead.children) {
                 thedchilderns.push(item);
             }
-            this.theadchildresns = thedchilderns;
+            this.TheadCildren = thedchilderns;
         }
 
 
@@ -305,7 +305,7 @@ export default {
                 }
             } else if (window.innerWidth > 1024 && thead.children.length < 3) {
                 for (let i = 0; i < 4; i++) {
-                    thead.appendChild(this.theadchildresns[i]);
+                    thead.appendChild(this.TheadCildren[i]);
                 }
             }
         }

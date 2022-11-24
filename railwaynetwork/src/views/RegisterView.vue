@@ -10,27 +10,27 @@
                 </h1>
                 <!-- register content -->
                 <div class="register-content # row-start-2 row-end-6 backdrop-blur-sm bg-gray-600 flex flex-col bg-transparent/60 py-16 rounded-lg xl:text-xl lg:text-xl md:text-xl sm:text-base">
-                    <form @submit.prevent='submithandle' class="text-center registry-form">
-                        <input v-model="username"
+                    <form @submit.prevent='SubmitHandle' class="text-center registry-form">
+                        <input v-model="Username"
                             class="w-4/5 p-2 m-auto text-center rounded-lg outline-none bg-darkgray text-lightgray"
                             type="text" placeholder="Felhasználónév" required>
 
-                        <input v-model="password"
+                        <input v-model="Password"
                             class="w-4/5 p-2 m-auto text-center rounded-lg outline-none bg-darkgray mt-7 text-lightgray"
-                            type="password" placeholder="Jelszó" required>
+                            type="Password" placeholder="Jelszó" required>
 
-                        <input v-model="passwordconfirm"
+                        <input v-model="PasswordConfirm"
                             class="w-4/5 p-2 m-auto text-center rounded-lg outline-none bg-darkgray mt-7 text-lightgray mb-7"
-                            type="password" placeholder="Jelszó megerősítése" required>
+                            type="Password" placeholder="Jelszó megerősítése" required>
 
                         <input type="submit" class="w-2/6 p-2 mt-6 text-center rounded-lg bg-lightgray text-darkgray ">
                     </form>
                 </div>
                 <!-- response container -->
                 <div class="absolute grid w-11/12 row-start-6 row-end-7 mt-6 text-center -translate-x-1/2 -translate-y-1/2 rounded-lg left-1/2 response-container bg-transparent/60">
-                    <h2 v-if="msgvisibility"
+                    <h2 v-if="MsgVisibility"
                         class="text-2xl font-medium duration-100 ease-in-out text-lightgray">
-                        {{ msg }}
+                        {{ Msg }}
                     </h2>
                 </div>
             </div>
@@ -44,28 +44,28 @@ export default {
     name: "register",
     data() {
         return {
-            username: '',
-            passwordconfirm: '',
-            password: '',
-            msg: '',
-            msgvisibility: false
+            Username: '',
+            PasswordConfirm: '',
+            Password: '',
+            Msg: '',
+            MsgVisibility: false
         };
     },
     methods: {
-        async submithandle() {
-            this.msg = "A jelszavaknak egyezniük kell!"
-            if (this.password === this.passwordconfirm) {
+        async SubmitHandle() {
+            this.Msg = "A jelszavaknak egyezniük kell!"
+            if (this.Password === this.PasswordConfirm) {
                 const response = await axios.post('/SiginUp', {
-                    Username: this.username,
-                    PasswordConfrim: this.passwordconfirm,
-                    Password: this.password
+                    Username: this.Username,
+                    PasswordConfrim: this.PasswordConfirm,
+                    Password: this.Password
                 });
-                this.msg = response.data;
+                this.Msg = response.data;
             }
-            this.msgvisibility = true;
+            this.MsgVisibility = true;
             setTimeout(() => {
-                this.msgvisibility = false;
-                if (this.msg === "Sikeres regisztráció!") {
+                this.MsgVisibility = false;
+                if (this.Msg === "Sikeres regisztráció!") {
                     router.push('/');
                 };
             }, 2500);

@@ -1,12 +1,12 @@
 <template>
-    <transition v-if="visible" name="modal-animation">
+    <transition v-if="Visible" name="modal-animation">
         <div class="modal">
             <transition name="modal-animation-inner">
                 <div
                     class="absolute z-50 w-full p-6 -translate-x-1/2 -translate-y-1/2 font-mainfont modal-inner main-modal-container left-1/2 top-2/4 xl:w-1/2 lg:w-8/12 md:w-3/4 sm:w-8/12">
                     <div class="z-50 p-6 rounded-lg bg-darkgray font-mainfont">
                         <div class="modal-content">
-                            <i @click="close()"
+                            <i @click="Close()"
                                 class='absolute right-0 px-3 text-3xl font-medium transition duration-200 ease-in-out cursor-pointer top-2 selection:p-1 bx bx-x-circle text-lightgray drop-shadow-md font-mainfont hover:text-red '></i>
                             <h1 class="p-2 text-2xl text-center border-b-4 font-600 border-dark/30 text-lightgray">
                                 Hozzáadás</h1> 
@@ -79,8 +79,8 @@ export default {
         }
     },
     props: {
-        visible: Boolean,
-        close: Function,
+        Visible: Boolean,
+        Close: Function,
         AddRailway: Function,
         ShowError: Boolean,
         ShowSussces: Boolean,

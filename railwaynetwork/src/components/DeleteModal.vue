@@ -1,12 +1,12 @@
 <template>
-    <transition v-if="visible" name="modal-animation">
+    <transition v-if="Visible" name="modal-animation">
         <div class="modal">
             <transition name="modal-animation-inner">
                 <div class="modal-inner">
                     <div
                         class="absolute z-50 w-11/12 p-6 -translate-x-1/2 -translate-y-1/2 rounded-lg bakcdrop-filter-none main-modal-container left-1/2 top-2/4 bg-darkgray font-mainfont xl:w-1/4 lg:w-2/6 md:w-1/2 sm:w-3/4">
                         <div class="modal-content">
-                            <i @click="closemodal()"
+                            <i @click="Close()"
                                 class='absolute right-0 px-3 text-3xl font-medium transition duration-200 ease-in-out cursor-pointer top-2 selection:p-1 bx bx-x-circle text-lightgray drop-shadow-md font-mainfont hover:text-red '></i>
                             <h1 class="p-2 text-2xl text-center border-b-4 font-600 border-dark/30 text-lightgray">
                                 Megerősítés</h1>
@@ -20,7 +20,7 @@
                             <div class="flex delete-options place-content-center">
                                 <button
                                     class="p-1 px-5 mt-6 font-medium text-center transition duration-200 ease-in-out border-2 border-solid rounded-md border-lightgray text-lightgray drop-shadow-md font-mainfont hover:shadow-xl shadow-lightgray hover:bg-lightgray hover:text-darkgray hover:font-semibold"
-                                    @click="deleteCity()">Törlés
+                                    @click="DeleteCity()">Törlés
                                 </button>
                             </div>
                         </div>
@@ -35,9 +35,9 @@ import axios from 'axios';
 
 export default {
     props: {
-        visible: Boolean,
-        deleteCity: Function,
-        closemodal:Function
+        Visible: Boolean,
+        DeleteCity: Function,
+        Close:Function
     },
 }
 </script>
