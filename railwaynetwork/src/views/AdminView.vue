@@ -284,10 +284,31 @@ export default {
             this.DeleteRailwayModalVisibility = false;
             this.blurVisibility = false;
         },
-        CreateRailway(Railway) {
-            axios.post("/CreateRailway", {
-
-            });
+        async CreateRailway(railway) {
+            let DepatureCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.Depatureid)].cityName;
+            let ArrivalCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.arrivalid)].cityName;
+            let isexist=this.railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname);         
+            if (!isexist) {
+                 let response = await axios.put("/CreateRailwy", {
+                    DepatureCityId: railway.Depatureid,
+                    ArivalCityId: railway.arrivalid,
+                    km: railway.km
+                });
+                this.railways.push(response.data)
+                this.ShowSussces = true;
+                setTimeout(() => {
+                    this.ShowSussces = false;
+                    this.blurVisibility = false;
+                    this.AddRailwayModalVisibility = false;
+                }, 1200);
+            }
+            else
+            {
+                this.ShowError=true;
+                setTimeout(() => {
+                    this.ShowError=false;
+                }, 1200);
+            }
         },
         ShowAddRailwayModal() {
             this.AddRailwayModalVisibility = true;
@@ -301,8 +322,7 @@ export default {
 
             let DepatureCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.Depatureid)].cityName;
             let ArrivalCityname = this.cities[this.cities.findIndex((obj) => obj.id === railway.arrivalid)].cityName;
-            console.log(DepatureCityname, ArrivalCityname);
-            let isexist = this.railways.some((obj) => obj.depatureCity === DepatureCityname && obj.arivalCity === ArrivalCityname);
+            let isexist=this.railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname);         
             if (!isexist) {
                 let response = await axios.patch("/UpdateRailway", {
                     Id: this.RailwayId,

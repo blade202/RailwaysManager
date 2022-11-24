@@ -16,14 +16,14 @@
                             <div class="grid grid-cols-1 grid-rows-3 xl:grid-cols-3 xl:grid-rows-1 lg:grid-cols-3 lg:grid-rows-1 md:grid-cols-3 md:grid-rows-1 sm:grid-cols-1 sm:grid-rows-3 railway-creation-container">
                                 <div class="col-start-1 col-end-2 row-start-1 row-end-2 mb-2 text-center xl:col-start-1 xl:col-end-2 xl:row-start-1 xl:row-end-2 lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-2 md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-2 sm:col-start-1 sm:col-end-2 sm:row-start-1 sm:row-end-2 depature-container">
                                     <h2 class="text-lg font-medium text-left text-lightgray">Induló állomás</h2>
-                                    <select v-model="railway.DepatCityId" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
+                                    <select v-model="railway.Depatureid" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
                                         <option  class="cursor-pointer bg-darkgray text-lightgray" value="">Induló állomás</option>
                                         <option class="cursor-pointer bg-darkgray text-lightgray" v-for="item in Cities" :value="item.id">{{ item.cityName }} </option>
                                     </select>
                                 </div>
                                 <div class="col-start-1 col-end-2 row-start-2 row-end-3 mb-2 text-center arrival-container xl:col-start-2 xl:col-end-3 xl:row-start-1 xl:row-end-2 lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2 md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2 sm:col-start-1 sm:col-end-2 sm:row-start-2 sm:row-end-3">
                                     <h2 class="text-lg font-medium text-left text-lightgray">Érkező állomás</h2>
-                                    <select v-model="railway.ArrivalCityId" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
+                                    <select v-model="railway.arrivalid" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
                                         <option class="cursor-pointer bg-darkgray text-lightgray" value="">Érkező állomás</option>
                                         <option class="cursor-pointer bg-darkgray text-lightgray" v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                                     </select>
@@ -45,7 +45,7 @@
                             <div class="flex place-content-center">
                                 <button
                                     class="p-1 px-5 mt-6 font-medium text-center transition duration-200 ease-in-out border-2 border-solid rounded-md border-lightgray text-lightgray drop-shadow-md font-mainfont hover:shadow-xl shadow-lightgray hover:bg-lightgray hover:text-darkgray hover:font-semibold"
-                                    @click="AddRailway(this.railway)">Módosítás</button>
+                                    @click="AddRailway(this.railway)">Hozzáadás</button>
                             </div>
                         </div>
                     </div>
@@ -71,8 +71,8 @@ export default {
     data() {
         return {
             railway:{
-            DepatCityId: 0,
-            ArrivalCityId: 0,
+            Depatureid: 0,
+            arrivalid: 0,
             km:0   
             }
            
