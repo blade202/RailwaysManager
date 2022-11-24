@@ -73,7 +73,7 @@
                             </td>
                             <td class="text-lg text-center xl:w-1/12 lg:w-1/12 md:w-2/12 sm:w-1/12 bg-darkgray h-14">
                                 <div
-                                    class="px-3 border-r-4 border-lightgray/70 xl:text-base lg:text-base md:text-sm sm:text-sm">
+                                    class="px-3r-4 border-lightgray/70 xl:text-base lg:text-base md:text-sm sm:text-sm">
                                     {{ railway.km }} km
                                 </div>
                             </td>
