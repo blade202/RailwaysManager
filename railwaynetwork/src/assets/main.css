@@ -1,6 +1,8 @@
 @import "./base.css";
 *{
     box-sizing: border-box;
+    padding: 0;
+    margin:0;
 }
 #login, #registry, #home, #admin{
     animation-name: template-loading;
@@ -38,6 +40,18 @@
     display: none;
     scrollbar-width: none;
 }
+.admin-table::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+}
+.main-admin-container::-webkit-scrollbar { 
+    width: 0 !important;
+    -ms-overflow-style: none; }
+
+.main-admin-container::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+}
 
 select::-webkit-scrollbar {
     display: none;
@@ -52,13 +66,10 @@ select::-webkit-scrollbar {
     display: none;
     scrollbar-width: none;
 }
-
-template::-webkit-scrollbar {
+.main-admin-table::-webkit-scrollbar {
     display: none;
     scrollbar-width: none;
 }
-
-/* --- Delete Modal --- */
 
 
 

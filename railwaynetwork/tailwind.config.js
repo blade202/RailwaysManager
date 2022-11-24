@@ -28,7 +28,8 @@ module.exports = {
         'mainfont': ['Montserrat, sans-serif']
       },
       spacing: {
-        '128': '42rem',
+        'desktop': '42rem',
+        'mobile':'30rem'
       }
     },
     screens:{
@@ -40,5 +41,7 @@ module.exports = {
       '2xl':'1536',
     }
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 }

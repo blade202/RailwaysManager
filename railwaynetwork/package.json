@@ -10,6 +10,7 @@
     "axios": "^0.27.2",
     "js-cookie": "^3.0.1",
     "resize-observer-polyfill": "^1.5.1",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "vue": "^3.2.38",
     "vue-router": "^4.1.5",
     "vuex": "^4.1.0",

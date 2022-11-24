@@ -2,7 +2,7 @@
     <transition v-if="visible" name="modal-animation">
         <div class="modal">
             <transition name="modal-animation-inner">
-                <div class="absolute z-50 p-6 -translate-x-1/2 -translate-y-1/2 modal-inner main-modal-container left-1/2 top-2/4">
+                <div class="absolute z-50 w-11/12 p-6 -translate-x-1/2 -translate-y-1/2 modal-inner main-modal-container left-1/2 top-2/4 xl:w-1/4 lg:w-2/6 md:w-1/2 sm:w-3/4">
                     <div
                         class="z-50 p-6 rounded-lg bg-darkgray font-mainfont">
                         <div class="modal-content">
@@ -14,7 +14,7 @@
                                 Írja be a kívánt módosítást!
                             </h4>
                             <input v-model="newcitiname"
-                                class="w-full p-2 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray">
+                                class="w-full p-2 font-semibold text-center rounded-lg outline-none bg-dark/60 text-darkeryellow">
                             <h5 class="mt-0.5 mb-1 text-sm text-center text-lightgray">Később is módosíthatja a már
                                 szerkesztett adatokat.</h5>
                             <div class="flex delete place-content-center">

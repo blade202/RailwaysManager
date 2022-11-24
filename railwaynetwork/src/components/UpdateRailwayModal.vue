@@ -3,44 +3,44 @@
         <div class="modal">
             <transition name="modal-animation-inner">
                 <div
-                    class="absolute z-50 p-6 -translate-x-1/2 -translate-y-1/2 modal-inner main-modal-container left-1/2 top-2/4">
+                    class="absolute z-50 w-full p-6 -translate-x-1/2 -translate-y-1/2 modal-inner main-modal-container left-1/2 top-2/4 xl:w-1/2 lg:w-8/12 md:w-3/4 sm:w-8/12">
                     <div class="z-50 p-6 rounded-lg bg-darkgray font-mainfont">
                         <div class="modal-content">
                             <i @click="close()"
                                 class='absolute right-0 px-3 text-3xl font-medium transition duration-200 ease-in-out cursor-pointer top-2 selection:p-1 bx bx-x-circle text-lightgray drop-shadow-md font-mainfont hover:text-red '></i>
                             <h1 class="p-2 text-2xl text-center border-b-4 font-600 border-dark/30 text-lightgray">
-                                Hozzáadás</h1>
+                                Módosítás</h1>
                             <h4 class="mt-2 mb-5 text-lg text-center text-lightgray">
                                 Írja be a kívánt módosításokat!
                             </h4>
                             
-                            <div class="grid grid-cols-3 grid-rows-1 railway-creation-container">
-                                <div class="col-start-1 col-end-2 depature-container">
+                            <div class="grid grid-cols-1 grid-rows-3 xl:grid-cols-3 xl:grid-rows-1 lg:grid-cols-3 lg:grid-rows-1 md:grid-cols-3 md:grid-rows-1 sm:grid-cols-1 sm:grid-rows-3 railway-update-container">
+                                <div class="col-start-1 col-end-2 row-start-1 row-end-2 mb-2 text-center xl:col-start-1 xl:col-end-2 xl:row-start-1 xl:row-end-2 lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-2 md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-2 sm:col-start-1 sm:col-end-2 sm:row-start-1 sm:row-end-2 depature-container">
                                     <h2 class="text-lg font-medium text-lightgray">Induló állomás</h2>
                                     <select v-model="railway.Depatureid" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
                                         <option  class="cursor-pointer bg-darkgray text-lightgray" value="">Induló állomás</option>
                                         <option class="cursor-pointer bg-darkgray text-lightgray" v-for="item in Cities" :value="item.id">{{ item.cityName }} </option>
                                     </select>
                                 </div>
-                                <div class="col-start-2 col-end-3 arrival-container">
+                                <div class="col-start-1 col-end-2 row-start-2 row-end-3 mb-2 text-center arrival-container xl:col-start-2 xl:col-end-3 xl:row-start-1 xl:row-end-2 lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2 md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2 sm:col-start-1 sm:col-end-2 sm:row-start-2 sm:row-end-3">
                                     <h2 class="text-lg font-medium text-lightgray">Érkező állomás</h2>
                                     <select v-model="railway.arrivalid" class="w-11/12 p-2.5 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray" name="" id="">
                                         <option class="cursor-pointer bg-darkgray text-lightgray" value="">Érkező állomás</option>
                                         <option class="cursor-pointer bg-darkgray text-lightgray" v-for="item in Cities" :value="item.id">{{ item.cityName }}</option>
                                     </select>
                                 </div>
-                                <div class="col-start-3 col-end-4 km-container">
+                                <div class="col-start-1 row-start-3 row-end-4 mb-2 text-center selection:col-end-2 km-container xl:col-start-3 xl:col-end-4 xl:row-start-1 xl:row-end-2 lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2 md:col-start-3 md:col-end-4 md:row-start-1 md:row-end-2 sm:col-start-1 sm:col-end-2 sm:row-start-3 sm:row-end-4">
                                     <h2 class="text-lg font-medium text-lightgray">Távolság</h2>
-                                    <div class="flex items-center km-container-content">
+                                    <div class="flex flex-col items-center xl:flex-row lg:flex-row md:flex-row sm:flex-col km-container-content">
                                         <input v-model="railway.km"
-                                            class="p-2 font-semibold text-center rounded-lg outline-none bg-dark/60 text-lightgray"
+                                            class="w-11/12 p-2 font-semibold text-center rounded-lg outline-none bg-dark/60 text-darkeryellow"
                                             type="text ">
                                         <h2 class="pl-1 first-line:font-semibold text-lightgray"> km.</h2>
                                     </div>
                                 </div>
                                 
                             </div>
-                            <h2 class="mt-3 text-sm text-center text-lightgray">
+                            <h2 class="mt-3 text-sm text-center text-darkeryellow">
                                 Később megváltoztathatja a korábban hozzáadott járatokat és részleteit is.
                             </h2>
                             <div class="flex place-content-center">
