@@ -5,7 +5,7 @@ import * as Cookies from 'js-cookie';
 
 
 
-axios.defaults.baseURL='https://localhost:49153/';
+axios.defaults.baseURL='https://trainbackendapi20221125003319.azurewebsites.net/';
 const state= {
     user:null
 };
