@@ -42,7 +42,10 @@ const store = new Store({
         createPersistedState()
       ]
 });
-
+if(store.state.user.token)
+    {
+        axios.defaults.headers.common['Authorization']='Bearer '+ store.state.user.token;
+    }
       axios.interceptors.response.use(function (response) {
         return response;
       }, async function (error) {

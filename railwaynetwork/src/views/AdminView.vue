@@ -84,7 +84,7 @@
                                 class="grid items-center w-full col-start-1 col-end-3 row-start-2 row-end-2 text-center rounded-bl-lg xl:w-2/12 lg:w-2/12 md:w-full sm:w-full h-9 xl:h-14 lg:h-14 md:h-9 sm:h-9 xl:table-cell lg:table-cell md:grid sm:gird xl:rounded-bl-none lg:rounded-bl-none md:rounded-bl-lg sm:rounded-bl-lg bg-darkgray xl:col-start-3 xl:col-end-4 xl:row-start-1 xl:row-end-2 lg:col-start-3 lg:col-end-4 md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-2 sm:col-start-1 sm:col-end-3 sm:row-start-2 sm:row-end-2">
                                 <div
                                     class="px-3 text-sm border-r-4 border-lightgray/70 xl:text-base lg:text-base md:text-base sm:text-sm">
-                                    {{ railway.km }} km
+                                    {{ railway.km }} Km.
                                 </div>
                             </td>
                             <td
@@ -107,17 +107,17 @@
                 </table>
             </div>
         </div>
-        <ChangeCityModal :visible=CityModalChangeVisibility :close=CloseChangeModal :UpdateCiti=UpdateCity
+        <ChangeCityModal :Visible=CityModalChangeVisibility :Close=CloseChangeModal :UpdateCiti=UpdateCity
             :ShowError=ShowError :ShowSuccess=ShowSuccess />
-        <DeleteModal :visible=DeleteModalVisibility :deleteCity=DeletCities :closemodal=CloseDeleteModal />
-        <AddCityModal :visible=AddCityModalVisibility :close=CloseAddCityModal :AddCity=AddCity :ShowError=ShowError
+        <DeleteModal :Visible=DeleteModalVisibility :DeleteCity=DeletCities :Closemodal=CloseDeleteModal />
+        <AddCityModal :Visible=AddCityModalVisibility :Close=CloseAddCityModal :AddCity=AddCity :ShowError=ShowError
             :ShowSuccess=ShowSuccess />
-        <DeleteRailwayModal :visible=DeleteRailwayModalVisibility :close=CloseDeleRailwayModal
-            :deleteRailway=DeleteRailway />
-        <AddRailwayModal :visible=AddRailwayModalVisibility :ShowError=ShowError :ShowSuccess=ShowSuccess
-            :close=CloseAddRailwayModal :AddRailway=CreateRailway :Cities=this.Cities />
-        <UpdateRailwayModal :visible=UpdateRailwayModalVisibility :ShowError=ShowError :ShowSuccess=ShowSuccess
-            :close=CloseUpdateRailwayModal :Update=UpdateRailway :Cities=this.Cities />
+        <DeleteRailwayModal :Visible=DeleteRailwayModalVisibility :Close=CloseDeleRailwayModal
+            :DeleteRailway=DeleteRailway />
+        <AddRailwayModal :Visible=AddRailwayModalVisibility :ShowError=ShowError :ShowSuccess=ShowSuccess
+            :Close=CloseAddRailwayModal :AddRailway=CreateRailway :Cities=this.Cities />
+        <UpdateRailwayModal :Visible=UpdateRailwayModalVisibility :ShowError=ShowError :ShowSuccess=ShowSuccess
+            :Close=CloseUpdateRailwayModal :Update=UpdateRailway :Cities=this.Cities />
         <TheFooter />
     </div>
     <div v-if="BlurVisibility" id="blur-overlay"
@@ -286,14 +286,14 @@ export default {
             this.BlurVisibility = false;
         },
         async CreateRailway(railway) {
-            let DepatureCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.Depatureid)].cityName;
-            let ArrivalCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.arrivalid)].cityName;
+            let DepatureCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.DepatureID)].cityName;
+            let ArrivalCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.ArrivalID)].cityName;
             let isexist=this.Railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname);         
             if (!isexist) {
                  let response = await axios.put("/CreateRailwy", {
-                    DepatureCityID: railway.Depatureid,
-                    ArivalCityID: railway.arrivalid,
-                    km: railway.km
+                    DepatureCityID: railway.DepatureID,
+                    ArivalCityID: railway.ArrivalID,
+                    km: railway.Km
                 });
                 this.Railways.push(response.data)
                 this.ShowSuccess = true;
@@ -321,15 +321,16 @@ export default {
         },
         async UpdateRailway(railway) {
 
-            let DepatureCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.Depatureid)].cityName;
-            let ArrivalCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.arrivalid)].cityName;
-            let isexist=this.Railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname);         
+            let DepatureCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.DepatureID)].cityName;
+            let ArrivalCityname = this.Cities[this.Cities.findIndex((obj) => obj.id === railway.ArrivalID)].cityName;
+
+            let isexist=this.Railways.some((obj) => obj.depatureCity === DepatureCityname&&obj.arivalCity === ArrivalCityname&&obj.km ===railway.Km);         
             if (!isexist) {
                 let response = await axios.patch("/UpdateRailway", {
-                    Id: this.RailwayID,
-                    DepCitiyId: railway.Depatureid,
-                    AriCityID: railway.arrivalid,
-                    km: railway.km
+                    id: this.RailwayID,
+                    depCitiyId: railway.DepatureID,
+                    ariCityID: railway.ArrivalID,
+                    km: railway.Km
                 });
                 let inex = this.Railways.findIndex((obj) => obj.id === this.RailwayID);
                 this.Railways[inex] = response.data;
