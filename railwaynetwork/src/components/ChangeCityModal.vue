@@ -29,7 +29,7 @@
                             Sikertelen módosítás! <br>
                             Már létezik ilyen nevű város!</h2>
                     </div>
-                    <div v-if="ShowSussces" class="z-50 p-6 mt-3 font-semibold text-center rounded-lg response-container bg-darkgray font-mainfont">                  
+                    <div v-if="ShowSuccess" class="z-50 p-6 mt-3 font-semibold text-center rounded-lg response-container bg-darkgray font-mainfont">                  
                         <h2 class="text-green" >Sikeres módosítás!</h2>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ export default {
         Close:Function,
         UpdateCiti:Function,
         ShowError:Boolean,
-        ShowSussces:Boolean,
+        ShowSuccess:Boolean,
     },
 
 }
