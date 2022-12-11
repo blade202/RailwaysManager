@@ -52,7 +52,7 @@ namespace TrainBackendApi.Services
             var depatcity = cityService.GetById(requset.DepCitiyId);
             if (arivalcity != null && depatcity != null)
             {
-                if (dbConntex.Railways.FirstOrDefault(x => x.ArivalCity == arivalcity.CityName && x.DepatureCity == depatcity.CityName) == null)
+                if (dbConntex.Railways.FirstOrDefault(x => x.ArivalCity == arivalcity.CityName && x.DepatureCity == depatcity.CityName&&x.KM==requset.Km) == null)
                 {
                     var updaterailway = GetById(requset.Id);
                     if(updaterailway!=null)

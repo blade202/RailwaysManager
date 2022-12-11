@@ -135,7 +135,7 @@
                     <div v-for="img in Iamges"
                         class="w-16 p-2 mx-3 mb-2 rounded-lg xl:w-24 lg:w-24 md:w-20 sm:w-24 h-min bg-lightgray/20">
                         <div class="w-12 h-12 p-2 bg-center bg-no-repeat bg-contain xl:w-20 xl:h-20 lg:w-20 lg:h-20 md:w-16 md:h-16 sm:w-20 sm:h-20 icon "
-                            v-bind:style="{ backgroundImage: 'url(../public/pictures/' + img + ')' }">
+                            v-bind:style="{ backgroundImage: 'url(/pictures/' + img + ')' }">
                         </div>
                     </div>
                 </div>

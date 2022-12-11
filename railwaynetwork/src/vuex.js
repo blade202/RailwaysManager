@@ -43,20 +43,20 @@ const store = new Store({
       ]
 });
 
+   
+
       axios.interceptors.response.use(function (response) {
         return response;
       }, async function (error) {
         console.log(error);
-        if(error.response.status===0){    
+        if(error.response.status===401){    
         let newtokens= await axios.post('RefreshToken',{
             oldtoken:store.state.user.token,
             refreshtoken:store.state.user.refreshtoken
         });
         let user=store.state.user;
-        console.log(user)
         user.token=newtokens.data.token;
         user.refreshtoken=newtokens.data.refreshtoken;
-        console.log(newtokens);
         error.config.headers['Authorization'] = 'Bearer ' + user.token;
         store.dispatch("user",user);
         console.log(store.state.user);  
